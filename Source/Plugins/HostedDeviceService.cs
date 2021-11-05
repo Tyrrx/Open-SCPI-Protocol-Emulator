@@ -13,6 +13,7 @@ using FunicularSwitch;
 using FunicularSwitch.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Protocol.Execution;
 using Protocol.Interpreter;
 
 namespace EmulatorHost
@@ -22,25 +23,27 @@ namespace EmulatorHost
         where TConfiguration : IDeviceConfiguration
         where TProtocolInterpreter : IProtocolInterpreter<TCommand>
     {
-        private readonly ILogger<HostedDeviceService<TDeviceController, TCommand, TConfiguration, TProtocolInterpreter>> logger;
+        private readonly ILogger<HostedDeviceService<TDeviceController, TCommand, TConfiguration, TProtocolInterpreter>>
+            logger;
+
         private readonly TcpServer server;
+        private readonly CommandExecutionAdapter<TCommand, IByteArrayConvertible> executionAdapter;
 
         private readonly IPEndPoint endPoint;
-        private readonly ICommandExecutor<TCommand, IByteArrayConvertible> executor;
         private readonly Task resultStreamDisposable;
 
         public HostedDeviceService(
             ILogger<HostedDeviceService<TDeviceController, TCommand, TConfiguration, TProtocolInterpreter>> logger,
             Func<TConfiguration> configurationProvider,
             TcpServer server,
-            TDeviceController deviceController,
-            TProtocolInterpreter protocolInterpreter)
+            TProtocolInterpreter protocolInterpreter,
+            CommandExecutionAdapter<TCommand, IByteArrayConvertible> executionAdapter)
         {
             this.logger = logger;
             this.server = server;
+            this.executionAdapter = executionAdapter;
 
             endPoint = new IPEndPoint(IPAddress.Parse(configurationProvider().Ip), configurationProvider().Port);
-            executor = new CommandExecutor<TCommand, IByteArrayConvertible>(deviceController);
 
             resultStreamDisposable = Task.Run(() =>
                 server.ReceiveStream.ForEachAsync(async input =>
@@ -48,7 +51,7 @@ namespace EmulatorHost
                     await protocolInterpreter
                         .GetCommand(input)
                         .Bind(command =>
-                            executor.Execute(command))
+                            executionAdapter.Execute(command))
                         .Match(
                             success =>
                             {
@@ -74,7 +77,7 @@ namespace EmulatorHost
         {
             logger.LogInformation(
                 $"Starting device: {typeof(TDeviceController).BeautifulName()} on: {endPoint}");
-            server.Start(endPoint, executor.GetOutputQueue());
+            server.Start(endPoint, executionAdapter.GetOutputQueue());
             return Task.CompletedTask;
         }
 

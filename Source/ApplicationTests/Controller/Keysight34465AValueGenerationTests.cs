@@ -11,6 +11,7 @@ using Emulator.Controller;
 using FluentAssertions;
 using FunicularSwitch;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Protocol.Execution;
 using Range = Domain.UnionTypes.Range;
 
 namespace EmulatorTests.Controller
@@ -50,7 +51,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task TestIdentification()
         {
-            var executor = new CommandExecutor<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465AController);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465AController);
             var result = await executor.Execute(Keysight34465ACommand.Identification)
                 .ConfigureAwait(false);
             executor.GetOutputQueue().First().Should().BeOfType<ResponseValue.String_>().Which.Value.Should()
@@ -60,7 +61,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task TestReadOrder()
         {
-            var executor = new CommandExecutor<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465AController);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465AController);
             var result = await executor
                 .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricityType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(false);

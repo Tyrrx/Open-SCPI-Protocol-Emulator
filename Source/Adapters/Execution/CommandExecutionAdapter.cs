@@ -1,17 +1,18 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using Emulator.Command;
 using Emulator.Controller;
 using FunicularSwitch;
 
-namespace Emulator.Command
+namespace Protocol.Execution
 {
     public class
-        CommandExecutor<TCommand, TOutputQueue> : ICommandExecutor<TCommand, TOutputQueue>
+        CommandExecutionAdapter<TCommand, TOutputQueue> : ICommandExecutionAdapter<TCommand, TOutputQueue>
     {
         private readonly ConcurrentQueue<TOutputQueue> outputQueue = new ConcurrentQueue<TOutputQueue>();
         private readonly IDeviceController<TCommand, TOutputQueue> deviceController;
 
-        public CommandExecutor(IDeviceController<TCommand, TOutputQueue> deviceController)
+        public CommandExecutionAdapter(IDeviceController<TCommand, TOutputQueue> deviceController)
         {
             this.deviceController = deviceController;
         }
