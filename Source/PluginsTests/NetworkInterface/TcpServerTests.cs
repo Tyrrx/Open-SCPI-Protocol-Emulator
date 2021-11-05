@@ -6,12 +6,12 @@
 //using System.Reactive.Linq;
 //using System.Text;
 //using System.Threading;
-//using EmulatorHost.NetworkInterface;
+//using Plugins.NetworkInterface;
 //using FluentAssertions;
 //using FunicularSwitch;
 //using Microsoft.Extensions.Logging.Abstractions;
 
-//namespace EmulatorHostTests.NetworkInterface
+//namespace PluginsTests.NetworkInterface
 //{
 //    [TestClass]
 //    public class TcpServerTests
@@ -20,7 +20,7 @@
 //        public void Start_StateUnderTest_ExpectedBehavior()
 //        {
 //            // Arrangenew 
-//            var socketServer = new EmulatorHost.NetworkInterface.TcpServer();
+//            var socketServer = new Plugins.NetworkInterface.TcpServer();
 //            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5025);
 //            var queue = new ConcurrentQueue<byte[]>();
 //            socketServer.Start(endPoint, queue);
@@ -35,7 +35,7 @@
 //        public void Stop_StateUnderTest_ExpectedBehavior()
 //        {
 //            // Arrange
-//            var socketServer = new EmulatorHost.NetworkInterface.TcpServer();
+//            var socketServer = new Plugins.NetworkInterface.TcpServer();
 //            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5025);
 //            var queue = new ConcurrentQueue<byte[]>();
 //            socketServer.Start(endPoint, queue);
@@ -51,7 +51,7 @@
 //        public void SendToHostServer_StateUnderTest_ExpectedBehavior()
 //        {
 //            // Arrange
-//            var socketServer = new EmulatorHost.NetworkInterface.TcpServer();
+//            var socketServer = new Plugins.NetworkInterface.TcpServer();
 //            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5025);
 //            var queue = new ConcurrentQueue<byte[]>();
 //            socketServer.Start(endPoint, queue);
@@ -92,7 +92,7 @@
 //        {
 //            // Arrange
 
-//            var socketServer = new EmulatorHost.NetworkInterface.TcpServer();
+//            var socketServer = new Plugins.NetworkInterface.TcpServer();
 //            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5025);
 //            var queue = new ConcurrentQueue<byte[]>();
 //            socketServer.Start(endPoint, queue);

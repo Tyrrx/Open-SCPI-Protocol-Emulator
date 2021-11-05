@@ -1,10 +1,10 @@
 ﻿// using System.Reactive.Linq;
 // using System.Threading.Tasks;
-// using EmulatorHost.NetworkInterface;
+// using Plugins.NetworkInterface;
 // using FluentAssertions;
 // using Microsoft.VisualStudio.TestTools.UnitTesting;
 //
-// namespace EmulatorHostTests.NetworkInterface
+// namespace PluginsTests.NetworkInterface
 // {
 //     [TestClass]
 //     public class DataBuilderTests

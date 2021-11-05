@@ -5,6 +5,7 @@
     <IsPackable>false</IsPackable>
       <LangVersion>9.0</LangVersion>
     <Platforms>AnyCPU;x86</Platforms>
+    <RootNamespace>EmulatorHostTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\EmulatorHost\EmulatorHost.csproj" />
+    <ProjectReference Include="..\Plugins\Plugins.csproj" />
   </ItemGroup>
 
 </Project>

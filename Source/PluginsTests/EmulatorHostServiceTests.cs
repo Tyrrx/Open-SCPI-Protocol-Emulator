@@ -1,5 +1,5 @@
-// using EmulatorHost;
-// using EmulatorHost.NetworkInterface;
+// using Plugins;
+// using Plugins.NetworkInterface;
 // using Microsoft.VisualStudio.TestTools.UnitTesting;
 // using System.Net;
 // using System.Net.Sockets;
@@ -9,7 +9,7 @@
 // using FluentAssertions;
 // using Microsoft.Extensions.Logging.Abstractions;
 //
-// namespace EmulatorHostTests
+// namespace PluginsTests
 // {
 //     [TestClass]
 //     public class EmulatorHostServiceTests
