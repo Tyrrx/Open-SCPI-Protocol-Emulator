@@ -1,18 +1,16 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading.Tasks;
-using Domain.Abstractions;
 using Emulator.Command;
 using FunicularSwitch;
 
 namespace Emulator.Controller
 {
-	public interface IDeviceController<TCommand>
-	where TCommand : ICommand
+	public interface IDeviceController<TCommand, TOutputQueue>
 	{
-		Task<Result<TCommand>> CommandProcessor(
+		Task<Result<CommandExecutionResult<TCommand>>> ProcessCommand(
 			TCommand command,
-			ConcurrentQueue<IByteArrayConvertible> queue,
-			CommandExecutionContext executionContext);
+			ConcurrentQueue<TOutputQueue> queue,
+			CommandExecutionResult<TCommand> executionResult);
 		//todo add cancelation token
 	}
 }

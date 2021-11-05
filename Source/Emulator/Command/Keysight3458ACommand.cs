@@ -6,7 +6,7 @@ using Range = Domain.UnionTypes.Range;
 
 namespace Emulator.Command
 {
-	public abstract class Keysight3458ACommand : ICommand
+	public abstract class Keysight3458ACommand
 	{
 		public static readonly Keysight3458ACommand Identification = new Identification_();
 		public static readonly Keysight3458ACommand Read = new Read_();

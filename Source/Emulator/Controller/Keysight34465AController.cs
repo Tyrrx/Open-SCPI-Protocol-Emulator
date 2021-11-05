@@ -7,7 +7,7 @@ using FunicularSwitch;
 
 namespace Emulator.Controller
 {
-	public class Keysight34465AController : IDeviceController<Keysight34465ACommand>
+	public class Keysight34465AController : IDeviceController<Keysight34465ACommand, IByteArrayConvertible>
 	{
 		private Keysight34465A Device { get; }
 
@@ -16,73 +16,69 @@ namespace Emulator.Controller
 			Device = device;
 		}
 		
-		public Task<Result<Keysight34465ACommand>> CommandProcessor(
+		public Task<Result<CommandExecutionResult<Keysight34465ACommand>>> ProcessCommand(
 			Keysight34465ACommand command,
 			ConcurrentQueue<IByteArrayConvertible> queue,
-			CommandExecutionContext executionContext)
+			CommandExecutionResult<Keysight34465ACommand> executionResult)
 		{
-			executionContext.ExecutedCommands.Add(command);
+			executionResult.ExecutedCommands.Add(command);
 
-			Task<Result<Keysight34465ACommand>> Identification(Keysight34465ACommand.Identification_ identification) =>
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> Identification(Keysight34465ACommand.Identification_ identification) =>
 				Device.GetIdentification()
 					.Map(result =>
 					{
 						queue.Enqueue(result);
-						return command;
+						return executionResult;
 					});
 
-			Task<Result<Keysight34465ACommand>> Read(Keysight34465ACommand.Read_ read) =>
-				CommandProcessor(Keysight34465ACommand.Initiate, queue, executionContext)
-					.Bind(_ => CommandProcessor(Keysight34465ACommand.Fetch, queue, executionContext))
-					.Map(_ => command);
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> Read(Keysight34465ACommand.Read_ read) =>
+				ProcessCommand(Keysight34465ACommand.Initiate, queue, executionResult)
+					.Bind(result => ProcessCommand(Keysight34465ACommand.Fetch, queue, result));
 
-			Task<Result<Keysight34465ACommand>> Abort(Keysight34465ACommand.Abort_ abort) =>
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> Abort(Keysight34465ACommand.Abort_ abort) =>
 				Device.Abort()
-					.Map(_ => command);
+					.Map(_ => executionResult);
 
-			Task<Result<Keysight34465ACommand>> Initiate(Keysight34465ACommand.Initiate_ initiate) =>
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> Initiate(Keysight34465ACommand.Initiate_ initiate) =>
 				Device.Initiate()
-					.Map(_ => command);
+					.Map(_ => executionResult);
 
-			Task<Result<Keysight34465ACommand>> Fetch(Keysight34465ACommand.Fetch_ fetch) =>
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> Fetch(Keysight34465ACommand.Fetch_ fetch) =>
 				Device.Fetch(queue)
-					.Map(_ => command);
+					.Map(_ => executionResult);
 
-			Task<Result<Keysight34465ACommand>> ConfigureCurrent(Keysight34465ACommand.ConfigureCurrent_ configureCurrent) =>
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> ConfigureCurrent(Keysight34465ACommand.ConfigureCurrent_ configureCurrent) =>
 				Device.ConfigureCurrent(configureCurrent.ElectricityType, configureCurrent.Range, configureCurrent.Resolution)
-					.Map(_ => command);
+					.Map(_ => executionResult);
 
-			Task<Result<Keysight34465ACommand>> MeasureCurrent(Keysight34465ACommand.MeasureCurrent_ measureCurrent) =>
-				CommandProcessor(Keysight34465ACommand.ConfigureCurrent(measureCurrent.ElectricityType, measureCurrent.Range, measureCurrent.Resolution), queue, executionContext)
-					.Bind(_ => CommandProcessor(Keysight34465ACommand.Read, queue, executionContext))
-					.Map(_ => command);
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> MeasureCurrent(Keysight34465ACommand.MeasureCurrent_ measureCurrent) =>
+				ProcessCommand(Keysight34465ACommand.ConfigureCurrent(measureCurrent.ElectricityType, measureCurrent.Range, measureCurrent.Resolution), queue, executionResult)
+					.Bind(result => ProcessCommand(Keysight34465ACommand.Read, queue, result));
 
-			Task<Result<Keysight34465ACommand>> ConfigureVoltage(Keysight34465ACommand.ConfigureVoltage_ configureVoltage) =>
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> ConfigureVoltage(Keysight34465ACommand.ConfigureVoltage_ configureVoltage) =>
 				Device.ConfigureVoltage(configureVoltage.ElectricityType, configureVoltage.Range, configureVoltage.Resolution)
-					.Map(_ => command);
+					.Map(_ => executionResult);
 
-			Task<Result<Keysight34465ACommand>> MeasureVoltage(Keysight34465ACommand.MeasureVoltage_ measureVoltage) =>
-				CommandProcessor(Keysight34465ACommand.ConfigureVoltage(measureVoltage.ElectricityType, measureVoltage.Range, measureVoltage.Resolution), queue, executionContext)
-					.Bind(_ => CommandProcessor(Keysight34465ACommand.Read, queue, executionContext))
-					.Map(_ => command);
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> MeasureVoltage(Keysight34465ACommand.MeasureVoltage_ measureVoltage) =>
+				ProcessCommand(Keysight34465ACommand.ConfigureVoltage(measureVoltage.ElectricityType, measureVoltage.Range, measureVoltage.Resolution), queue, executionResult)
+					.Bind(result => ProcessCommand(Keysight34465ACommand.Read, queue, result));
 
-			Task<Result<Keysight34465ACommand>> DisplayText(Keysight34465ACommand.DisplayText_ displayText) =>
-				CommandProcessor(Keysight34465ACommand.ClearDisplay, queue, executionContext)
-					.Bind(async _ =>
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> DisplayText(Keysight34465ACommand.DisplayText_ displayText) =>
+				ProcessCommand(Keysight34465ACommand.ClearDisplay, queue, executionResult)
+					.Bind(async result =>
 					{
 						await Device.DisplayText(displayText.Text);
-						return await CommandProcessor(Keysight34465ACommand.ClearDisplay, queue, executionContext)
+						return await ProcessCommand(Keysight34465ACommand.ClearDisplay, queue, result)
 							.ConfigureAwait(false);
-					})
-					.Map(_ => command);
+					});
 
-			Task<Result<Keysight34465ACommand>> ClearDisplay(Keysight34465ACommand.ClearDisplay_ clearDisplay) =>
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> ClearDisplay(Keysight34465ACommand.ClearDisplay_ clearDisplay) =>
 				Device.ClearDisplay()
-					.Map(_ => command);
+					.Map(_ => executionResult);
 
-			Task<Result<Keysight34465ACommand>> SetImpedance(Keysight34465ACommand.SetImpedance_ setImpedance) =>
+			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> SetImpedance(Keysight34465ACommand.SetImpedance_ setImpedance) =>
 				Device.SetImpedance(setImpedance.Impedance)
-					.Map(_ => command);
+					.Map(_ => executionResult);
 
 			return command.Match(
 				Identification,

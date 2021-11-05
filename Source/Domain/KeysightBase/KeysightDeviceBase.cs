@@ -7,7 +7,7 @@ using Domain.UnionTypes;
 
 namespace Domain.KeysightBase
 {
-	public abstract class KeysightDeviceBase : IKeysightDeviceBase
+	public abstract class KeysightDeviceBase //: IKeysightDeviceBase
 	{
 		public BehaviorSubject<TriggerState> TriggerStateBehaviourSubject { get; set; }
 		public ConcurrentQueue<MeasurementValue> ReadingQueue { get; } = new ConcurrentQueue<MeasurementValue>();

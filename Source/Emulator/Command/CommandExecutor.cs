@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using Emulator.Controller;
 using FunicularSwitch;
 
 namespace Emulator.Command
 {
-	public class
-		CommandExecutor<TCommand, TOutputQueue, TExecutionResult> : ICommandExecutor<TCommand, TOutputQueue,
-			TExecutionResult>
-		where TCommand : ICommand
-	{
-		private readonly ConcurrentQueue<TOutputQueue> outputQueue = new ConcurrentQueue<TOutputQueue>();
+    public class
+        CommandExecutor<TCommand, TOutputQueue> : ICommandExecutor<TCommand, TOutputQueue>
+    {
+        private readonly ConcurrentQueue<TOutputQueue> outputQueue = new ConcurrentQueue<TOutputQueue>();
+        private readonly IDeviceController<TCommand, TOutputQueue> deviceController;
 
-		public Task<Result<(TExecutionResult, CommandExecutionContext)>> Execute(
-			TCommand command,
-			Func<TCommand, ConcurrentQueue<TOutputQueue>, CommandExecutionContext,
-				Task<Result<TExecutionResult>>> commandProcessor,
-			CommandExecutionContext commandExecutionContext)
-		{
-			return commandProcessor(command, outputQueue, commandExecutionContext)
-				.Map(executionResult => (executionResult, commandExecutionContext));
-		}
+        public CommandExecutor(IDeviceController<TCommand, TOutputQueue> deviceController)
+        {
+            this.deviceController = deviceController;
+        }
+        
+        public Task<Result<CommandExecutionResult<TCommand>>> Execute(TCommand command)
+        {
+            return deviceController.ProcessCommand(command, outputQueue, new CommandExecutionResult<TCommand>());
+        }
 
-		public ConcurrentQueue<TOutputQueue> GetOutputQueue() => outputQueue;
-	}
+        public ConcurrentQueue<TOutputQueue> GetOutputQueue() => outputQueue;
+    }
 }
