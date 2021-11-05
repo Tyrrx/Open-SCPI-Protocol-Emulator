@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain.Abstractions;
 using Emulator.Command;
-using Emulator.Controller;
 using EmulatorHost.Network;
 using FunicularSwitch;
 using FunicularSwitch.Extensions;
@@ -18,26 +17,24 @@ using Protocol.Interpreter;
 
 namespace EmulatorHost
 {
-    public class HostedDeviceService<TDeviceController, TCommand, TConfiguration, TProtocolInterpreter> : IHostedService
-        where TDeviceController : IDeviceController<TCommand, IByteArrayConvertible>
+    public class HostedDeviceService<TCommand, TConfiguration> : IHostedService
         where TConfiguration : IDeviceConfiguration
-        where TProtocolInterpreter : IProtocolInterpreter<TCommand>
     {
-        private readonly ILogger<HostedDeviceService<TDeviceController, TCommand, TConfiguration, TProtocolInterpreter>>
+        private readonly ILogger<HostedDeviceService<TCommand, TConfiguration>>
             logger;
 
         private readonly TcpServer server;
-        private readonly CommandExecutionAdapter<TCommand, IByteArrayConvertible> executionAdapter;
+        private readonly ICommandExecutionAdapter<TCommand, IByteArrayConvertible> executionAdapter;
 
         private readonly IPEndPoint endPoint;
         private readonly Task resultStreamDisposable;
 
         public HostedDeviceService(
-            ILogger<HostedDeviceService<TDeviceController, TCommand, TConfiguration, TProtocolInterpreter>> logger,
+            ILogger<HostedDeviceService<TCommand, TConfiguration>> logger,
             Func<TConfiguration> configurationProvider,
             TcpServer server,
-            TProtocolInterpreter protocolInterpreter,
-            CommandExecutionAdapter<TCommand, IByteArrayConvertible> executionAdapter)
+            IProtocolInterpreter<TCommand> protocolInterpreter,
+            ICommandExecutionAdapter<TCommand, IByteArrayConvertible> executionAdapter)
         {
             this.logger = logger;
             this.server = server;
@@ -76,7 +73,7 @@ namespace EmulatorHost
         public Task StartAsync(CancellationToken cancellationToken)
         {
             logger.LogInformation(
-                $"Starting device: {typeof(TDeviceController).BeautifulName()} on: {endPoint}");
+                $"Starting device on: {endPoint}");
             server.Start(endPoint, executionAdapter.GetOutputQueue());
             return Task.CompletedTask;
         }
