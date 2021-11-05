@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Dev\Open-SCPI-Protocol-Emulator\Source\ProtocolParser\Keysight34465A\Keysight34465ASCPI.g4 by ANTLR 4.9.1
+// Generated from C:\Dev\Open-SCPI-Protocol-Application\Source\ProtocolParser\Keysight34465A\Keysight34465ASCPI.g4 by ANTLR 4.9.1
 
 // Unreachable code detected
 #pragma warning disable 0162

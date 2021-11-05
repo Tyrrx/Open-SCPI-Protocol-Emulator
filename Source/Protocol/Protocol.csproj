@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Emulator\Emulator.csproj" />
+      <ProjectReference Include="..\Application\Application.csproj" />
       <ProjectReference Include="..\ProtocolParser\ProtocolParser.csproj" />
     </ItemGroup>
 

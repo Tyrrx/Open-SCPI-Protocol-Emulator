@@ -8,7 +8,6 @@ using Domain.Abstractions;
 using Domain.KeysightBase;
 using Domain.UnionTypes;
 using FunicularSwitch;
-using FunicularSwitch.Extensions;
 using Range = Domain.UnionTypes.Range;
 
 namespace Domain.Keysight34465A
