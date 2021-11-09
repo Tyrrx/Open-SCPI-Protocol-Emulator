@@ -7,12 +7,12 @@ using FunicularSwitch;
 namespace Protocol.Execution
 {
     public class
-        CommandExecutionAdapter<TCommand, TOutputQueue> : ICommandExecutionAdapter<TCommand, TOutputQueue>
+        CommandExecutionAdapter<TCommand, TOutput> : ICommandExecutionAdapter<TCommand, TOutput>
     {
-        private readonly ConcurrentQueue<TOutputQueue> outputQueue = new ConcurrentQueue<TOutputQueue>();
-        private readonly IDeviceController<TCommand, TOutputQueue> deviceController;
+        private readonly ConcurrentQueue<TOutput> outputQueue = new ConcurrentQueue<TOutput>();
+        private readonly IDeviceController<TCommand, TOutput> deviceController;
 
-        public CommandExecutionAdapter(IDeviceController<TCommand, TOutputQueue> deviceController)
+        public CommandExecutionAdapter(IDeviceController<TCommand, TOutput> deviceController)
         {
             this.deviceController = deviceController;
         }
@@ -21,7 +21,6 @@ namespace Protocol.Execution
         {
             return deviceController.ProcessCommand(command, outputQueue, new CommandExecutionResult<TCommand>());
         }
-
-        public ConcurrentQueue<TOutputQueue> GetOutputQueue() => outputQueue;
+        public ConcurrentQueue<TOutput> GetOutputQueue() => outputQueue;
     }
 }

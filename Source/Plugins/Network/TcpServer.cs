@@ -12,7 +12,6 @@ namespace EmulatorHost.Network
     {
         private readonly ILogger<TcpServer> logger;
         private TcpListener tcpListener;
-
         private readonly WorkerThread connectionThread;
         private WorkerThread transmissionThread;
 

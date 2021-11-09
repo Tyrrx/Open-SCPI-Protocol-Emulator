@@ -5,12 +5,12 @@ using FunicularSwitch;
 
 namespace Emulator.Controller
 {
-	public interface IDeviceController<TCommand, TOutputQueue>
+	public interface IDeviceController<TCommandInput, TExecutionResultOutput>
 	{
-		Task<Result<CommandExecutionResult<TCommand>>> ProcessCommand(
-			TCommand command,
-			ConcurrentQueue<TOutputQueue> queue,
-			CommandExecutionResult<TCommand> executionResult);
+		Task<Result<CommandExecutionResult<TCommandInput>>> ProcessCommand(
+			TCommandInput command,
+			ConcurrentQueue<TExecutionResultOutput> queue,
+			CommandExecutionResult<TCommandInput> executionResult);
 		//todo add cancelation token
 	}
 }
