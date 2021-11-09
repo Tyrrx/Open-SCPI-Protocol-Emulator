@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using Emulator.Command;
-using Emulator.Controller;
+using Emulator.CommandHandler;
 using FunicularSwitch;
 
 namespace Protocol.Execution

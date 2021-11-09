@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Emulator.Command;
 using FunicularSwitch;
 
-namespace Emulator.Controller
+namespace Emulator.CommandHandler
 {
 	public interface ICommandHandler<TCommandInput, TExecutionResultOutput>
 	{

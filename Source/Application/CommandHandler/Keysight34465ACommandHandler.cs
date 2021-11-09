@@ -5,7 +5,7 @@ using Domain.Keysight34465A;
 using Emulator.Command;
 using FunicularSwitch;
 
-namespace Emulator.Controller
+namespace Emulator.CommandHandler
 {
 	public class Keysight34465ACommandHandler : ICommandHandler<Keysight34465ACommand, IByteArrayConvertible>
 	{

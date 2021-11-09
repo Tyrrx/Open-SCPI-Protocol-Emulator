@@ -7,7 +7,7 @@ using Domain.Abstractions;
 using Domain.Keysight34465A;
 using Domain.UnionTypes;
 using Emulator.Command;
-using Emulator.Controller;
+using Emulator.CommandHandler;
 using FluentAssertions;
 using FunicularSwitch;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

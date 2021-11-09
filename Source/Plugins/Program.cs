@@ -5,7 +5,7 @@ using Domain.Abstractions;
 using Domain.Keysight34465A;
 using Domain.Keysight3458A;
 using Emulator.Command;
-using Emulator.Controller;
+using Emulator.CommandHandler;
 using EmulatorHost.Configuration;
 using EmulatorHost.Network;
 using FunicularSwitch;
