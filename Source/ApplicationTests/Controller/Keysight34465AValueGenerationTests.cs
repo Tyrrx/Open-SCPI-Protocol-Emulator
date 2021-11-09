@@ -20,7 +20,7 @@ namespace EmulatorTests.Controller
     public class Keysight34465AValueGenerationTests
     {
         private Keysight34465A Keysight34465A { get; set; }
-        private Keysight34465AController Keysight34465AController { get; set; }
+        private Keysight34465ACommandHandler Keysight34465ACommandHandler { get; set; }
         private Keysight34465AConfiguration Configuration { get; set; }
 
         [TestInitialize]
@@ -45,13 +45,13 @@ namespace EmulatorTests.Controller
             };
 
             Keysight34465A = new Keysight34465A(() => Configuration);
-            Keysight34465AController = new Keysight34465AController(Keysight34465A);
+            Keysight34465ACommandHandler = new Keysight34465ACommandHandler(Keysight34465A);
         }
 
         [TestMethod]
         public async Task TestIdentification()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465AController);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
             var result = await executor.Execute(Keysight34465ACommand.Identification)
                 .ConfigureAwait(false);
             executor.GetOutputQueue().First().Should().BeOfType<ResponseValue.String_>().Which.Value.Should()
@@ -61,7 +61,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task TestReadOrder()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465AController);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
             var result = await executor
                 .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricityType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(false);

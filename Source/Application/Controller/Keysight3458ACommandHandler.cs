@@ -7,11 +7,11 @@ using FunicularSwitch;
 
 namespace Emulator.Controller
 {
-	public class Keysight3458AController : IDeviceController<Keysight3458ACommand, IByteArrayConvertible>
+	public class Keysight3458ACommandHandler : ICommandHandler<Keysight3458ACommand, IByteArrayConvertible>
 	{
 		private Keysight3458A Device { get; }
 
-		public Keysight3458AController(Keysight3458A device)
+		public Keysight3458ACommandHandler(Keysight3458A device)
 		{
 			Device = device;
 		}

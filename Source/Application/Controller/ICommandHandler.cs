@@ -5,7 +5,7 @@ using FunicularSwitch;
 
 namespace Emulator.Controller
 {
-	public interface IDeviceController<TCommandInput, TExecutionResultOutput>
+	public interface ICommandHandler<TCommandInput, TExecutionResultOutput>
 	{
 		Task<Result<CommandExecutionResult<TCommandInput>>> ProcessCommand(
 			TCommandInput command,

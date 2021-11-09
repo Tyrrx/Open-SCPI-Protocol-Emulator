@@ -10,16 +10,16 @@ namespace Protocol.Execution
         CommandExecutionAdapter<TCommand, TOutput> : ICommandExecutionAdapter<TCommand, TOutput>
     {
         private readonly ConcurrentQueue<TOutput> outputQueue = new ConcurrentQueue<TOutput>();
-        private readonly IDeviceController<TCommand, TOutput> deviceController;
+        private readonly ICommandHandler<TCommand, TOutput> commandHandler;
 
-        public CommandExecutionAdapter(IDeviceController<TCommand, TOutput> deviceController)
+        public CommandExecutionAdapter(ICommandHandler<TCommand, TOutput> commandHandler)
         {
-            this.deviceController = deviceController;
+            this.commandHandler = commandHandler;
         }
         
         public Task<Result<CommandExecutionResult<TCommand>>> Execute(TCommand command)
         {
-            return deviceController.ProcessCommand(command, outputQueue, new CommandExecutionResult<TCommand>());
+            return commandHandler.ProcessCommand(command, outputQueue, new CommandExecutionResult<TCommand>());
         }
         public ConcurrentQueue<TOutput> GetOutputQueue() => outputQueue;
     }

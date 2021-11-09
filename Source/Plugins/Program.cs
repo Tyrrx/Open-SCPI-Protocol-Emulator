@@ -53,7 +53,7 @@ namespace EmulatorHost
                         services.AddSingleton<Func<Keysight34465AConfiguration>>(() => keysight34465AConfiguration);
                         services.AddSingleton<IProtocolInterpreter<Keysight34465ACommand>, Keysight34465AProtocolInterpreter>();
                         services.AddTransient<Keysight34465A>();
-                        services.AddTransient<IDeviceController<Keysight34465ACommand, IByteArrayConvertible>, Keysight34465AController>();
+                        services.AddTransient<ICommandHandler<Keysight34465ACommand, IByteArrayConvertible>, Keysight34465ACommandHandler>();
                         services.AddTransient<ICommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>, CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>>();
                         services.AddHostedService<HostedDeviceService<
                             Keysight34465ACommand,
@@ -69,7 +69,7 @@ namespace EmulatorHost
                         services.AddSingleton<Func<Keysight3458AConfiguration>>(() => keysight3458AConfiguration);
                         services.AddSingleton<IProtocolInterpreter<Keysight3458ACommand>, Keysight3458AProtocolInterpreter>();
                         services.AddTransient<Keysight3458A>();
-                        services.AddTransient<IDeviceController<Keysight3458ACommand, IByteArrayConvertible>, Keysight3458AController>();
+                        services.AddTransient<ICommandHandler<Keysight3458ACommand, IByteArrayConvertible>, Keysight3458ACommandHandler>();
                         services.AddTransient<ICommandExecutionAdapter<Keysight3458ACommand, IByteArrayConvertible>, CommandExecutionAdapter<Keysight3458ACommand, IByteArrayConvertible>>();
                         services.AddHostedService<HostedDeviceService<
                             Keysight3458ACommand,
