@@ -1,12 +1,13 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using Antlr4.Runtime;
+using Emulator;
 using Emulator.Command;
+using EmulatorHost.Interpreter.Keysight34465A;
 using FunicularSwitch;
-using Protocol.Keysight34465A;
 using ProtocolParser.Keysight34465A;
 
-namespace Protocol.Interpreter
+namespace EmulatorHost.Interpreter
 {
 	public sealed class Keysight34465AProtocolInterpreter : IProtocolInterpreter<Keysight34465ACommand>
 	{

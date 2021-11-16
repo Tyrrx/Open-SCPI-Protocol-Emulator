@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using Domain.Abstractions;
+using Domain.Interfaces;
 using Domain.KeysightBase;
 using Domain.UnionTypes;
 using FunicularSwitch;
@@ -13,7 +13,7 @@ namespace Domain.Keysight3458A
 {
 	public class Keysight3458A : KeysightDeviceBase
 	{
-		private readonly Func<Keysight3458AConfiguration> configurationProvider;
+		private readonly Keysight3458AConfiguration configurationProvider;
 
 		private BehaviorSubject<MeasurementType> MeasurementTypeBehaviorSubject { get; }
 		private BehaviorSubject<ElectricityType> ElectricityTypeBehaviorSubject { get; }
@@ -21,9 +21,12 @@ namespace Domain.Keysight3458A
 		private BehaviorSubject<Resolution> ResolutionBehaviorSubject { get; }
 
 
-		public Keysight3458A(Func<Keysight3458AConfiguration> configurationProvider)
+		public Keysight3458A(Option<Keysight3458AConfiguration> optionalConfiguration)
 		{
-			this.configurationProvider = configurationProvider;
+			configurationProvider = optionalConfiguration
+				.Match(
+					some => some,
+					() => throw new Exception("Tried to start a device without a configuration present"));
 			MeasurementTypeBehaviorSubject = new BehaviorSubject<MeasurementType>(MeasurementType.Voltage);
 			ElectricityTypeBehaviorSubject = new BehaviorSubject<ElectricityType>(ElectricityType.DC);
 			RangeBehaviorSubject = new BehaviorSubject<Range>(Range.Auto);
@@ -33,16 +36,16 @@ namespace Domain.Keysight3458A
 			{
 				var list = measurementTypeValue.Match(
 					_ =>
-						configurationProvider().VoltageInterferenceFactors,
+						configurationProvider.VoltageInterferenceFactors,
 					_ =>
-						configurationProvider().CurrentInterferenceFactors);
+						configurationProvider.CurrentInterferenceFactors);
 				GeneratorQueue = new Queue<double>(list);
 			});
 		}
 
 		public Task<Result<ResponseValue>> GetIdentification()
 		{
-			return Task.FromResult(Result.Ok(ResponseValue.String(configurationProvider().Identification)));
+			return Task.FromResult(Result.Ok(ResponseValue.String(configurationProvider.Identification)));
 		}
 
 		public Task<Result<Unit>> Abort()
@@ -59,7 +62,7 @@ namespace Domain.Keysight3458A
 			return Task.FromResult(Result.Ok(No.Thing));
 		}
 
-		public Task<Result<Unit>> Fetch(ConcurrentQueue<IByteArrayConvertible> queue)
+		public Task<Result<Unit>> Fetch(ConcurrentQueue<IStringConvertible> queue)
 		{
 			foreach (var measurementValue in ReadingQueue)
 			{
@@ -98,16 +101,16 @@ namespace Domain.Keysight3458A
 			{
 				return MeasurementTypeBehaviorSubject.Value.Match(_ => RangeBehaviorSubject.Value.Match(
 						number => number.Value,
-						_ => configurationProvider().VoltageRangeAuto,
-						_ => configurationProvider().VoltageRangeMin,
-						_ => configurationProvider().VoltageRangeMax,
-						_ => configurationProvider().VoltageRangeDef),
+						_ => configurationProvider.VoltageRangeAuto,
+						_ => configurationProvider.VoltageRangeMin,
+						_ => configurationProvider.VoltageRangeMax,
+						_ => configurationProvider.VoltageRangeDef),
 					_ => RangeBehaviorSubject.Value.Match(
 						number => number.Value,
-						_ => configurationProvider().CurrentRangeAuto,
-						_ => configurationProvider().CurrentRangeMin,
-						_ => configurationProvider().CurrentRangeMax,
-						_ => configurationProvider().CurrentRangeDef));
+						_ => configurationProvider.CurrentRangeAuto,
+						_ => configurationProvider.CurrentRangeMin,
+						_ => configurationProvider.CurrentRangeMax,
+						_ => configurationProvider.CurrentRangeDef));
 			}
 
 			var rangeValue = GetRangeValue();

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading.Tasks;
-using Domain.Abstractions;
+using Domain.Interfaces;
 
 namespace Domain.UnionTypes
 {
-    public abstract class MeasurementValue : IByteArrayConvertible
+    public abstract class MeasurementValue : IStringConvertible
     {
         public static MeasurementValue Double(double value) => new Double_(value);
 
-        public abstract byte[] ToByteArray(Func<string, byte[]> stringByteArrayEncoder);
+        public abstract string ToOutputString(CultureInfo cultureInfo);
 
         public class Double_ : MeasurementValue
         {
@@ -19,9 +19,9 @@ namespace Domain.UnionTypes
                 Value = value;
             }
 
-            public override byte[] ToByteArray(Func<string, byte[]> stringByteArrayEncoder) // todo factory for double creation
+            public override string ToOutputString(CultureInfo cultureInfo) // todo factory for double creation
             {
-                return stringByteArrayEncoder(Value.ToString(CultureInfo.InvariantCulture));
+                return Value.ToString(cultureInfo);
             }
         }
 

@@ -4,7 +4,7 @@ using Emulator.Command;
 using FunicularSwitch;
 using ProtocolParser.Keysight34465A;
 
-namespace Protocol.Keysight34465A
+namespace EmulatorHost.Interpreter.Keysight34465A
 {
     public class Keysight34465ACommandVisitor : Keysight34465ASCPIBaseVisitor<Result<Keysight34465ACommand>>
     {

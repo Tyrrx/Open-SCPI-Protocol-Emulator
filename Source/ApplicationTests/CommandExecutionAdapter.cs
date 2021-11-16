@@ -1,18 +1,19 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using Domain.Interfaces;
 using Emulator.Command;
 using Emulator.CommandHandler;
 using FunicularSwitch;
 
-namespace Protocol.Execution
+namespace EmulatorTests
 {
     public class
-        CommandExecutionAdapter<TCommand, TOutput> : ICommandExecutionAdapter<TCommand, TOutput>
+        CommandExecutionAdapter<TCommand> : ICommandExecutionAdapter<TCommand>
     {
-        private readonly ConcurrentQueue<TOutput> outputQueue = new ConcurrentQueue<TOutput>();
-        private readonly ICommandHandler<TCommand, TOutput> commandHandler;
+        private readonly ConcurrentQueue<IStringConvertible> outputQueue = new ConcurrentQueue<IStringConvertible>();
+        private readonly ICommandHandler<TCommand> commandHandler;
 
-        public CommandExecutionAdapter(ICommandHandler<TCommand, TOutput> commandHandler)
+        public CommandExecutionAdapter(ICommandHandler<TCommand> commandHandler)
         {
             this.commandHandler = commandHandler;
         }
@@ -21,6 +22,6 @@ namespace Protocol.Execution
         {
             return commandHandler.ProcessCommand(command, outputQueue, new CommandExecutionResult<TCommand>());
         }
-        public ConcurrentQueue<TOutput> GetOutputQueue() => outputQueue;
+        public ConcurrentQueue<IStringConvertible> GetOutputQueue() => outputQueue;
     }
 }

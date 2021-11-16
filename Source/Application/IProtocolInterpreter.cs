@@ -1,7 +1,6 @@
-﻿using Emulator.Command;
-using FunicularSwitch;
+﻿using FunicularSwitch;
 
-namespace Protocol.Interpreter
+namespace Emulator
 {
     public interface IProtocolInterpreter<TCommand>
     {

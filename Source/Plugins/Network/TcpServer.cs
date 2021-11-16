@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using Domain.Abstractions;
+using Domain.Interfaces;
+using Emulator;
 using Microsoft.Extensions.Logging;
 
 namespace EmulatorHost.Network
 {
-    public class TcpServer
+    public class TcpServer : IServer
     {
         private readonly ILogger<TcpServer> logger;
         private TcpListener tcpListener;
@@ -20,14 +22,11 @@ namespace EmulatorHost.Network
         private static readonly int readBufferCapacity = 200;
         private readonly byte[] readBuffer = new byte[readBufferCapacity];
         
-        private ConcurrentQueue<IByteArrayConvertible> queue;
+        private readonly ConcurrentQueue<IStringConvertible> outputQueue = new ConcurrentQueue<IStringConvertible>();
 
         private readonly Func<string, byte[]> byteArrayConverter = val => Encoding.ASCII.GetBytes(val);
 
         private readonly DataBuilder dataBuilder;
-        public IObservable<string> ReceiveStream => dataBuilder.DataStream;
-
-
         public TcpServer(ILogger<TcpServer> logger)
         {
             this.logger = logger;
@@ -37,10 +36,20 @@ namespace EmulatorHost.Network
             connectionThread = new WorkerThread(ConnectionWorker, 1000);
             transmissionThread = new WorkerThread(TransmissionWorker, 15);
         }
-
-        public void Start(IPEndPoint endPoint, ConcurrentQueue<IByteArrayConvertible> outputQueue)
+        
+        public IObservable<string> GetInputStream()
         {
-            this.queue = outputQueue;
+            return dataBuilder.DataStream;
+        }
+
+        public ConcurrentQueue<IStringConvertible> GetOutputQueue()
+        {
+            return outputQueue;
+        }
+
+        public void Start(IServerConfiguration serverConfiguration)
+        {
+            var endPoint = new IPEndPoint(IPAddress.Parse(serverConfiguration.Ip), serverConfiguration.Port);
             tcpListener = new TcpListener(endPoint);
             tcpListener.Start(1);
             connectionThread.Start();
@@ -51,7 +60,7 @@ namespace EmulatorHost.Network
         {
             dataBuilder.Stop();
             transmissionThread.Stop();
-            connectionThread.Stop();
+            connectionThread.Stop(); // todo only stop if no other server is running
             tcpListener?.Stop();
         }
 
@@ -122,18 +131,18 @@ namespace EmulatorHost.Network
             else
             {
                 //todo err data but not readable
-                logger.LogCritical("Stream data no readable");
+                logger.LogCritical("Stream data not readable");
             }
 
 
             if (stream.CanWrite)
             {
-                if (queue.IsEmpty) return;
-                while (!queue.IsEmpty && assertIsRunning())
+                if (outputQueue.IsEmpty) return;
+                while (!outputQueue.IsEmpty && assertIsRunning())
                 {
-                    if (queue.TryDequeue(out var result))
+                    if (outputQueue.TryDequeue(out var result))
                     {
-                        var data = result.ToByteArray(byteArrayConverter);
+                        var data = byteArrayConverter(result.ToOutputString(CultureInfo.InvariantCulture));
                         stream.Write(data, 0, data.Length);
                     }
                 }

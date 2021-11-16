@@ -1,11 +1,12 @@
 ﻿using System;
 using Antlr4.Runtime;
+using Emulator;
 using Emulator.Command;
+using EmulatorHost.Interpreter.Keysight3458;
 using FunicularSwitch;
-using Protocol.Keysight3458;
 using ProtocolParser.Keysight3458A;
 
-namespace Protocol.Interpreter
+namespace EmulatorHost.Interpreter
 {
 	public class Keysight3458AProtocolInterpreter : IProtocolInterpreter<Keysight3458ACommand>
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Protocol
+namespace EmulatorHost.Interpreter
 {
 	public sealed class VisitorTokenHandlerException : Exception
 	{

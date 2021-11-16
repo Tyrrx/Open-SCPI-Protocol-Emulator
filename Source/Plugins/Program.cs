@@ -1,25 +1,28 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Domain.Abstractions;
+using Domain.Interfaces;
 using Domain.Keysight34465A;
 using Domain.Keysight3458A;
+using Emulator;
 using Emulator.Command;
 using Emulator.CommandHandler;
 using EmulatorHost.Configuration;
+using EmulatorHost.Interpreter;
 using EmulatorHost.Network;
 using FunicularSwitch;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Protocol.Execution;
-using Protocol.Interpreter;
 
 namespace EmulatorHost
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
+    // ReSharper disable once ArrangeTypeModifiers
     class Program
     {
         private const string DeviceSettingsJsonFileName = "devicesettings.json";
 
+        // ReSharper disable once ArrangeTypeMemberModifiers
         static Task Main(string[] args)
         {
             return LoadDeviceConfigurations(args)
@@ -40,43 +43,25 @@ namespace EmulatorHost
 
         private static IHostBuilder CreateHostBuilder(DeviceConfigurations deviceConfigurations)
         {
-            var hostBuilder = Host.CreateDefaultBuilder( /*args*/);
-
-            hostBuilder.ConfigureServices(services =>
-                services.AddTransient<TcpServer>());
-            deviceConfigurations
-                .Keysight34465AConfiguration
-                .Match(keysight34465AConfiguration =>
+            return Host.CreateDefaultBuilder( /*args*/)
+                .ConfigureServices(services =>
                 {
-                    hostBuilder.ConfigureServices(services =>
-                    {
-                        services.AddSingleton<Func<Keysight34465AConfiguration>>(() => keysight34465AConfiguration);
-                        services.AddSingleton<IProtocolInterpreter<Keysight34465ACommand>, Keysight34465AProtocolInterpreter>();
-                        services.AddTransient<Keysight34465A>();
-                        services.AddTransient<ICommandHandler<Keysight34465ACommand, IByteArrayConvertible>, Keysight34465ACommandHandler>();
-                        services.AddTransient<ICommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>, CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>>();
-                        services.AddHostedService<HostedDeviceService<
-                            Keysight34465ACommand,
-                            Keysight34465AConfiguration>>();
-                    });
+                    services.AddTransient<IServer, TcpServer>();
+                    
+                    services.AddSingleton(deviceConfigurations.Keysight34465AConfiguration);
+                    services.AddTransient<IProtocolInterpreter<Keysight34465ACommand>, Keysight34465AProtocolInterpreter>();
+                    services.AddTransient<Keysight34465A>();
+                    services.AddTransient<ICommandHandler<Keysight34465ACommand>, Keysight34465ACommandHandler>();
+                    services.AddTransient<GenericDevice<Keysight34465ACommand, Keysight34465AConfiguration>>();
+                    services.AddHostedService<HostedDeviceService<Keysight34465ACommand, Keysight34465AConfiguration>>();
+                    
+                    services.AddSingleton(deviceConfigurations.Keysight3458AConfiguration);
+                    services.AddTransient<IProtocolInterpreter<Keysight3458ACommand>, Keysight3458AProtocolInterpreter>();
+                    services.AddTransient<Keysight3458A>();
+                    services.AddTransient<ICommandHandler<Keysight3458ACommand>, Keysight3458ACommandHandler>();
+                    services.AddTransient<GenericDevice<Keysight3458ACommand, Keysight3458AConfiguration>>();
+                    services.AddHostedService<HostedDeviceService<Keysight3458ACommand, Keysight3458AConfiguration>>();
                 });
-            deviceConfigurations
-                .Keysight3458AConfiguration
-                .Match(keysight3458AConfiguration =>
-                {
-                    hostBuilder.ConfigureServices(services =>
-                    {
-                        services.AddSingleton<Func<Keysight3458AConfiguration>>(() => keysight3458AConfiguration);
-                        services.AddSingleton<IProtocolInterpreter<Keysight3458ACommand>, Keysight3458AProtocolInterpreter>();
-                        services.AddTransient<Keysight3458A>();
-                        services.AddTransient<ICommandHandler<Keysight3458ACommand, IByteArrayConvertible>, Keysight3458ACommandHandler>();
-                        services.AddTransient<ICommandExecutionAdapter<Keysight3458ACommand, IByteArrayConvertible>, CommandExecutionAdapter<Keysight3458ACommand, IByteArrayConvertible>>();
-                        services.AddHostedService<HostedDeviceService<
-                            Keysight3458ACommand,
-                            Keysight3458AConfiguration>>();
-                    });
-                });
-            return hostBuilder;
         }
 
         private static Result<DeviceConfigurations> LoadDeviceConfigurations(string[] args)

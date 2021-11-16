@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Domain.Abstractions;
+using Domain.Interfaces;
 using Domain.Keysight34465A;
 using Domain.UnionTypes;
 using Emulator.Command;
@@ -10,7 +10,6 @@ using Emulator.CommandHandler;
 using FluentAssertions;
 using FunicularSwitch;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Protocol.Execution;
 using Range = Domain.UnionTypes.Range;
 
 namespace EmulatorTests.Controller
@@ -45,14 +44,14 @@ namespace EmulatorTests.Controller
                 CurrentRangeDef = 0.01,
             };
 
-            Keysight34465A = new Keysight34465A(() => configuration);
+            Keysight34465A = new Keysight34465A(configuration);
             Keysight34465ACommandHandler = new Keysight34465ACommandHandler(Keysight34465A);
         }
 
         [TestMethod]
         public async Task ConfigureVoltage_WithDefaultParameters()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = await executor
                 .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricityType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(false);
@@ -72,7 +71,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task ConfigureVoltage_WithoutOptionalParameters()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = await executor
                 .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricityType.DC, Option<Range>.None,
                     Option<Resolution>.None))
@@ -94,7 +93,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task MeasureVoltage_WithDefaultParameters()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
 
             var result = await executor
                 .Execute(Keysight34465ACommand.MeasureVoltage(ElectricityType.DC, Range.Auto, Resolution.Def))
@@ -115,7 +114,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task MeasureVoltage_WithoutOptionalParameters()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = await executor
                 .Execute(Keysight34465ACommand.MeasureVoltage(ElectricityType.DC, Option<Range>.None,
                     Option<Resolution>.None))
@@ -136,7 +135,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task ConfigureCurrent_WithDefaultParameters()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = await executor
                 .Execute(Keysight34465ACommand.ConfigureCurrent(ElectricityType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(false);
@@ -156,7 +155,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task ConfigureCurrent_WithoutOptionalParameters()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = await executor
                 .Execute(Keysight34465ACommand.ConfigureCurrent(ElectricityType.DC, Option<Range>.None,
                     Option<Resolution>.None))
@@ -177,7 +176,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task MeasureCurrent_WithDefaultParameters()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = await executor
                 .Execute(Keysight34465ACommand.MeasureCurrent(ElectricityType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(false);
@@ -197,7 +196,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task MeasureCurrent_WithoutOptionalParameters()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = await executor
                 .Execute(Keysight34465ACommand.MeasureCurrent(ElectricityType.DC, Option<Range>.None,
                     Option<Resolution>.None))
@@ -218,7 +217,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task Read_WithDefaults()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = await executor.Execute(Keysight34465ACommand.Read).ConfigureAwait(false);
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
@@ -235,7 +234,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public void TestInitiate_ReadingQueueClear_AndOutputEmpty_WhenReadingQueueIsNotEmpty()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             executor.Execute(Keysight34465ACommand.Initiate);
             executor.Execute(Keysight34465ACommand.Initiate);
             Keysight34465A.ReadingQueue.Single().Should().BeOfType<MeasurementValue.Double_>();
@@ -245,7 +244,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public void TestFetch_ReadingQueueNotChanged_AndOutputQueueEnqueue()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             executor.Execute(Keysight34465ACommand.Initiate);
             Keysight34465A.ReadingQueue.Should().ContainSingle();
             executor.GetOutputQueue().Should().BeEmpty();
@@ -257,7 +256,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task TestSetImpedance_High()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = await executor.Execute(Keysight34465ACommand.SetImpedance(Impedance.High)).ConfigureAwait(false);
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
@@ -267,7 +266,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task TestAbort()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = await executor.Execute(Keysight34465ACommand.Abort)
                 .ConfigureAwait(false);
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
@@ -278,7 +277,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task TestDisplayText_AutoClearAfterDelay()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var helloWorld = "Hello world!";
             var result = executor.Execute(Keysight34465ACommand.DisplayText(helloWorld));
             var (_, _, _, _, _, displayState) = await Keysight34465A.State.FirstAsync();
@@ -292,7 +291,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public void TestIdentification()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand, IByteArrayConvertible>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
             var result = executor.Execute(Keysight34465ACommand.Identification);
             executor.GetOutputQueue().Should().ContainSingle().Which.Should().BeOfType<ResponseValue.String_>();
         }

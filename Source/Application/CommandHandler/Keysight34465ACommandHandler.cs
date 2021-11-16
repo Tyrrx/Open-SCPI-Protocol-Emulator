@@ -1,13 +1,13 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading.Tasks;
-using Domain.Abstractions;
+using Domain.Interfaces;
 using Domain.Keysight34465A;
 using Emulator.Command;
 using FunicularSwitch;
 
 namespace Emulator.CommandHandler
 {
-	public class Keysight34465ACommandHandler : ICommandHandler<Keysight34465ACommand, IByteArrayConvertible>
+	public class Keysight34465ACommandHandler : ICommandHandler<Keysight34465ACommand>
 	{
 		private Keysight34465A Device { get; }
 
@@ -18,7 +18,7 @@ namespace Emulator.CommandHandler
 		
 		public Task<Result<CommandExecutionResult<Keysight34465ACommand>>> ProcessCommand(
 			Keysight34465ACommand command,
-			ConcurrentQueue<IByteArrayConvertible> queue,
+			ConcurrentQueue<IStringConvertible> queue,
 			CommandExecutionResult<Keysight34465ACommand> executionResult)
 		{
 			executionResult.ExecutedCommands.Add(command);

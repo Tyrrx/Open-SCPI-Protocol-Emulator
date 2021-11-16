@@ -7,7 +7,7 @@ using FunicularSwitch.Extensions;
 
 // ReSharper disable HeapView.PossibleBoxingAllocation
 
-namespace Protocol
+namespace EmulatorHost.Interpreter
 {
     public class ResultErrorListener<T> : IAntlrErrorListener<T>
     {

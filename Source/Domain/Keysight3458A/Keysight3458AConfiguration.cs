@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Domain.Abstractions;
+using Domain.Interfaces;
 
 namespace Domain.Keysight3458A
 {

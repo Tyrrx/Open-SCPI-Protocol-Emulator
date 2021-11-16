@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
-using Domain.Abstractions;
+using Domain.Interfaces;
 
 namespace Domain.UnionTypes
 {
-    public abstract class ResponseValue : IByteArrayConvertible
+    public abstract class ResponseValue : IStringConvertible
     {
         public static ResponseValue String(string value) => new String_(value);
-        public abstract byte[] ToByteArray(Func<string, byte[]> stringByteArrayEncoder);
+        public abstract string ToOutputString(CultureInfo cultureInfo);
 
         public class String_ : ResponseValue
         {
@@ -17,9 +18,9 @@ namespace Domain.UnionTypes
                 Value = value;
             }
 
-            public override byte[] ToByteArray(Func<string, byte[]> stringByteArrayEncoder)
+            public override string ToOutputString(CultureInfo cultureInfo)
             {
-                return stringByteArrayEncoder(Value);
+                return Value;
             }
         }
 
