@@ -21,6 +21,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Adapters\Adapters.csproj" />
+    <ProjectReference Include="..\PluginConfiguration\PluginConfiguration.csproj" />
+    <ProjectReference Include="..\PluginHosting\PluginHosting.csproj" />
+    <ProjectReference Include="..\PluginInterpreter\PluginInterpreter.csproj" />
+    <ProjectReference Include="..\PluginNetwork\PluginNetwork.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Domain.Interfaces;
 using Domain.Keysight34465A;
 using Domain.Keysight3458A;
 using Emulator;
 using Emulator.Command;
 using Emulator.CommandHandler;
-using EmulatorHost.Configuration;
-using EmulatorHost.Interpreter;
-using EmulatorHost.Network;
 using FunicularSwitch;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PluginConfiguration;
+using PluginHosting;
+using PluginInterpreter;
+using PluginNetwork;
 
 namespace EmulatorHost
 {

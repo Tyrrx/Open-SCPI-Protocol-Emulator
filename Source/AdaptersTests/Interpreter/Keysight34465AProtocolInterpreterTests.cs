@@ -1,10 +1,10 @@
 ﻿using System;
 using Domain.UnionTypes;
 using Emulator.Command;
-using EmulatorHost.Interpreter;
 using FluentAssertions;
 using FunicularSwitch;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PluginInterpreter;
 using Range = Domain.UnionTypes.Range;
 
 // ReSharper disable InconsistentNaming

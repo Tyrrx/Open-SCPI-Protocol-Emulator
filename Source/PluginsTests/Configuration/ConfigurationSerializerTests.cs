@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Domain.Keysight34465A;
 using Domain.Keysight3458A;
-using EmulatorHost.Configuration;
 using FluentAssertions;
 using FunicularSwitch;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PluginConfiguration;
 
 namespace EmulatorHostTests.Configuration
 {
