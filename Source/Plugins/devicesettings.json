@@ -1,5 +1,5 @@
 ﻿{
-  "Keysight34465AConfiguration": {
+  "Keysight34465AConfiguration": [{
     "Ip": "127.0.0.1",
     "Port": 5025,
     "Identification": "Keysight Technologies,34465A,21-BH-34465-EMULATOR,0.01.00-01.00-01.00-01.00-01-01",
@@ -33,8 +33,8 @@
     "VoltageRangeMin": 100.0,
     "VoltageRangeMax": 1000.0,
     "VoltageRangeDef": 500.0
-  },
-  "Keysight3458AConfiguration": {
+  }],
+  "Keysight3458AConfiguration": [{
     "Ip": "127.0.0.1",
     "Port": 5026,
     "Identification": "Keysight Technologies, 3458A-EMULATOR,0.01.00-01.00-01.00-01.00-01-01",
@@ -66,5 +66,5 @@
     "VoltageRangeMin": 100.0,
     "VoltageRangeMax": 1000.0,
     "VoltageRangeDef": 500.0
-  }
+  }]
 }

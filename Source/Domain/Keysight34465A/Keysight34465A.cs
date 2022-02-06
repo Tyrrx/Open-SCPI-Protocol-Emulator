@@ -12,7 +12,7 @@ using Range = Domain.UnionTypes.Range;
 
 namespace Domain.Keysight34465A
 {
-    public sealed class Keysight34465A : KeysightDeviceBase
+    public sealed class Keysight34465A : KeysightDeviceBase, IMeasurementDevice
     {
         private readonly Keysight34465AConfiguration configuration;
         private static readonly TimeSpan DisplayVisibilityTime = TimeSpan.FromSeconds(5);
@@ -159,6 +159,11 @@ namespace Domain.Keysight34465A
             var rangeValue = GetRangeValue();
             var impedanceMultiplier = GetImpedanceMultiplier();
             return rangeValue + interference * impedanceMultiplier * rangeValue;
+        }
+
+        string IMeasurementDevice.GetIdentification()
+        {
+            return configuration.Identification;
         }
     }
 }

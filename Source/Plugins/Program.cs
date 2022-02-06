@@ -5,12 +5,14 @@ using Domain.Keysight3458A;
 using Emulator;
 using Emulator.Command;
 using Emulator.CommandHandler;
+using Emulator.Factories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PluginConfiguration;
 using PluginHosting;
 using PluginInterpreter;
 using PluginNetwork;
+using PluginPersistence;
 using static PluginConfiguration.DeviceConfigurationLoader;
 
 namespace EmulatorHost
@@ -45,21 +47,24 @@ namespace EmulatorHost
             return Host.CreateDefaultBuilder( /*args*/)
                 .ConfigureServices(services =>
                 {
-                    services.AddTransient<IServer, TcpServer>();
+                    services.AddTransient<IServerFactory, ServerFactory>();
                     
                     services.AddSingleton(deviceConfigurations.Keysight34465AConfiguration);
                     services.AddTransient<IProtocolInterpreter<Keysight34465ACommand>, Keysight34465AProtocolInterpreter>();
-                    services.AddTransient<Keysight34465A>();
-                    services.AddTransient<ICommandHandler<Keysight34465ACommand>, Keysight34465ACommandHandler>();
-                    services.AddTransient<GenericDevice<Keysight34465ACommand, Keysight34465AConfiguration>>();
-                    services.AddHostedService<HostedDeviceService<Keysight34465ACommand, Keysight34465AConfiguration>>();
+                    services.AddTransient<ICommandHandler<Keysight34465A, Keysight34465ACommand>, Keysight34465ACommandHandler>();
+                    services.AddTransient<IMeasurementDeviceFactory<Keysight34465A, Keysight34465AConfiguration>, Keysight34465AFactory>();
+                    services.AddTransient<MeasurementDeviceExecutionService<Keysight34465A, Keysight34465ACommand>>();
+                    services.AddSingleton<IMeasurementDeviceRepository<Keysight34465A>, MeasurementDeviceRepository<Keysight34465A>>();
+                    services.AddSingleton<MeasurementDeviceInstanceManager<Keysight34465A,Keysight34465ACommand,Keysight34465AConfiguration>>();
+                    services.AddHostedService<HostedMeasurementDeviceInstanceManager<Keysight34465A,Keysight34465ACommand,Keysight34465AConfiguration>>();
                     
-                    services.AddSingleton(deviceConfigurations.Keysight3458AConfiguration);
-                    services.AddTransient<IProtocolInterpreter<Keysight3458ACommand>, Keysight3458AProtocolInterpreter>();
-                    services.AddTransient<Keysight3458A>();
-                    services.AddTransient<ICommandHandler<Keysight3458ACommand>, Keysight3458ACommandHandler>();
-                    services.AddTransient<GenericDevice<Keysight3458ACommand, Keysight3458AConfiguration>>();
-                    services.AddHostedService<HostedDeviceService<Keysight3458ACommand, Keysight3458AConfiguration>>();
+                    
+                    // services.AddSingleton(deviceConfigurations.Keysight3458AConfiguration);
+                    // services.AddTransient<IProtocolInterpreter<Keysight3458ACommand>, Keysight3458AProtocolInterpreter>();
+                    // services.AddTransient<Keysight3458A>();
+                    // services.AddTransient<ICommandHandler<Keysight3458A, Keysight3458ACommand>, Keysight3458ACommandHandler>();
+                    // services.AddTransient<MeasurementDeviceExecutionService<Keysight3458ACommand, Keysight3458AConfiguration>>();
+                    // services.AddHostedService<HostedMeasurementDeviceInstanceManager<,,>>();
                 });
         }
     }

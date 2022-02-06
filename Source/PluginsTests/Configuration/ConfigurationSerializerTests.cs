@@ -18,7 +18,7 @@ namespace EmulatorHostTests.Configuration
 			var configurationSerializer = new DeviceConfigurationSerializer();
 			var deviceConfigurations = new DeviceConfigurations()
 			{
-				Keysight34465AConfiguration = Option<Keysight34465AConfiguration>.None
+				Keysight34465AConfiguration = new List<Keysight34465AConfiguration>()
 			};
 
 			var json = configurationSerializer.SerializeDeviceConfigurations(deviceConfigurations);
@@ -48,7 +48,7 @@ namespace EmulatorHostTests.Configuration
 
 			var expectedDeviceConfigurations = new DeviceConfigurations()
 			{
-				Keysight34465AConfiguration = Option<Keysight34465AConfiguration>.None
+				Keysight34465AConfiguration = new List<Keysight34465AConfiguration>()
 			};
 
 
@@ -65,7 +65,7 @@ namespace EmulatorHostTests.Configuration
 			var configurationSerializer = new DeviceConfigurationSerializer();
 			var deviceConfigurations = new DeviceConfigurations()
 			{
-				Keysight34465AConfiguration = new Keysight34465AConfiguration
+				Keysight34465AConfiguration = new List {new Keysight34465AConfiguration
 				{
 					Ip = "127.0.0.1",
 					Port = 5025,
@@ -87,7 +87,7 @@ namespace EmulatorHostTests.Configuration
 					CurrentRangeMin = 0.00001,
 					CurrentRangeMax = 0.00001,
 					CurrentRangeDef = 0.00001,
-				},
+				}},
 				Keysight3458AConfiguration = new Keysight3458AConfiguration
 				{
 					Ip = "127.0.0.1",

@@ -25,6 +25,7 @@
     <ProjectReference Include="..\PluginHosting\PluginHosting.csproj" />
     <ProjectReference Include="..\PluginInterpreter\PluginInterpreter.csproj" />
     <ProjectReference Include="..\PluginNetwork\PluginNetwork.csproj" />
+    <ProjectReference Include="..\PluginPersistence\PluginPersistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

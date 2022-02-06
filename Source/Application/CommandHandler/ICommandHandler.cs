@@ -6,9 +6,10 @@ using FunicularSwitch;
 
 namespace Emulator.CommandHandler
 {
-	public interface ICommandHandler<TCommandInput>
+	public interface ICommandHandler<TDeviceType, TCommandInput>
 	{
 		Task<Result<CommandExecutionResult<TCommandInput>>> ProcessCommand(
+			TDeviceType device,
 			TCommandInput command,
 			ConcurrentQueue<IStringConvertible> queue,
 			CommandExecutionResult<TCommandInput> executionResult);

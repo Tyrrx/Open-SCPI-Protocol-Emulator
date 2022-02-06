@@ -44,13 +44,13 @@ namespace EmulatorTests.Controller
             };
 
             Keysight34465A = new Keysight34465A(Configuration);
-            Keysight34465ACommandHandler = new Keysight34465ACommandHandler(Keysight34465A);
+            Keysight34465ACommandHandler = new Keysight34465ACommandHandler();
         }
 
         [TestMethod]
         public async Task TestIdentification()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
             var result = await executor.Execute(Keysight34465ACommand.Identification)
                 .ConfigureAwait(false);
             executor.GetOutputQueue().First().Should().BeOfType<ResponseValue.String_>().Which.Value.Should()
@@ -60,7 +60,7 @@ namespace EmulatorTests.Controller
         [TestMethod]
         public async Task TestReadOrder()
         {
-            var executor = new CommandExecutionAdapter<Keysight34465ACommand>(Keysight34465ACommandHandler);
+            var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
             var result = await executor
                 .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricityType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(false);

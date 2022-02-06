@@ -11,7 +11,7 @@ using Range = Domain.UnionTypes.Range;
 
 namespace Domain.Keysight3458A
 {
-	public class Keysight3458A : KeysightDeviceBase
+	public class Keysight3458A : KeysightDeviceBase, IMeasurementDevice
 	{
 		private readonly Keysight3458AConfiguration configurationProvider;
 
@@ -115,6 +115,11 @@ namespace Domain.Keysight3458A
 
 			var rangeValue = GetRangeValue();
 			return rangeValue + interference * rangeValue;
+		}
+
+		string IMeasurementDevice.GetIdentification()
+		{
+			return configurationProvider.Identification;
 		}
 	}
 }

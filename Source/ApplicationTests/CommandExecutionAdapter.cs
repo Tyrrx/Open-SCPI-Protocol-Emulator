@@ -8,19 +8,21 @@ using FunicularSwitch;
 namespace EmulatorTests
 {
     public class
-        CommandExecutionAdapter<TCommand> : ICommandExecutionAdapter<TCommand>
+        CommandExecutionAdapter<TDevice, TCommand> : ICommandExecutionAdapter<TCommand>
     {
         private readonly ConcurrentQueue<IStringConvertible> outputQueue = new ConcurrentQueue<IStringConvertible>();
-        private readonly ICommandHandler<TCommand> commandHandler;
+        private readonly ICommandHandler<TDevice, TCommand> commandHandler;
+        private readonly TDevice device;
 
-        public CommandExecutionAdapter(ICommandHandler<TCommand> commandHandler)
+        public CommandExecutionAdapter(ICommandHandler<TDevice, TCommand> commandHandler, TDevice device)
         {
             this.commandHandler = commandHandler;
+            this.device = device;
         }
         
         public Task<Result<CommandExecutionResult<TCommand>>> Execute(TCommand command)
         {
-            return commandHandler.ProcessCommand(command, outputQueue, new CommandExecutionResult<TCommand>());
+            return commandHandler.ProcessCommand(device, command, outputQueue, new CommandExecutionResult<TCommand>());
         }
         public ConcurrentQueue<IStringConvertible> GetOutputQueue() => outputQueue;
     }
