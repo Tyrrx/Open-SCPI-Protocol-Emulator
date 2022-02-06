@@ -1,18 +1,17 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using Domain.Keysight34465A;
 using Domain.Keysight3458A;
 using Emulator;
 using Emulator.Command;
 using Emulator.CommandHandler;
-using FunicularSwitch;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PluginConfiguration;
 using PluginHosting;
 using PluginInterpreter;
 using PluginNetwork;
+using static PluginConfiguration.DeviceConfigurationLoader;
 
 namespace EmulatorHost
 {
@@ -25,7 +24,7 @@ namespace EmulatorHost
         // ReSharper disable once ArrangeTypeMemberModifiers
         static Task Main(string[] args)
         {
-            return LoadDeviceConfigurations(args)
+            return LoadDeviceConfigurations(args, DeviceSettingsJsonFileName)
                 .Map(deviceConfigurations =>
                     CreateHostBuilder(deviceConfigurations)
                         .Build()
@@ -62,22 +61,6 @@ namespace EmulatorHost
                     services.AddTransient<GenericDevice<Keysight3458ACommand, Keysight3458AConfiguration>>();
                     services.AddHostedService<HostedDeviceService<Keysight3458ACommand, Keysight3458AConfiguration>>();
                 });
-        }
-
-        private static Result<DeviceConfigurations> LoadDeviceConfigurations(string[] args)
-        {
-            var configurationSerializer = new DeviceConfigurationSerializer();
-
-            if (args.Length > 0 && args[0] != null)
-            {
-                return configurationSerializer.DeserializeDeviceConfigurations(args[0]);
-            }
-
-            var configFilePath = Path.Combine(Environment.CurrentDirectory, DeviceSettingsJsonFileName);
-            return File.Exists(configFilePath)
-                ? configurationSerializer.DeserializeDeviceConfigurations(File.ReadAllText(configFilePath))
-                : Result.Error<DeviceConfigurations>(
-                    $"Missing device configuration file {configFilePath}. Pass configuration as start parameters or make sure the config file is present.");
         }
     }
 }
