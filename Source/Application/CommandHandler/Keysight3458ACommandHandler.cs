@@ -42,19 +42,19 @@ namespace Emulator.CommandHandler
 					.Map(_ => executionResult);
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> ConfigureCurrent(Keysight3458ACommand.ConfigureCurrent_ configureCurrent) =>
-				device.ConfigureCurrent(configureCurrent.ElectricityType, configureCurrent.Range, configureCurrent.Resolution)
+				device.ConfigureCurrent(configureCurrent.ElectricCurrentType, configureCurrent.Range, configureCurrent.Resolution)
 					.Map(_ => executionResult);
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> MeasureCurrent(Keysight3458ACommand.MeasureCurrent_ measureCurrent) =>
-				ProcessCommand(device,Keysight3458ACommand.ConfigureCurrent(measureCurrent.ElectricityType, measureCurrent.Range, measureCurrent.Resolution), queue, executionResult)
+				ProcessCommand(device,Keysight3458ACommand.ConfigureCurrent(measureCurrent.ElectricCurrentType, measureCurrent.Range, measureCurrent.Resolution), queue, executionResult)
 					.Bind(result => ProcessCommand(device, Keysight3458ACommand.Read, queue, result));
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> ConfigureVoltage(Keysight3458ACommand.ConfigureVoltage_ configureVoltage) =>
-				device.ConfigureVoltage(configureVoltage.ElectricityType, configureVoltage.Range, configureVoltage.Resolution)
+				device.ConfigureVoltage(configureVoltage.ElectricCurrentType, configureVoltage.Range, configureVoltage.Resolution)
 					.Map(_ => executionResult);
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> MeasureVoltage(Keysight3458ACommand.MeasureVoltage_ measureVoltage) =>
-				ProcessCommand(device, Keysight3458ACommand.ConfigureVoltage(measureVoltage.ElectricityType, measureVoltage.Range, measureVoltage.Resolution), queue, executionResult)
+				ProcessCommand(device, Keysight3458ACommand.ConfigureVoltage(measureVoltage.ElectricCurrentType, measureVoltage.Range, measureVoltage.Resolution), queue, executionResult)
 					.Bind(_ => ProcessCommand(device, Keysight3458ACommand.Read, queue, executionResult))
 					.Map(_ => executionResult);
 

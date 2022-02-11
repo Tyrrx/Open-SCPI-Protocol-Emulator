@@ -14,17 +14,17 @@ namespace Emulator.Command
 		public static readonly Keysight3458ACommand Initiate = new Initiate_();
 		public static readonly Keysight3458ACommand Fetch = new Fetch_();
 
-		public static Keysight3458ACommand ConfigureCurrent(ElectricityType electricityType, Option<Range> range,
-			Option<Resolution> resolution) => new ConfigureCurrent_(electricityType, range, resolution);
+		public static Keysight3458ACommand ConfigureCurrent(ElectricCurrentType electricCurrentType, Option<Range> range,
+			Option<Resolution> resolution) => new ConfigureCurrent_(electricCurrentType, range, resolution);
 
-		public static Keysight3458ACommand MeasureCurrent(ElectricityType electricityType, Option<Range> range,
-			Option<Resolution> resolution) => new MeasureCurrent_(electricityType, range, resolution);
+		public static Keysight3458ACommand MeasureCurrent(ElectricCurrentType electricCurrentType, Option<Range> range,
+			Option<Resolution> resolution) => new MeasureCurrent_(electricCurrentType, range, resolution);
 
-		public static Keysight3458ACommand ConfigureVoltage(ElectricityType electricityType, Option<Range> range,
-			Option<Resolution> resolution) => new ConfigureVoltage_(electricityType, range, resolution);
+		public static Keysight3458ACommand ConfigureVoltage(ElectricCurrentType electricCurrentType, Option<Range> range,
+			Option<Resolution> resolution) => new ConfigureVoltage_(electricCurrentType, range, resolution);
 
-		public static Keysight3458ACommand MeasureVoltage(ElectricityType electricityType, Option<Range> range,
-			Option<Resolution> resolution) => new MeasureVoltage_(electricityType, range, resolution);
+		public static Keysight3458ACommand MeasureVoltage(ElectricCurrentType electricCurrentType, Option<Range> range,
+			Option<Resolution> resolution) => new MeasureVoltage_(electricCurrentType, range, resolution);
 
 		public class Identification_ : Keysight3458ACommand
 		{
@@ -63,14 +63,14 @@ namespace Emulator.Command
 
 		public class ConfigureCurrent_ : Keysight3458ACommand
 		{
-			public ElectricityType ElectricityType { get; }
+			public ElectricCurrentType ElectricCurrentType { get; }
 			public Option<Range> Range { get; }
 			public Option<Resolution> Resolution { get; }
 
-			public ConfigureCurrent_(ElectricityType electricityType, Option<Range> range,
+			public ConfigureCurrent_(ElectricCurrentType electricCurrentType, Option<Range> range,
 				Option<Resolution> resolution) : base(UnionCases.ConfigureCurrent)
 			{
-				ElectricityType = electricityType;
+				ElectricCurrentType = electricCurrentType;
 				Range = range;
 				Resolution = resolution;
 			}
@@ -78,14 +78,14 @@ namespace Emulator.Command
 
 		public class MeasureCurrent_ : Keysight3458ACommand
 		{
-			public ElectricityType ElectricityType { get; }
+			public ElectricCurrentType ElectricCurrentType { get; }
 			public Option<Range> Range { get; }
 			public Option<Resolution> Resolution { get; }
 
-			public MeasureCurrent_(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution)
+			public MeasureCurrent_(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution)
 				: base(UnionCases.MeasureCurrent)
 			{
-				ElectricityType = electricityType;
+				ElectricCurrentType = electricCurrentType;
 				Range = range;
 				Resolution = resolution;
 			}
@@ -93,14 +93,14 @@ namespace Emulator.Command
 
 		public class ConfigureVoltage_ : Keysight3458ACommand
 		{
-			public ElectricityType ElectricityType { get; }
+			public ElectricCurrentType ElectricCurrentType { get; }
 			public Option<Range> Range { get; }
 			public Option<Resolution> Resolution { get; }
 
-			public ConfigureVoltage_(ElectricityType electricityType, Option<Range> range,
+			public ConfigureVoltage_(ElectricCurrentType electricCurrentType, Option<Range> range,
 				Option<Resolution> resolution) : base(UnionCases.ConfigureVoltage)
 			{
-				ElectricityType = electricityType;
+				ElectricCurrentType = electricCurrentType;
 				Range = range;
 				Resolution = resolution;
 			}
@@ -108,14 +108,14 @@ namespace Emulator.Command
 
 		public class MeasureVoltage_ : Keysight3458ACommand
 		{
-			public ElectricityType ElectricityType { get; }
+			public ElectricCurrentType ElectricCurrentType { get; }
 			public Option<Range> Range { get; }
 			public Option<Resolution> Resolution { get; }
 
-			public MeasureVoltage_(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution)
+			public MeasureVoltage_(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution)
 				: base(UnionCases.MeasureVoltage)
 			{
-				ElectricityType = electricityType;
+				ElectricCurrentType = electricCurrentType;
 				Range = range;
 				Resolution = resolution;
 			}

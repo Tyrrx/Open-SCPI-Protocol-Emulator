@@ -1,6 +1,6 @@
 ﻿namespace Domain.Interfaces
 {
-    public interface IMeasurementDevice
+    public interface IMeasuringInstrument
     {
         public string GetIdentification();
     }

@@ -52,18 +52,18 @@ namespace EmulatorTests.Controller
         {
             var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
             var result = await executor
-                .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricityType.DC, Range.Auto, Resolution.Def))
+                .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricCurrentType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(false);
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
 
 
-            electricityType.Should().BeOfType<ElectricityType.DC_>();
+            electricityType.Should().BeOfType<ElectricCurrentType.DC_>();
             impedance.Should().BeOfType<Impedance.Low_>();
             range.Should().BeOfType<Range.Auto_>();
             resolution.Should().BeOfType<Resolution.Def_>();
             triggerState.Should().BeOfType<TriggerState.Idle_>();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
             executor.GetOutputQueue().Should().BeEmpty();
         }
 
@@ -72,19 +72,19 @@ namespace EmulatorTests.Controller
         {
             var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
             var result = await executor
-                .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricityType.DC, Option<Range>.None,
+                .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricCurrentType.DC, Option<Range>.None,
                     Option<Resolution>.None))
                 .ConfigureAwait(false);
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
 
 
-            electricityType.Should().BeOfType<ElectricityType.DC_>();
+            electricityType.Should().BeOfType<ElectricCurrentType.DC_>();
             impedance.Should().BeOfType<Impedance.Low_>();
             range.Should().BeOfType<Range.Auto_>();
             resolution.Should().BeOfType<Resolution.Def_>();
             triggerState.Should().BeOfType<TriggerState.Idle_>();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
             executor.GetOutputQueue().Should().BeEmpty();
         }
 
@@ -95,18 +95,18 @@ namespace EmulatorTests.Controller
             var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
 
             var result = await executor
-                .Execute(Keysight34465ACommand.MeasureVoltage(ElectricityType.DC, Range.Auto, Resolution.Def))
+                .Execute(Keysight34465ACommand.MeasureVoltage(ElectricCurrentType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(true);
 
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
 
-            electricityType.Should().BeOfType<ElectricityType.DC_>();
+            electricityType.Should().BeOfType<ElectricCurrentType.DC_>();
             impedance.Should().BeOfType<Impedance.Low_>();
             range.Should().BeOfType<Range.Auto_>();
             resolution.Should().BeOfType<Resolution.Def_>();
             triggerState.Should().BeOfType<TriggerState.Idle_>();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
             executor.GetOutputQueue().First().Should().BeOfType<MeasurementValue.Double_>();
         }
 
@@ -115,19 +115,19 @@ namespace EmulatorTests.Controller
         {
             var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
             var result = await executor
-                .Execute(Keysight34465ACommand.MeasureVoltage(ElectricityType.DC, Option<Range>.None,
+                .Execute(Keysight34465ACommand.MeasureVoltage(ElectricCurrentType.DC, Option<Range>.None,
                     Option<Resolution>.None))
                 .ConfigureAwait(false);
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
 
 
-            electricityType.Should().BeOfType<ElectricityType.DC_>();
+            electricityType.Should().BeOfType<ElectricCurrentType.DC_>();
             impedance.Should().BeOfType<Impedance.Low_>();
             range.Should().BeOfType<Range.Auto_>();
             resolution.Should().BeOfType<Resolution.Def_>();
             triggerState.Should().BeOfType<TriggerState.Idle_>();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
             executor.GetOutputQueue().First().Should().BeOfType<MeasurementValue.Double_>();
         }
 
@@ -136,18 +136,18 @@ namespace EmulatorTests.Controller
         {
             var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
             var result = await executor
-                .Execute(Keysight34465ACommand.ConfigureCurrent(ElectricityType.DC, Range.Auto, Resolution.Def))
+                .Execute(Keysight34465ACommand.ConfigureCurrent(ElectricCurrentType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(false);
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
 
 
-            electricityType.Should().BeOfType<ElectricityType.DC_>();
+            electricityType.Should().BeOfType<ElectricCurrentType.DC_>();
             impedance.Should().BeOfType<Impedance.Low_>();
             range.Should().BeOfType<Range.Auto_>();
             resolution.Should().BeOfType<Resolution.Def_>();
             triggerState.Should().BeOfType<TriggerState.Idle_>();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
             executor.GetOutputQueue().Should().BeEmpty();
         }
 
@@ -156,19 +156,19 @@ namespace EmulatorTests.Controller
         {
             var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
             var result = await executor
-                .Execute(Keysight34465ACommand.ConfigureCurrent(ElectricityType.DC, Option<Range>.None,
+                .Execute(Keysight34465ACommand.ConfigureCurrent(ElectricCurrentType.DC, Option<Range>.None,
                     Option<Resolution>.None))
                 .ConfigureAwait(false);
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
 
 
-            electricityType.Should().BeOfType<ElectricityType.DC_>();
+            electricityType.Should().BeOfType<ElectricCurrentType.DC_>();
             impedance.Should().BeOfType<Impedance.Low_>();
             range.Should().BeOfType<Range.Auto_>();
             resolution.Should().BeOfType<Resolution.Def_>();
             triggerState.Should().BeOfType<TriggerState.Idle_>();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
             executor.GetOutputQueue().Should().BeEmpty();
         }
 
@@ -177,18 +177,18 @@ namespace EmulatorTests.Controller
         {
             var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
             var result = await executor
-                .Execute(Keysight34465ACommand.MeasureCurrent(ElectricityType.DC, Range.Auto, Resolution.Def))
+                .Execute(Keysight34465ACommand.MeasureCurrent(ElectricCurrentType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(false);
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
 
 
-            electricityType.Should().BeOfType<ElectricityType.DC_>();
+            electricityType.Should().BeOfType<ElectricCurrentType.DC_>();
             impedance.Should().BeOfType<Impedance.Low_>();
             range.Should().BeOfType<Range.Auto_>();
             resolution.Should().BeOfType<Resolution.Def_>();
             triggerState.Should().BeOfType<TriggerState.Idle_>();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
             executor.GetOutputQueue().First().Should().BeOfType<MeasurementValue.Double_>();
         }
 
@@ -197,19 +197,19 @@ namespace EmulatorTests.Controller
         {
             var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
             var result = await executor
-                .Execute(Keysight34465ACommand.MeasureCurrent(ElectricityType.DC, Option<Range>.None,
+                .Execute(Keysight34465ACommand.MeasureCurrent(ElectricCurrentType.DC, Option<Range>.None,
                     Option<Resolution>.None))
                 .ConfigureAwait(false);
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
 
 
-            electricityType.Should().BeOfType<ElectricityType.DC_>();
+            electricityType.Should().BeOfType<ElectricCurrentType.DC_>();
             impedance.Should().BeOfType<Impedance.Low_>();
             range.Should().BeOfType<Range.Auto_>();
             resolution.Should().BeOfType<Resolution.Def_>();
             triggerState.Should().BeOfType<TriggerState.Idle_>();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
             executor.GetOutputQueue().First().Should().BeOfType<MeasurementValue.Double_>();
         }
 
@@ -221,12 +221,12 @@ namespace EmulatorTests.Controller
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
 
-            electricityType.Should().BeOfType<ElectricityType.DC_>();
+            electricityType.Should().BeOfType<ElectricCurrentType.DC_>();
             impedance.Should().BeOfType<Impedance.Low_>();
             range.Should().BeOfType<Range.Auto_>();
             resolution.Should().BeOfType<Resolution.Def_>();
             triggerState.Should().BeOfType<TriggerState.Idle_>();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
             executor.GetOutputQueue().First().Should().BeOfType<MeasurementValue.Double_>();
         }
 
@@ -284,7 +284,7 @@ namespace EmulatorTests.Controller
             await result.ConfigureAwait(true);
 
             (_, _, _, _, _, displayState) = await Keysight34465A.State.FirstAsync();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
         }
 
         [TestMethod]

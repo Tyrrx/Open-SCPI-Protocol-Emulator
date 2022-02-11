@@ -11,12 +11,12 @@ using Range = Domain.UnionTypes.Range;
 
 namespace Domain.Keysight3458A
 {
-	public class Keysight3458A : KeysightDeviceBase, IMeasurementDevice
+	public class Keysight3458A : KeysightDeviceBase, IMeasuringInstrument
 	{
 		private readonly Keysight3458AConfiguration configurationProvider;
 
-		private BehaviorSubject<MeasurementType> MeasurementTypeBehaviorSubject { get; }
-		private BehaviorSubject<ElectricityType> ElectricityTypeBehaviorSubject { get; }
+		private BehaviorSubject<ElectricalUnitOfMeasure> MeasurementTypeBehaviorSubject { get; }
+		private BehaviorSubject<ElectricCurrentType> ElectricityTypeBehaviorSubject { get; }
 		private BehaviorSubject<Range> RangeBehaviorSubject { get; }
 		private BehaviorSubject<Resolution> ResolutionBehaviorSubject { get; }
 
@@ -27,8 +27,8 @@ namespace Domain.Keysight3458A
 				.Match(
 					some => some,
 					() => throw new Exception("Tried to start a device without a configuration present"));
-			MeasurementTypeBehaviorSubject = new BehaviorSubject<MeasurementType>(MeasurementType.Voltage);
-			ElectricityTypeBehaviorSubject = new BehaviorSubject<ElectricityType>(ElectricityType.DC);
+			MeasurementTypeBehaviorSubject = new BehaviorSubject<ElectricalUnitOfMeasure>(ElectricalUnitOfMeasure.Voltage);
+			ElectricityTypeBehaviorSubject = new BehaviorSubject<ElectricCurrentType>(ElectricCurrentType.DC);
 			RangeBehaviorSubject = new BehaviorSubject<Range>(Range.Auto);
 			ResolutionBehaviorSubject = new BehaviorSubject<Resolution>(Resolution.Def);
 
@@ -71,10 +71,10 @@ namespace Domain.Keysight3458A
 			return Task.FromResult(Result.Ok(No.Thing));
 		}
 
-		public Task<Result<Unit>> ConfigureCurrent(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution)
+		public Task<Result<Unit>> ConfigureCurrent(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution)
 		{
-			MeasurementTypeBehaviorSubject.OnNext(MeasurementType.Current);
-			ElectricityTypeBehaviorSubject.OnNext(electricityType);
+			MeasurementTypeBehaviorSubject.OnNext(ElectricalUnitOfMeasure.Current);
+			ElectricityTypeBehaviorSubject.OnNext(electricCurrentType);
 			RangeBehaviorSubject.OnNext(range.Match(
 				some => some,
 				() => Range.Auto));
@@ -83,10 +83,10 @@ namespace Domain.Keysight3458A
 				() => Resolution.Def));
 			return Task.FromResult(Result<Unit>.Ok(No.Thing));
 		}
-		public Task<Result<Unit>> ConfigureVoltage(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution)
+		public Task<Result<Unit>> ConfigureVoltage(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution)
 		{
-			MeasurementTypeBehaviorSubject.OnNext(MeasurementType.Voltage);
-			ElectricityTypeBehaviorSubject.OnNext(electricityType);
+			MeasurementTypeBehaviorSubject.OnNext(ElectricalUnitOfMeasure.Voltage);
+			ElectricityTypeBehaviorSubject.OnNext(electricCurrentType);
 			RangeBehaviorSubject.OnNext(range.Match(
 				some => some,
 				() => Range.Auto));
@@ -117,7 +117,7 @@ namespace Domain.Keysight3458A
 			return rangeValue + interference * rangeValue;
 		}
 
-		string IMeasurementDevice.GetIdentification()
+		string IMeasuringInstrument.GetIdentification()
 		{
 			return configurationProvider.Identification;
 		}

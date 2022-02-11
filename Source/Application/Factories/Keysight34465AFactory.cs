@@ -2,7 +2,7 @@
 
 namespace Emulator.Factories
 {
-    public class Keysight34465AFactory : IMeasurementDeviceFactory<Keysight34465A, Keysight34465AConfiguration>
+    public class Keysight34465AFactory : IMeasuringInstrumentFactory<Keysight34465A, Keysight34465AConfiguration>
     {
         public Keysight34465A Create(Keysight34465AConfiguration configuration)
         {

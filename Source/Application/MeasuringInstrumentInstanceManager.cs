@@ -6,35 +6,35 @@ using Domain.Interfaces;
 
 namespace Emulator
 {
-    public class MeasurementDeviceInstanceManager<TMeasurementDevice, TCommand, TConfiguration>
+    public class MeasuringInstrumentInstanceManager<TMeasurementDevice, TCommand, TConfiguration>
         where TConfiguration : IDeviceConfiguration
     {
         private readonly IServerFactory serverFactory;
 
-        private readonly MeasurementDeviceExecutionService<TMeasurementDevice, TCommand>
-            measurementDeviceExecutionService;
+        private readonly MeasuringInstrumentExecutionService<TMeasurementDevice, TCommand>
+            measuringInstrumentExecutionService;
 
         private readonly List<TConfiguration> configurations;
-        private readonly IMeasurementDeviceFactory<TMeasurementDevice, TConfiguration> measurementDeviceFactory;
-        private readonly IMeasurementDeviceRepository<TMeasurementDevice> measurementDeviceRepository;
+        private readonly IMeasuringInstrumentFactory<TMeasurementDevice, TConfiguration> measuringInstrumentFactory;
+        private readonly IMeasuringInstrumentRepository<TMeasurementDevice> measuringInstrumentRepository;
 
         private List<IDisposable> subscriptions = new List<IDisposable>();
 
         private readonly List<IServer> servers = new List<IServer>();
 
-        public MeasurementDeviceInstanceManager(
+        public MeasuringInstrumentInstanceManager(
             IServerFactory serverFactory,
-            MeasurementDeviceExecutionService<TMeasurementDevice, TCommand> measurementDeviceExecutionService,
+            MeasuringInstrumentExecutionService<TMeasurementDevice, TCommand> measuringInstrumentExecutionService,
             List<TConfiguration> configurations,
-            IMeasurementDeviceFactory<TMeasurementDevice, TConfiguration> measurementDeviceFactory,
-            IMeasurementDeviceRepository<TMeasurementDevice> measurementDeviceRepository
+            IMeasuringInstrumentFactory<TMeasurementDevice, TConfiguration> measuringInstrumentFactory,
+            IMeasuringInstrumentRepository<TMeasurementDevice> measuringInstrumentRepository
         )
         {
             this.serverFactory = serverFactory;
-            this.measurementDeviceExecutionService = measurementDeviceExecutionService;
+            this.measuringInstrumentExecutionService = measuringInstrumentExecutionService;
             this.configurations = configurations;
-            this.measurementDeviceFactory = measurementDeviceFactory;
-            this.measurementDeviceRepository = measurementDeviceRepository;
+            this.measuringInstrumentFactory = measuringInstrumentFactory;
+            this.measuringInstrumentRepository = measuringInstrumentRepository;
         }
 
         public Task StartAll()
@@ -55,11 +55,11 @@ namespace Emulator
             var server = serverFactory.Create();
             servers.Add(server);
 
-            var device = measurementDeviceRepository.GetByConfiguration(configuration)
+            var device = measuringInstrumentRepository.GetByConfiguration(configuration)
                 .Match(
                     some => some,
-                    () => measurementDeviceFactory.Create(configuration));
-            var subscription = measurementDeviceExecutionService.BeginExecution(
+                    () => measuringInstrumentFactory.Create(configuration));
+            var subscription = measuringInstrumentExecutionService.BeginExecution(
                 server.GetInputStream(),
                 server.GetOutputQueue(),
                 device);

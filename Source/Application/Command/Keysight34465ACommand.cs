@@ -14,10 +14,10 @@ namespace Emulator.Command
         public static readonly Keysight34465ACommand Initiate = new Initiate_();
         public static readonly Keysight34465ACommand Fetch = new Fetch_();
 
-        public static Keysight34465ACommand ConfigureCurrent(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution) => new ConfigureCurrent_(electricityType, range, resolution);
-        public static Keysight34465ACommand MeasureCurrent(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution) => new MeasureCurrent_(electricityType, range, resolution);
-        public static Keysight34465ACommand ConfigureVoltage(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution) => new ConfigureVoltage_(electricityType, range, resolution);
-        public static Keysight34465ACommand MeasureVoltage(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution) => new MeasureVoltage_(electricityType, range, resolution);
+        public static Keysight34465ACommand ConfigureCurrent(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution) => new ConfigureCurrent_(electricCurrentType, range, resolution);
+        public static Keysight34465ACommand MeasureCurrent(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution) => new MeasureCurrent_(electricCurrentType, range, resolution);
+        public static Keysight34465ACommand ConfigureVoltage(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution) => new ConfigureVoltage_(electricCurrentType, range, resolution);
+        public static Keysight34465ACommand MeasureVoltage(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution) => new MeasureVoltage_(electricCurrentType, range, resolution);
         public static Keysight34465ACommand DisplayText(string text) => new DisplayText_(text);
 
         public static readonly Keysight34465ACommand ClearDisplay = new ClearDisplay_();
@@ -61,12 +61,12 @@ namespace Emulator.Command
 
         public class ConfigureCurrent_ : Keysight34465ACommand
         {
-            public ElectricityType ElectricityType { get; }
+            public ElectricCurrentType ElectricCurrentType { get; }
             public Option<Range> Range { get; }
             public Option<Resolution> Resolution { get; }
-            public ConfigureCurrent_(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution) : base(UnionCases.ConfigureCurrent)
+            public ConfigureCurrent_(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution) : base(UnionCases.ConfigureCurrent)
             {
-                ElectricityType = electricityType;
+                ElectricCurrentType = electricCurrentType;
                 Range = range;
                 Resolution = resolution;
 
@@ -75,12 +75,12 @@ namespace Emulator.Command
 
         public class MeasureCurrent_ : Keysight34465ACommand
         {
-            public ElectricityType ElectricityType { get; }
+            public ElectricCurrentType ElectricCurrentType { get; }
             public Option<Range> Range { get; }
             public Option<Resolution> Resolution { get; }
-            public MeasureCurrent_(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution) : base(UnionCases.MeasureCurrent)
+            public MeasureCurrent_(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution) : base(UnionCases.MeasureCurrent)
             {
-                ElectricityType = electricityType;
+                ElectricCurrentType = electricCurrentType;
                 Range = range;
                 Resolution = resolution;
             }
@@ -88,12 +88,12 @@ namespace Emulator.Command
 
         public class ConfigureVoltage_ : Keysight34465ACommand
         {
-            public ElectricityType ElectricityType { get; }
+            public ElectricCurrentType ElectricCurrentType { get; }
             public Option<Range> Range { get; }
             public Option<Resolution> Resolution { get; }
-            public ConfigureVoltage_(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution) : base(UnionCases.ConfigureVoltage)
+            public ConfigureVoltage_(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution) : base(UnionCases.ConfigureVoltage)
             {
-                ElectricityType = electricityType;
+                ElectricCurrentType = electricCurrentType;
                 Range = range;
                 Resolution = resolution;
             }
@@ -101,12 +101,12 @@ namespace Emulator.Command
 
         public class MeasureVoltage_ : Keysight34465ACommand
         {
-            public ElectricityType ElectricityType { get; }
+            public ElectricCurrentType ElectricCurrentType { get; }
             public Option<Range> Range { get; }
             public Option<Resolution> Resolution { get; }
-            public MeasureVoltage_(ElectricityType electricityType, Option<Range> range, Option<Resolution> resolution) : base(UnionCases.MeasureVoltage)
+            public MeasureVoltage_(ElectricCurrentType electricCurrentType, Option<Range> range, Option<Resolution> resolution) : base(UnionCases.MeasureVoltage)
             {
-                ElectricityType = electricityType;
+                ElectricCurrentType = electricCurrentType;
                 Range = range;
                 Resolution = resolution;
             }

@@ -42,19 +42,19 @@ namespace Emulator.CommandHandler
 					.Map(_ => executionResult);
 
 			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> ConfigureCurrent(Keysight34465ACommand.ConfigureCurrent_ configureCurrent) =>
-				device.ConfigureCurrent(configureCurrent.ElectricityType, configureCurrent.Range, configureCurrent.Resolution)
+				device.ConfigureCurrent(configureCurrent.ElectricCurrentType, configureCurrent.Range, configureCurrent.Resolution)
 					.Map(_ => executionResult);
 
 			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> MeasureCurrent(Keysight34465ACommand.MeasureCurrent_ measureCurrent) =>
-				ProcessCommand(device, Keysight34465ACommand.ConfigureCurrent(measureCurrent.ElectricityType, measureCurrent.Range, measureCurrent.Resolution), queue, executionResult)
+				ProcessCommand(device, Keysight34465ACommand.ConfigureCurrent(measureCurrent.ElectricCurrentType, measureCurrent.Range, measureCurrent.Resolution), queue, executionResult)
 					.Bind(result => ProcessCommand(device, Keysight34465ACommand.Read, queue, result));
 
 			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> ConfigureVoltage(Keysight34465ACommand.ConfigureVoltage_ configureVoltage) =>
-				device.ConfigureVoltage(configureVoltage.ElectricityType, configureVoltage.Range, configureVoltage.Resolution)
+				device.ConfigureVoltage(configureVoltage.ElectricCurrentType, configureVoltage.Range, configureVoltage.Resolution)
 					.Map(_ => executionResult);
 
 			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> MeasureVoltage(Keysight34465ACommand.MeasureVoltage_ measureVoltage) =>
-				ProcessCommand(device, Keysight34465ACommand.ConfigureVoltage(measureVoltage.ElectricityType, measureVoltage.Range, measureVoltage.Resolution), queue, executionResult)
+				ProcessCommand(device, Keysight34465ACommand.ConfigureVoltage(measureVoltage.ElectricCurrentType, measureVoltage.Range, measureVoltage.Resolution), queue, executionResult)
 					.Bind(result => ProcessCommand(device, Keysight34465ACommand.Read, queue, result));
 
 			Task<Result<CommandExecutionResult<Keysight34465ACommand>>> DisplayText(Keysight34465ACommand.DisplayText_ displayText) =>

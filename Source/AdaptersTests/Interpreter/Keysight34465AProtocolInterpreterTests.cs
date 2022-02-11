@@ -37,10 +37,10 @@ namespace ProtocolTests.Interpreter
         public void Test_SCPI_ConfigureCurrent_Command()
         {
             //Test long form and short form with ac and dc
-            AssertCommandType<Keysight34465ACommand.ConfigureCurrent_>("CONF:CURR:AC").ElectricityType.Should().BeOfType<ElectricityType.AC_>();
-            AssertCommandType<Keysight34465ACommand.ConfigureCurrent_>("CONFigure:CURRent:AC").ElectricityType.Should().BeOfType<ElectricityType.AC_>();
-            AssertCommandType<Keysight34465ACommand.ConfigureCurrent_>("CONF:CURR:DC").ElectricityType.Should().BeOfType<ElectricityType.DC_>();
-            AssertCommandType<Keysight34465ACommand.ConfigureCurrent_>("CONFigure:CURRent:DC").ElectricityType.Should().BeOfType<ElectricityType.DC_>();
+            AssertCommandType<Keysight34465ACommand.ConfigureCurrent_>("CONF:CURR:AC").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.AC_>();
+            AssertCommandType<Keysight34465ACommand.ConfigureCurrent_>("CONFigure:CURRent:AC").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.AC_>();
+            AssertCommandType<Keysight34465ACommand.ConfigureCurrent_>("CONF:CURR:DC").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.DC_>();
+            AssertCommandType<Keysight34465ACommand.ConfigureCurrent_>("CONFigure:CURRent:DC").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.DC_>();
             // Test defaults
             AssertCommandType<Keysight34465ACommand.ConfigureCurrent_>("CONF:CURR:DC").Range.Should().BeOfType<None<Range>>();
             AssertCommandType<Keysight34465ACommand.ConfigureCurrent_>("CONFigure:CURRent:DC").Resolution.Should().BeOfType<None<Resolution>>();
@@ -93,10 +93,10 @@ namespace ProtocolTests.Interpreter
         public void Test_SCPI_MeasureCurrent_Query()
         {
             //Test long form and short form with ac and dc
-            AssertCommandType<Keysight34465ACommand.MeasureCurrent_>("MEAS:CURR:AC?").ElectricityType.Should().BeOfType<ElectricityType.AC_>();
-            AssertCommandType<Keysight34465ACommand.MeasureCurrent_>("MEASure:CURRent:AC?").ElectricityType.Should().BeOfType<ElectricityType.AC_>();
-            AssertCommandType<Keysight34465ACommand.MeasureCurrent_>("MEASure:CURR:DC?").ElectricityType.Should().BeOfType<ElectricityType.DC_>();
-            AssertCommandType<Keysight34465ACommand.MeasureCurrent_>("MEASure:CURRent:DC?").ElectricityType.Should().BeOfType<ElectricityType.DC_>();
+            AssertCommandType<Keysight34465ACommand.MeasureCurrent_>("MEAS:CURR:AC?").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.AC_>();
+            AssertCommandType<Keysight34465ACommand.MeasureCurrent_>("MEASure:CURRent:AC?").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.AC_>();
+            AssertCommandType<Keysight34465ACommand.MeasureCurrent_>("MEASure:CURR:DC?").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.DC_>();
+            AssertCommandType<Keysight34465ACommand.MeasureCurrent_>("MEASure:CURRent:DC?").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.DC_>();
             // Test defaults
             AssertCommandType<Keysight34465ACommand.MeasureCurrent_>("MEASure:CURRent:DC?").Range.Should().BeOfType<None<Range>>();
             AssertCommandType<Keysight34465ACommand.MeasureCurrent_>("MEASure:CURRent:DC?").Resolution.Should().BeOfType<None<Resolution>>();
@@ -131,10 +131,10 @@ namespace ProtocolTests.Interpreter
         [TestMethod]
         public void Test_SCPI_ConfigureVoltage_Command()
         {
-            AssertCommandType<Keysight34465ACommand.ConfigureVoltage_>("CONF:VOLT:AC").ElectricityType.Should().BeOfType<ElectricityType.AC_>();
-            AssertCommandType<Keysight34465ACommand.ConfigureVoltage_>("CONFigure:VOLTage:AC").ElectricityType.Should().BeOfType<ElectricityType.AC_>();
-            AssertCommandType<Keysight34465ACommand.ConfigureVoltage_>("CONF:VOLT:DC").ElectricityType.Should().BeOfType<ElectricityType.DC_>();
-            AssertCommandType<Keysight34465ACommand.ConfigureVoltage_>("CONFigure:VOLTage:DC").ElectricityType.Should().BeOfType<ElectricityType.DC_>();
+            AssertCommandType<Keysight34465ACommand.ConfigureVoltage_>("CONF:VOLT:AC").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.AC_>();
+            AssertCommandType<Keysight34465ACommand.ConfigureVoltage_>("CONFigure:VOLTage:AC").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.AC_>();
+            AssertCommandType<Keysight34465ACommand.ConfigureVoltage_>("CONF:VOLT:DC").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.DC_>();
+            AssertCommandType<Keysight34465ACommand.ConfigureVoltage_>("CONFigure:VOLTage:DC").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.DC_>();
             // Test defaults
             AssertCommandType<Keysight34465ACommand.ConfigureVoltage_>("CONF:VOLT:DC").Range.Should().BeOfType<None<Range>>();
             AssertCommandType<Keysight34465ACommand.ConfigureVoltage_>("CONFigure:VOLTage:DC").Resolution.Should().BeOfType<None<Resolution>>();
@@ -169,10 +169,10 @@ namespace ProtocolTests.Interpreter
         [TestMethod]
         public void Test_SCPI_MeasureVoltage_Command()
         {
-            AssertCommandType<Keysight34465ACommand.MeasureVoltage_>("MEAS:VOLT:AC?").ElectricityType.Should().BeOfType<ElectricityType.AC_>();
-            AssertCommandType<Keysight34465ACommand.MeasureVoltage_>("MEASure:VOLTage:AC?").ElectricityType.Should().BeOfType<ElectricityType.AC_>();
-            AssertCommandType<Keysight34465ACommand.MeasureVoltage_>("MEAS:VOLT:DC?").ElectricityType.Should().BeOfType<ElectricityType.DC_>();
-            AssertCommandType<Keysight34465ACommand.MeasureVoltage_>("MEASure:VOLTage:DC?").ElectricityType.Should().BeOfType<ElectricityType.DC_>();
+            AssertCommandType<Keysight34465ACommand.MeasureVoltage_>("MEAS:VOLT:AC?").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.AC_>();
+            AssertCommandType<Keysight34465ACommand.MeasureVoltage_>("MEASure:VOLTage:AC?").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.AC_>();
+            AssertCommandType<Keysight34465ACommand.MeasureVoltage_>("MEAS:VOLT:DC?").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.DC_>();
+            AssertCommandType<Keysight34465ACommand.MeasureVoltage_>("MEASure:VOLTage:DC?").ElectricCurrentType.Should().BeOfType<ElectricCurrentType.DC_>();
             // Test defaults
             AssertCommandType<Keysight34465ACommand.MeasureVoltage_>("MEAS:VOLT:DC?").Range.Should().BeOfType<None<Range>>();
             AssertCommandType<Keysight34465ACommand.MeasureVoltage_>("MEASure:VOLTage:DC?").Resolution.Should().BeOfType<None<Resolution>>();

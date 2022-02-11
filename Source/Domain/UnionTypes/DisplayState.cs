@@ -7,7 +7,7 @@ namespace Domain.UnionTypes
     {
         public static DisplayState DisplayText(string textValue) => new DisplayText_(textValue);
 
-        public static readonly DisplayState Hidden = new Hidden_();
+        public static readonly DisplayState Empty = new Empty_();
 
         public class DisplayText_ : DisplayState
         {
@@ -18,9 +18,9 @@ namespace Domain.UnionTypes
             }
         }
 
-        public class Hidden_ : DisplayState
+        public class Empty_ : DisplayState
         {
-            public Hidden_() : base(UnionCases.Hidden)
+            public Empty_() : base(UnionCases.Empty)
             {
             }
         }
@@ -28,7 +28,7 @@ namespace Domain.UnionTypes
         internal enum UnionCases
         {
             DisplayText,
-            Hidden,
+            Empty,
         }
 
         internal UnionCases UnionCase { get; }
@@ -50,33 +50,33 @@ namespace Domain.UnionTypes
 
     public static class DisplayStateExtension
     {
-        public static T Match<T>(this DisplayState displayState, Func<DisplayState.DisplayText_, T> displayText, Func<DisplayState.Hidden_, T> hidden)
+        public static T Match<T>(this DisplayState displayState, Func<DisplayState.DisplayText_, T> displayText, Func<DisplayState.Empty_, T> empty)
         {
             switch (displayState.UnionCase)
             {
                 case DisplayState.UnionCases.DisplayText:
                     return displayText((DisplayState.DisplayText_)displayState);
-                case DisplayState.UnionCases.Hidden:
-                    return hidden((DisplayState.Hidden_)displayState);
+                case DisplayState.UnionCases.Empty:
+                    return empty((DisplayState.Empty_)displayState);
                 default:
                     throw new ArgumentException($"Unknown type derived from DisplayState: {displayState.GetType().Name}");
             }
         }
 
-        public static async Task<T> Match<T>(this DisplayState displayState, Func<DisplayState.DisplayText_, Task<T>> displayText, Func<DisplayState.Hidden_, Task<T>> hidden)
+        public static async Task<T> Match<T>(this DisplayState displayState, Func<DisplayState.DisplayText_, Task<T>> displayText, Func<DisplayState.Empty_, Task<T>> empty)
         {
             switch (displayState.UnionCase)
             {
                 case DisplayState.UnionCases.DisplayText:
                     return await displayText((DisplayState.DisplayText_)displayState).ConfigureAwait(false);
-                case DisplayState.UnionCases.Hidden:
-                    return await hidden((DisplayState.Hidden_)displayState).ConfigureAwait(false);
+                case DisplayState.UnionCases.Empty:
+                    return await empty((DisplayState.Empty_)displayState).ConfigureAwait(false);
                 default:
                     throw new ArgumentException($"Unknown type derived from DisplayState: {displayState.GetType().Name}");
             }
         }
 
-        public static async Task<T> Match<T>(this Task<DisplayState> displayState, Func<DisplayState.DisplayText_, T> displayText, Func<DisplayState.Hidden_, T> hidden) => (await displayState.ConfigureAwait(false)).Match(displayText, hidden);
-        public static async Task<T> Match<T>(this Task<DisplayState> displayState, Func<DisplayState.DisplayText_, Task<T>> displayText, Func<DisplayState.Hidden_, Task<T>> hidden) => await(await displayState.ConfigureAwait(false)).Match(displayText, hidden).ConfigureAwait(false);
+        public static async Task<T> Match<T>(this Task<DisplayState> displayState, Func<DisplayState.DisplayText_, T> displayText, Func<DisplayState.Empty_, T> empty) => (await displayState.ConfigureAwait(false)).Match(displayText, empty);
+        public static async Task<T> Match<T>(this Task<DisplayState> displayState, Func<DisplayState.DisplayText_, Task<T>> displayText, Func<DisplayState.Empty_, Task<T>> empty) => await(await displayState.ConfigureAwait(false)).Match(displayText, empty).ConfigureAwait(false);
     }
 }

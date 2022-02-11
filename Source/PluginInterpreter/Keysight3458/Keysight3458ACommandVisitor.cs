@@ -35,8 +35,8 @@ namespace PluginInterpreter.Keysight3458
         {
             var electricityType = context.electricityType.Type switch
             {
-                Keysight3458ASCPILexer.AC => ElectricityType.AC,
-                Keysight3458ASCPILexer.DC => ElectricityType.DC,
+                Keysight3458ASCPILexer.AC => ElectricCurrentType.AC,
+                Keysight3458ASCPILexer.DC => ElectricCurrentType.DC,
                 _ => throw new VisitorTokenHandlerException("Wrong electricity type")
             };
             var (rage, resolution) = context.Accept(new Keysight3458ACurrentParameterVisitor());
@@ -47,8 +47,8 @@ namespace PluginInterpreter.Keysight3458
         {
             var electricityType = context.electricityType.Type switch
             {
-                Keysight3458ASCPILexer.AC => ElectricityType.AC,
-                Keysight3458ASCPILexer.DC => ElectricityType.DC,
+                Keysight3458ASCPILexer.AC => ElectricCurrentType.AC,
+                Keysight3458ASCPILexer.DC => ElectricCurrentType.DC,
                 _ => throw new VisitorTokenHandlerException("Wrong electricity type")
             };
             var (rage, resolution) = context.Accept(new Keysight3458AVoltageParameterVisitor());
@@ -61,8 +61,8 @@ namespace PluginInterpreter.Keysight3458
         {
             var electricityType = context.electricityType.Type switch
             {
-                Keysight3458ASCPILexer.AC => ElectricityType.AC,
-                Keysight3458ASCPILexer.DC => ElectricityType.DC,
+                Keysight3458ASCPILexer.AC => ElectricCurrentType.AC,
+                Keysight3458ASCPILexer.DC => ElectricCurrentType.DC,
                 _ => throw new VisitorTokenHandlerException("Wrong electricity type")
             };
 
@@ -75,8 +75,8 @@ namespace PluginInterpreter.Keysight3458
         {
             var electricityType = context.electricityType.Type switch
             {
-                Keysight3458ASCPILexer.AC => ElectricityType.AC,
-                Keysight3458ASCPILexer.DC => ElectricityType.DC,
+                Keysight3458ASCPILexer.AC => ElectricCurrentType.AC,
+                Keysight3458ASCPILexer.DC => ElectricCurrentType.DC,
                 _ => throw new VisitorTokenHandlerException("Wrong electricity type")
             };
             var (rage, resolution) = context.Accept(new Keysight3458AVoltageParameterVisitor());

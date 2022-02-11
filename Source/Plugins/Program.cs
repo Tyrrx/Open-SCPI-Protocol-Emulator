@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Domain.Keysight34465A;
-using Domain.Keysight3458A;
 using Emulator;
 using Emulator.Command;
 using Emulator.CommandHandler;
@@ -52,11 +51,11 @@ namespace EmulatorHost
                     services.AddSingleton(deviceConfigurations.Keysight34465AConfiguration);
                     services.AddTransient<IProtocolInterpreter<Keysight34465ACommand>, Keysight34465AProtocolInterpreter>();
                     services.AddTransient<ICommandHandler<Keysight34465A, Keysight34465ACommand>, Keysight34465ACommandHandler>();
-                    services.AddTransient<IMeasurementDeviceFactory<Keysight34465A, Keysight34465AConfiguration>, Keysight34465AFactory>();
-                    services.AddTransient<MeasurementDeviceExecutionService<Keysight34465A, Keysight34465ACommand>>();
-                    services.AddSingleton<IMeasurementDeviceRepository<Keysight34465A>, MeasurementDeviceRepository<Keysight34465A>>();
-                    services.AddSingleton<MeasurementDeviceInstanceManager<Keysight34465A,Keysight34465ACommand,Keysight34465AConfiguration>>();
-                    services.AddHostedService<HostedMeasurementDeviceInstanceManager<Keysight34465A,Keysight34465ACommand,Keysight34465AConfiguration>>();
+                    services.AddTransient<IMeasuringInstrumentFactory<Keysight34465A, Keysight34465AConfiguration>, Keysight34465AFactory>();
+                    services.AddTransient<MeasuringInstrumentExecutionService<Keysight34465A, Keysight34465ACommand>>();
+                    services.AddSingleton<IMeasuringInstrumentRepository<Keysight34465A>, MeasuringInstrumentRepository<Keysight34465A>>();
+                    services.AddSingleton<MeasuringInstrumentInstanceManager<Keysight34465A,Keysight34465ACommand,Keysight34465AConfiguration>>();
+                    services.AddHostedService<HostedMeasuringInstrumentInstanceManager<Keysight34465A,Keysight34465ACommand,Keysight34465AConfiguration>>();
                     
                     
                     // services.AddSingleton(deviceConfigurations.Keysight3458AConfiguration);

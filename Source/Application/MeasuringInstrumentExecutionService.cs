@@ -13,15 +13,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Emulator
 {
-    public class MeasurementDeviceExecutionService<TDeviceType, TCommandType>
+    public class MeasuringInstrumentExecutionService<TDeviceType, TCommandType>
 
     {
-        private readonly ILogger<MeasurementDeviceExecutionService<TDeviceType, TCommandType>> logger;
+        private readonly ILogger<MeasuringInstrumentExecutionService<TDeviceType, TCommandType>> logger;
         private readonly IProtocolInterpreter<TCommandType> protocolInterpreter;
         private readonly ICommandHandler<TDeviceType, TCommandType> commandHandler;
 
-        public MeasurementDeviceExecutionService(
-            ILogger<MeasurementDeviceExecutionService<TDeviceType, TCommandType>> logger,
+        public MeasuringInstrumentExecutionService(
+            ILogger<MeasuringInstrumentExecutionService<TDeviceType, TCommandType>> logger,
             IProtocolInterpreter<TCommandType> protocolInterpreter,
             ICommandHandler<TDeviceType, TCommandType> commandHandler)
         {

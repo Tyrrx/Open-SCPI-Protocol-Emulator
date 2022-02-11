@@ -62,18 +62,18 @@ namespace EmulatorTests.Controller
         {
             var executor = new CommandExecutionAdapter<Keysight34465A, Keysight34465ACommand>(Keysight34465ACommandHandler, Keysight34465A);
             var result = await executor
-                .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricityType.DC, Range.Auto, Resolution.Def))
+                .Execute(Keysight34465ACommand.ConfigureVoltage(ElectricCurrentType.DC, Range.Auto, Resolution.Def))
                 .ConfigureAwait(false);
 
             var (electricityType, impedance, range, resolution, triggerState, displayState) =
                 await Keysight34465A.State.FirstAsync();
 
-            electricityType.Should().BeOfType<ElectricityType.DC_>();
+            electricityType.Should().BeOfType<ElectricCurrentType.DC_>();
             impedance.Should().BeOfType<Impedance.Low_>();
             range.Should().BeOfType<Range.Auto_>();
             resolution.Should().BeOfType<Resolution.Def_>();
             triggerState.Should().BeOfType<TriggerState.Idle_>();
-            displayState.Should().BeOfType<DisplayState.Hidden_>();
+            displayState.Should().BeOfType<DisplayState.Empty_>();
             executor.GetOutputQueue().Should().BeEmpty();
 
             List<Task<Result<CommandExecutionResult<Keysight34465ACommand>>>> tasks =
