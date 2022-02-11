@@ -49,7 +49,7 @@ namespace EmulatorHost
                     services.AddTransient<IServerFactory, ServerFactory>();
                     
                     services.AddSingleton(deviceConfigurations.Keysight34465AConfiguration);
-                    services.AddTransient<IProtocolInterpreter<Keysight34465ACommand>, Keysight34465AProtocolInterpreter>();
+                    services.AddTransient<IProtocolParser<Keysight34465ACommand>, Keysight34465AProtocolParser>();
                     services.AddTransient<ICommandHandler<Keysight34465A, Keysight34465ACommand>, Keysight34465ACommandHandler>();
                     services.AddTransient<IMeasuringInstrumentFactory<Keysight34465A, Keysight34465AConfiguration>, Keysight34465AFactory>();
                     services.AddTransient<MeasuringInstrumentExecutionService<Keysight34465A, Keysight34465ACommand>>();

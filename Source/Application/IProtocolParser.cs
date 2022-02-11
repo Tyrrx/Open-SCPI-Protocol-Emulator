@@ -2,7 +2,7 @@
 
 namespace Emulator
 {
-    public interface IProtocolInterpreter<TCommand>
+    public interface IProtocolParser<TCommand>
     {
         Result<TCommand> GetCommand(string input);
     }

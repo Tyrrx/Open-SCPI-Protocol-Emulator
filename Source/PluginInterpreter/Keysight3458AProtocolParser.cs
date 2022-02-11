@@ -8,7 +8,7 @@ using PluginInterpreter.Keysight3458;
 
 namespace PluginInterpreter
 {
-	public class Keysight3458AProtocolInterpreter : IProtocolInterpreter<Keysight3458ACommand>
+	public class Keysight3458AProtocolParser : IProtocolParser<Keysight3458ACommand>
 	{
 		public Result<Keysight3458ACommand> GetCommand(string input)
 		{

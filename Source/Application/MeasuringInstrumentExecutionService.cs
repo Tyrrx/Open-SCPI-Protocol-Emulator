@@ -17,16 +17,16 @@ namespace Emulator
 
     {
         private readonly ILogger<MeasuringInstrumentExecutionService<TDeviceType, TCommandType>> logger;
-        private readonly IProtocolInterpreter<TCommandType> protocolInterpreter;
+        private readonly IProtocolParser<TCommandType> protocolParser;
         private readonly ICommandHandler<TDeviceType, TCommandType> commandHandler;
 
         public MeasuringInstrumentExecutionService(
             ILogger<MeasuringInstrumentExecutionService<TDeviceType, TCommandType>> logger,
-            IProtocolInterpreter<TCommandType> protocolInterpreter,
+            IProtocolParser<TCommandType> protocolParser,
             ICommandHandler<TDeviceType, TCommandType> commandHandler)
         {
             this.logger = logger;
-            this.protocolInterpreter = protocolInterpreter;
+            this.protocolParser = protocolParser;
             this.commandHandler = commandHandler;
         }
 
@@ -36,7 +36,7 @@ namespace Emulator
             TDeviceType device)
         {
             return inputStream.Subscribe(input =>
-                protocolInterpreter
+                protocolParser
                     .GetCommand(input)
                     .Bind(command =>
                         commandHandler.ProcessCommand(

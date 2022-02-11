@@ -293,7 +293,7 @@ namespace ProtocolTests.Interpreter
 
         private static T AssertCommandType<T>(string input)
         {
-            var commands = new Keysight34465AProtocolInterpreter().GetCommand(input);
+            var commands = new Keysight34465AProtocolParser().GetCommand(input);
             return commands.Match(ok => ok.Should().BeOfType<T>()
                 .Which,
                 error => throw new Exception(error));
@@ -301,7 +301,7 @@ namespace ProtocolTests.Interpreter
         
         private static void AssertError(string input)
         {
-            new Keysight34465AProtocolInterpreter().GetCommand(input).Should().BeOfType<Error<Keysight34465ACommand>>();
+            new Keysight34465AProtocolParser().GetCommand(input).Should().BeOfType<Error<Keysight34465ACommand>>();
         }
 
     }

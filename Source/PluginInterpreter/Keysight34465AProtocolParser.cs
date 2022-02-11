@@ -9,7 +9,7 @@ using PluginInterpreter.Keysight34465A;
 
 namespace PluginInterpreter
 {
-	public sealed class Keysight34465AProtocolInterpreter : IProtocolInterpreter<Keysight34465ACommand>
+	public sealed class Keysight34465AProtocolParser : IProtocolParser<Keysight34465ACommand>
 	{
 		public Result<Keysight34465ACommand> GetCommand(string input)
 		{
