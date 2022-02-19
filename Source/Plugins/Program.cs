@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Domain.Keysight34465A;
+using Domain.Keysight3458A;
 using Emulator;
 using Emulator.Command;
 using Emulator.CommandHandler;
@@ -56,6 +57,15 @@ namespace EmulatorHost
                     services.AddSingleton<IMeasuringInstrumentRepository<Keysight34465A>, MeasuringInstrumentRepository<Keysight34465A>>();
                     services.AddSingleton<MeasuringInstrumentInstanceManager<Keysight34465A,Keysight34465ACommand,Keysight34465AConfiguration>>();
                     services.AddHostedService<HostedMeasuringInstrumentInstanceManager<Keysight34465A,Keysight34465ACommand,Keysight34465AConfiguration>>();
+                    
+                    services.AddSingleton(deviceConfigurations.Keysight3458AConfiguration);
+                    services.AddTransient<IProtocolParser<Keysight3458ACommand>, Keysight3458AProtocolParser>();
+                    services.AddTransient<ICommandHandler<Keysight3458A, Keysight3458ACommand>, Keysight3458ACommandHandler>();
+                    services.AddTransient<IMeasuringInstrumentFactory<Keysight3458A, Keysight3458AConfiguration>, Keysight3458AFactory>();
+                    services.AddTransient<MeasuringInstrumentExecutionService<Keysight3458A, Keysight3458ACommand>>();
+                    services.AddSingleton<IMeasuringInstrumentRepository<Keysight3458A>, MeasuringInstrumentRepository<Keysight3458A>>();
+                    services.AddSingleton<MeasuringInstrumentInstanceManager<Keysight3458A,Keysight3458ACommand,Keysight3458AConfiguration>>();
+                    services.AddHostedService<HostedMeasuringInstrumentInstanceManager<Keysight3458A,Keysight3458ACommand,Keysight3458AConfiguration>>();
                     
                     
                     // services.AddSingleton(deviceConfigurations.Keysight3458AConfiguration);
