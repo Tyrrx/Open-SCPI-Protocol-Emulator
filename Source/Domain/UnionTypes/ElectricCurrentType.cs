@@ -8,14 +8,14 @@ namespace Domain.UnionTypes
         public static readonly ElectricCurrentType AC = new AC_();
         public static readonly ElectricCurrentType DC = new DC_();
 
-        public class AC_ : ElectricCurrentType
+        public sealed class AC_ : ElectricCurrentType
         {
             public AC_() : base(UnionCases.AC)
             {
             }
         }
 
-        public class DC_ : ElectricCurrentType
+        public sealed class DC_ : ElectricCurrentType
         {
             public DC_() : base(UnionCases.DC)
             {

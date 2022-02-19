@@ -8,14 +8,14 @@ namespace Domain.UnionTypes
         public static readonly Impedance High = new High_();
         public static readonly Impedance Low = new Low_();
 
-        public class High_ : Impedance
+        public sealed class High_ : Impedance
         {
             public High_() : base(UnionCases.High)
             {
             }
         }
 
-        public class Low_ : Impedance
+        public sealed class Low_ : Impedance
         {
             public Low_() : base(UnionCases.Low)
             {

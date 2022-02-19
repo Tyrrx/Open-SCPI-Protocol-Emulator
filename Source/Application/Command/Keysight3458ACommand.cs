@@ -26,42 +26,42 @@ namespace Emulator.Command
 		public static Keysight3458ACommand MeasureVoltage(ElectricCurrentType electricCurrentType, Option<Range> range,
 			Option<Resolution> resolution) => new MeasureVoltage_(electricCurrentType, range, resolution);
 
-		public class Identification_ : Keysight3458ACommand
+		public sealed class Identification_ : Keysight3458ACommand
 		{
 			public Identification_() : base(UnionCases.Identification)
 			{
 			}
 		}
 
-		public class Read_ : Keysight3458ACommand
+		public sealed class Read_ : Keysight3458ACommand
 		{
 			public Read_() : base(UnionCases.Read)
 			{
 			}
 		}
 
-		public class Abort_ : Keysight3458ACommand
+		public sealed class Abort_ : Keysight3458ACommand
 		{
 			public Abort_() : base(UnionCases.Abort)
 			{
 			}
 		}
 
-		public class Initiate_ : Keysight3458ACommand
+		public sealed class Initiate_ : Keysight3458ACommand
 		{
 			public Initiate_() : base(UnionCases.Initiate)
 			{
 			}
 		}
 
-		public class Fetch_ : Keysight3458ACommand
+		public sealed class Fetch_ : Keysight3458ACommand
 		{
 			public Fetch_() : base(UnionCases.Fetch)
 			{
 			}
 		}
 
-		public class ConfigureCurrent_ : Keysight3458ACommand
+		public sealed class ConfigureCurrent_ : Keysight3458ACommand
 		{
 			public ElectricCurrentType ElectricCurrentType { get; }
 			public Option<Range> Range { get; }
@@ -76,7 +76,7 @@ namespace Emulator.Command
 			}
 		}
 
-		public class MeasureCurrent_ : Keysight3458ACommand
+		public sealed class MeasureCurrent_ : Keysight3458ACommand
 		{
 			public ElectricCurrentType ElectricCurrentType { get; }
 			public Option<Range> Range { get; }
@@ -91,7 +91,7 @@ namespace Emulator.Command
 			}
 		}
 
-		public class ConfigureVoltage_ : Keysight3458ACommand
+		public sealed class ConfigureVoltage_ : Keysight3458ACommand
 		{
 			public ElectricCurrentType ElectricCurrentType { get; }
 			public Option<Range> Range { get; }
@@ -106,7 +106,7 @@ namespace Emulator.Command
 			}
 		}
 
-		public class MeasureVoltage_ : Keysight3458ACommand
+		public sealed class MeasureVoltage_ : Keysight3458ACommand
 		{
 			public ElectricCurrentType ElectricCurrentType { get; }
 			public Option<Range> Range { get; }

@@ -24,42 +24,42 @@ namespace Emulator.Command
 
         public static Keysight34465ACommand SetImpedance(Impedance impedance) => new SetImpedance_(impedance);
 
-        public class Identification_ : Keysight34465ACommand
+        public sealed class Identification_ : Keysight34465ACommand
         {
             public Identification_() : base(UnionCases.Identification)
             {
             }
         }
 
-        public class Read_ : Keysight34465ACommand
+        public sealed class Read_ : Keysight34465ACommand
         {
             public Read_() : base(UnionCases.Read)
             {
             }
         }
 
-        public class Abort_ : Keysight34465ACommand
+        public sealed class Abort_ : Keysight34465ACommand
         {
             public Abort_() : base(UnionCases.Abort)
             {
             }
         }
 
-        public class Initiate_ : Keysight34465ACommand
+        public sealed class Initiate_ : Keysight34465ACommand
         {
             public Initiate_() : base(UnionCases.Initiate)
             {
             }
         }
 
-        public class Fetch_ : Keysight34465ACommand
+        public sealed class Fetch_ : Keysight34465ACommand
         {
             public Fetch_() : base(UnionCases.Fetch)
             {
             }
         }
 
-        public class ConfigureCurrent_ : Keysight34465ACommand
+        public sealed class ConfigureCurrent_ : Keysight34465ACommand
         {
             public ElectricCurrentType ElectricCurrentType { get; }
             public Option<Range> Range { get; }
@@ -73,7 +73,7 @@ namespace Emulator.Command
             }
         }
 
-        public class MeasureCurrent_ : Keysight34465ACommand
+        public sealed class MeasureCurrent_ : Keysight34465ACommand
         {
             public ElectricCurrentType ElectricCurrentType { get; }
             public Option<Range> Range { get; }
@@ -86,7 +86,7 @@ namespace Emulator.Command
             }
         }
 
-        public class ConfigureVoltage_ : Keysight34465ACommand
+        public sealed class ConfigureVoltage_ : Keysight34465ACommand
         {
             public ElectricCurrentType ElectricCurrentType { get; }
             public Option<Range> Range { get; }
@@ -99,7 +99,7 @@ namespace Emulator.Command
             }
         }
 
-        public class MeasureVoltage_ : Keysight34465ACommand
+        public sealed class MeasureVoltage_ : Keysight34465ACommand
         {
             public ElectricCurrentType ElectricCurrentType { get; }
             public Option<Range> Range { get; }
@@ -112,7 +112,7 @@ namespace Emulator.Command
             }
         }
 
-        public class DisplayText_ : Keysight34465ACommand
+        public sealed class DisplayText_ : Keysight34465ACommand
         {
 
             public string Text { get; }
@@ -122,7 +122,7 @@ namespace Emulator.Command
             }
         }
 
-        public class SetImpedance_ : Keysight34465ACommand
+        public sealed class SetImpedance_ : Keysight34465ACommand
         {
 
             public Impedance Impedance { get; }
@@ -132,7 +132,7 @@ namespace Emulator.Command
             }
         }
 
-        public class ClearDisplay_ : Keysight34465ACommand
+        public sealed class ClearDisplay_ : Keysight34465ACommand
         {
             public ClearDisplay_() : base(UnionCases.ClearDisplay)
             {

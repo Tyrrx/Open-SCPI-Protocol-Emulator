@@ -9,7 +9,7 @@ namespace Domain.UnionTypes
 
         public static readonly DisplayState Empty = new Empty_();
 
-        public class DisplayText_ : DisplayState
+        public sealed class DisplayText_ : DisplayState
         {
             public string TextValue { get; }
             public DisplayText_(string textValue) : base(UnionCases.DisplayText)
@@ -18,7 +18,7 @@ namespace Domain.UnionTypes
             }
         }
 
-        public class Empty_ : DisplayState
+        public sealed class Empty_ : DisplayState
         {
             public Empty_() : base(UnionCases.Empty)
             {

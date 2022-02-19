@@ -10,7 +10,7 @@ namespace Domain.UnionTypes
         public static ResponseValue String(string value) => new String_(value);
         public abstract string ToOutputString(CultureInfo cultureInfo);
 
-        public class String_ : ResponseValue
+        public sealed class String_ : ResponseValue
         {
             public string Value { get; }
             public String_(string value) : base(UnionCases.String)

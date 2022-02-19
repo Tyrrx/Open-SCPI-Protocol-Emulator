@@ -11,7 +11,7 @@ namespace Domain.UnionTypes
 
         public abstract string ToOutputString(CultureInfo cultureInfo);
 
-        public class Double_ : MeasurementValue
+        public sealed class Double_ : MeasurementValue
         {
             public double Value { get; }
             public Double_(double value) : base(UnionCases.Double)

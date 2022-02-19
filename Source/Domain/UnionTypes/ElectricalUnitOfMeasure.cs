@@ -8,14 +8,14 @@ namespace Domain.UnionTypes
         public static readonly ElectricalUnitOfMeasure Voltage = new Voltage_();
         public static readonly ElectricalUnitOfMeasure Current = new Current_();
 
-        public class Voltage_ : ElectricalUnitOfMeasure
+        public sealed class Voltage_ : ElectricalUnitOfMeasure
         {
             public Voltage_() : base(UnionCases.Voltage)
             {
             }
         }
 
-        public class Current_ : ElectricalUnitOfMeasure
+        public sealed class Current_ : ElectricalUnitOfMeasure
         {
             public Current_() : base(UnionCases.Current)
             {

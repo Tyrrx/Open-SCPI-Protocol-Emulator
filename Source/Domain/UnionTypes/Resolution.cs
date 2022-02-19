@@ -11,7 +11,7 @@ namespace Domain.UnionTypes
         public static readonly Resolution Max = new Max_();
         public static readonly Resolution Def = new Def_();
 
-        public class Number_ : Resolution
+        public sealed class Number_ : Resolution
         {
             public double Value { get; }
             public Number_(double value) : base(UnionCases.Number)
@@ -20,21 +20,21 @@ namespace Domain.UnionTypes
             }
         }
 
-        public class Min_ : Resolution
+        public sealed class Min_ : Resolution
         {
             public Min_() : base(UnionCases.Min)
             {
             }
         }
 
-        public class Max_ : Resolution
+        public sealed class Max_ : Resolution
         {
             public Max_() : base(UnionCases.Max)
             {
             }
         }
 
-        public class Def_ : Resolution
+        public sealed class Def_ : Resolution
         {
             public Def_() : base(UnionCases.Def)
             {

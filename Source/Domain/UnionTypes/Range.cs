@@ -12,7 +12,7 @@ namespace Domain.UnionTypes
         public static readonly Range Max = new Max_();
         public static readonly Range Def = new Def_();
 
-        public class Number_ : Range
+        public sealed class Number_ : Range
         {
             public double Value { get; }
             public Number_(double value) : base(UnionCases.Number)
@@ -21,28 +21,28 @@ namespace Domain.UnionTypes
             }
         }
 
-        public class Auto_ : Range
+        public sealed class Auto_ : Range
         {
             public Auto_() : base(UnionCases.Auto)
             {
             }
         }
 
-        public class Min_ : Range
+        public sealed class Min_ : Range
         {
             public Min_() : base(UnionCases.Min)
             {
             }
         }
 
-        public class Max_ : Range
+        public sealed class Max_ : Range
         {
             public Max_() : base(UnionCases.Max)
             {
             }
         }
 
-        public class Def_ : Range
+        public sealed class Def_ : Range
         {
             public Def_() : base(UnionCases.Def)
             {

@@ -8,14 +8,14 @@ namespace Domain.UnionTypes
         public static readonly TriggerState Idle = new Idle_();
         public static readonly TriggerState WaitForTrigger = new WaitForTrigger_();
 
-        public class Idle_ : TriggerState
+        public sealed class Idle_ : TriggerState
         {
             public Idle_() : base(UnionCases.Idle)
             {
             }
         }
 
-        public class WaitForTrigger_ : TriggerState
+        public sealed class WaitForTrigger_ : TriggerState
         {
             public WaitForTrigger_() : base(UnionCases.WaitForTrigger)
             {
