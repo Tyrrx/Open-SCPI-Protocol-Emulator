@@ -16,6 +16,21 @@ namespace Domain.UnionTypes
             {
                 TextValue = textValue;
             }
+
+            private bool Equals(DisplayText_ other)
+            {
+                return base.Equals(other) && TextValue == other.TextValue;
+            }
+
+            public override bool Equals(object obj)
+            {
+                return ReferenceEquals(this, obj) || obj is DisplayText_ other && Equals(other);
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(base.GetHashCode(), TextValue);
+            }
         }
 
         public sealed class Empty_ : DisplayState

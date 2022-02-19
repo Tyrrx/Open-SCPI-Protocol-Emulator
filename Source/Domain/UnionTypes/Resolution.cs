@@ -18,6 +18,21 @@ namespace Domain.UnionTypes
             {
                 Value = value;
             }
+
+            private bool Equals(Number_ other)
+            {
+                return base.Equals(other) && Value.Equals(other.Value);
+            }
+
+            public override bool Equals(object obj)
+            {
+                return ReferenceEquals(this, obj) || obj is Number_ other && Equals(other);
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(base.GetHashCode(), Value);
+            }
         }
 
         public sealed class Min_ : Resolution

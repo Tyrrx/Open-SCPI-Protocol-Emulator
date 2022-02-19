@@ -22,6 +22,21 @@ namespace Domain.UnionTypes
             {
                 return Value;
             }
+
+            private bool Equals(String_ other)
+            {
+                return base.Equals(other) && Value == other.Value;
+            }
+
+            public override bool Equals(object obj)
+            {
+                return ReferenceEquals(this, obj) || obj is String_ other && Equals(other);
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(base.GetHashCode(), Value);
+            }
         }
 
         internal enum UnionCases

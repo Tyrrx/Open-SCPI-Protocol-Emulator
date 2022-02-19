@@ -23,6 +23,21 @@ namespace Domain.UnionTypes
             {
                 return Value.ToString(cultureInfo);
             }
+
+            private bool Equals(Double_ other)
+            {
+                return base.Equals(other) && Value.Equals(other.Value);
+            }
+
+            public override bool Equals(object obj)
+            {
+                return ReferenceEquals(this, obj) || obj is Double_ other && Equals(other);
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(base.GetHashCode(), Value);
+            }
         }
 
         internal enum UnionCases

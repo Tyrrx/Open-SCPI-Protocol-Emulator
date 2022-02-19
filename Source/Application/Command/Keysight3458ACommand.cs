@@ -74,6 +74,21 @@ namespace Emulator.Command
 				Range = range;
 				Resolution = resolution;
 			}
+
+			private bool Equals(ConfigureCurrent_ other)
+			{
+				return base.Equals(other) && Equals(ElectricCurrentType, other.ElectricCurrentType) && Equals(Range, other.Range) && Equals(Resolution, other.Resolution);
+			}
+
+			public override bool Equals(object obj)
+			{
+				return ReferenceEquals(this, obj) || obj is ConfigureCurrent_ other && Equals(other);
+			}
+
+			public override int GetHashCode()
+			{
+				return HashCode.Combine(base.GetHashCode(), ElectricCurrentType, Range, Resolution);
+			}
 		}
 
 		public sealed class MeasureCurrent_ : Keysight3458ACommand
@@ -88,6 +103,21 @@ namespace Emulator.Command
 				ElectricCurrentType = electricCurrentType;
 				Range = range;
 				Resolution = resolution;
+			}
+
+			private bool Equals(MeasureCurrent_ other)
+			{
+				return base.Equals(other) && Equals(ElectricCurrentType, other.ElectricCurrentType) && Equals(Range, other.Range) && Equals(Resolution, other.Resolution);
+			}
+
+			public override bool Equals(object obj)
+			{
+				return ReferenceEquals(this, obj) || obj is MeasureCurrent_ other && Equals(other);
+			}
+
+			public override int GetHashCode()
+			{
+				return HashCode.Combine(base.GetHashCode(), ElectricCurrentType, Range, Resolution);
 			}
 		}
 
@@ -104,6 +134,21 @@ namespace Emulator.Command
 				Range = range;
 				Resolution = resolution;
 			}
+
+			private bool Equals(ConfigureVoltage_ other)
+			{
+				return base.Equals(other) && Equals(ElectricCurrentType, other.ElectricCurrentType) && Equals(Range, other.Range) && Equals(Resolution, other.Resolution);
+			}
+
+			public override bool Equals(object obj)
+			{
+				return ReferenceEquals(this, obj) || obj is ConfigureVoltage_ other && Equals(other);
+			}
+
+			public override int GetHashCode()
+			{
+				return HashCode.Combine(base.GetHashCode(), ElectricCurrentType, Range, Resolution);
+			}
 		}
 
 		public sealed class MeasureVoltage_ : Keysight3458ACommand
@@ -118,6 +163,21 @@ namespace Emulator.Command
 				ElectricCurrentType = electricCurrentType;
 				Range = range;
 				Resolution = resolution;
+			}
+
+			private bool Equals(MeasureVoltage_ other)
+			{
+				return base.Equals(other) && Equals(ElectricCurrentType, other.ElectricCurrentType) && Equals(Range, other.Range) && Equals(Resolution, other.Resolution);
+			}
+
+			public override bool Equals(object obj)
+			{
+				return ReferenceEquals(this, obj) || obj is MeasureVoltage_ other && Equals(other);
+			}
+
+			public override int GetHashCode()
+			{
+				return HashCode.Combine(base.GetHashCode(), ElectricCurrentType, Range, Resolution);
 			}
 		}
 
