@@ -12,7 +12,7 @@ namespace Emulator.CommandHandler
 		public Task<Result<CommandExecutionResult<Keysight3458ACommand>>> ProcessCommand(
 			Keysight3458A device,
 			Keysight3458ACommand command,
-			ConcurrentQueue<IStringConvertible> queue,
+			ConcurrentQueue<IStringConvertible> outputQueue,
 			CommandExecutionResult<Keysight3458ACommand> executionResult)
 		{
 			executionResult.ExecutedCommands.Add(command);
@@ -21,13 +21,13 @@ namespace Emulator.CommandHandler
 				device.GetIdentification()
 					.Map(result =>
 					{
-						queue.Enqueue(result);
+						outputQueue.Enqueue(result);
 						return executionResult;
 					});
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> Read(Keysight3458ACommand.Read_ read) =>
-				ProcessCommand(device, Keysight3458ACommand.Initiate, queue, executionResult)
-					.Bind(result => ProcessCommand(device, Keysight3458ACommand.Fetch, queue, result));
+				ProcessCommand(device, Keysight3458ACommand.Initiate, outputQueue, executionResult)
+					.Bind(result => ProcessCommand(device, Keysight3458ACommand.Fetch, outputQueue, result));
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> Abort(Keysight3458ACommand.Abort_ abort) =>
 				device.Abort()
@@ -38,7 +38,7 @@ namespace Emulator.CommandHandler
 					.Map(_ => executionResult);
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> Fetch(Keysight3458ACommand.Fetch_ fetch) =>
-				device.Fetch(queue)
+				device.Fetch(outputQueue)
 					.Map(_ => executionResult);
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> ConfigureCurrent(Keysight3458ACommand.ConfigureCurrent_ configureCurrent) =>
@@ -46,16 +46,16 @@ namespace Emulator.CommandHandler
 					.Map(_ => executionResult);
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> MeasureCurrent(Keysight3458ACommand.MeasureCurrent_ measureCurrent) =>
-				ProcessCommand(device,Keysight3458ACommand.ConfigureCurrent(measureCurrent.ElectricCurrentType, measureCurrent.Range, measureCurrent.Resolution), queue, executionResult)
-					.Bind(result => ProcessCommand(device, Keysight3458ACommand.Read, queue, result));
+				ProcessCommand(device,Keysight3458ACommand.ConfigureCurrent(measureCurrent.ElectricCurrentType, measureCurrent.Range, measureCurrent.Resolution), outputQueue, executionResult)
+					.Bind(result => ProcessCommand(device, Keysight3458ACommand.Read, outputQueue, result));
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> ConfigureVoltage(Keysight3458ACommand.ConfigureVoltage_ configureVoltage) =>
 				device.ConfigureVoltage(configureVoltage.ElectricCurrentType, configureVoltage.Range, configureVoltage.Resolution)
 					.Map(_ => executionResult);
 
 			Task<Result<CommandExecutionResult<Keysight3458ACommand>>> MeasureVoltage(Keysight3458ACommand.MeasureVoltage_ measureVoltage) =>
-				ProcessCommand(device, Keysight3458ACommand.ConfigureVoltage(measureVoltage.ElectricCurrentType, measureVoltage.Range, measureVoltage.Resolution), queue, executionResult)
-					.Bind(_ => ProcessCommand(device, Keysight3458ACommand.Read, queue, executionResult))
+				ProcessCommand(device, Keysight3458ACommand.ConfigureVoltage(measureVoltage.ElectricCurrentType, measureVoltage.Range, measureVoltage.Resolution), outputQueue, executionResult)
+					.Bind(_ => ProcessCommand(device, Keysight3458ACommand.Read, outputQueue, executionResult))
 					.Map(_ => executionResult);
 
 			return command.Match(

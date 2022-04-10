@@ -11,7 +11,7 @@ namespace Emulator.CommandHandler
 		Task<Result<CommandExecutionResult<TCommandInput>>> ProcessCommand(
 			TDeviceType device,
 			TCommandInput command,
-			ConcurrentQueue<IStringConvertible> queue,
+			ConcurrentQueue<IStringConvertible> outputQueue,
 			CommandExecutionResult<TCommandInput> executionResult);
 		//todo add cancelation token
 	}
