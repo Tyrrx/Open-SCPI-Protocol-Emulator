@@ -113,7 +113,7 @@ namespace Emulator.CommandHandler
                         outputQueue,
                         executionResult)
                     .Bind(result =>
-                        DisplayText.OnMeasuringDevice(
+                        DisplayText.OfMeasuringDevice(
                                 displayText.Text,
                                 device)
                             .Map(_ => result))
