@@ -17,8 +17,8 @@ namespace Domain.Keysight34465A
         private readonly Keysight34465AConfiguration configuration;
         private static readonly TimeSpan DisplayVisibilityTime = TimeSpan.FromSeconds(5);
 
-        private BehaviorSubject<ElectricalUnitOfMeasure> MeasurementTypeBehaviorSubject { get; }
-        private BehaviorSubject<ElectricCurrentType> ElectricityTypeBehaviorSubject { get; }
+        private BehaviorSubject<ElectricalUnitOfMeasure> ElectricalUnitOfMeasureBehaviorSubject { get; }
+        private BehaviorSubject<ElectricCurrentType> ElectricCurrentTypeBehaviorSubject { get; }
         private BehaviorSubject<Impedance> ImpedanceBehaviorSubject { get; }
         private BehaviorSubject<Range> RangeBehaviorSubject { get; }
         private BehaviorSubject<Resolution> ResolutionBehaviorSubject { get; }
@@ -30,14 +30,14 @@ namespace Domain.Keysight34465A
                 .Match(
                     some => some,
                     () => throw new Exception("Tried to start a device without a configuration present"));
-            MeasurementTypeBehaviorSubject = new BehaviorSubject<ElectricalUnitOfMeasure>(ElectricalUnitOfMeasure.Voltage);
-            ElectricityTypeBehaviorSubject = new BehaviorSubject<ElectricCurrentType>(ElectricCurrentType.DC);
+            ElectricalUnitOfMeasureBehaviorSubject = new BehaviorSubject<ElectricalUnitOfMeasure>(ElectricalUnitOfMeasure.Voltage);
+            ElectricCurrentTypeBehaviorSubject = new BehaviorSubject<ElectricCurrentType>(ElectricCurrentType.DC);
             ImpedanceBehaviorSubject = new BehaviorSubject<Impedance>(Impedance.Low);
             RangeBehaviorSubject = new BehaviorSubject<Range>(Range.Auto);
             ResolutionBehaviorSubject = new BehaviorSubject<Resolution>(Resolution.Def);
             DisplayStateBehaviorSubject = new BehaviorSubject<DisplayState>(DisplayState.Empty);
 
-            MeasurementTypeBehaviorSubject.Subscribe(measurementTypeValue =>
+            ElectricalUnitOfMeasureBehaviorSubject.Subscribe(measurementTypeValue =>
             {
                 var list = measurementTypeValue.Match(
                     _ =>
@@ -80,15 +80,15 @@ namespace Domain.Keysight34465A
         public Task<Result<Unit>> ConfigureCurrent(ElectricCurrentType electricCurrentType, Option<Range> range,
             Option<Resolution> resolution)
         {
-            MeasurementTypeBehaviorSubject.OnNext(ElectricalUnitOfMeasure.Current);
-            ElectricityTypeBehaviorSubject.OnNext(electricCurrentType);
+            ElectricalUnitOfMeasureBehaviorSubject.OnNext(ElectricalUnitOfMeasure.Current);
+            ElectricCurrentTypeBehaviorSubject.OnNext(electricCurrentType);
             RangeBehaviorSubject.OnNext(range.Match(
                 some => some,
                 () => Range.Auto));
             ResolutionBehaviorSubject.OnNext(resolution.Match(
                 some => some,
                 () => Resolution.Def));
-            return Task.FromResult(Result<Unit>.Ok(No.Thing));
+            return Task.FromResult(Result.Ok(No.Thing));
         }
 
         public async Task<Result<Unit>> DisplayText(string text)
@@ -113,8 +113,8 @@ namespace Domain.Keysight34465A
         public Task<Result<Unit>> ConfigureVoltage(ElectricCurrentType electricCurrentType, Option<Range> range,
             Option<Resolution> resolution)
         {
-            MeasurementTypeBehaviorSubject.OnNext(ElectricalUnitOfMeasure.Voltage);
-            ElectricityTypeBehaviorSubject.OnNext(electricCurrentType);
+            ElectricalUnitOfMeasureBehaviorSubject.OnNext(ElectricalUnitOfMeasure.Voltage);
+            ElectricCurrentTypeBehaviorSubject.OnNext(electricCurrentType);
             RangeBehaviorSubject.OnNext(range.Match(
                 some => some,
                 () => Range.Auto));
@@ -124,7 +124,7 @@ namespace Domain.Keysight34465A
         }
 
         public IObservable<(ElectricCurrentType, Impedance, Range, Resolution, TriggerState, DisplayState)> State =>
-            ElectricityTypeBehaviorSubject.CombineLatest(
+            ElectricCurrentTypeBehaviorSubject.CombineLatest(
                 ImpedanceBehaviorSubject,
                 RangeBehaviorSubject,
                 ResolutionBehaviorSubject,
@@ -133,32 +133,13 @@ namespace Domain.Keysight34465A
 
         public override double CalculateNextMeasurementValue(double interference)
         {
-            double GetImpedanceMultiplier()
-            {
-                return ImpedanceBehaviorSubject.Value.Match(
-                    _ => configuration.HighImpedanceInterferenceMultiplier,
-                    _ => configuration.LowImpedanceInterferenceMultiplier);
-            }
-
-            double GetRangeValue()
-            {
-                return MeasurementTypeBehaviorSubject.Value.Match(_ => RangeBehaviorSubject.Value.Match(
-                        number => number.Value,
-                        _ => configuration.VoltageRangeAuto,
-                        _ => configuration.VoltageRangeMin,
-                        _ => configuration.VoltageRangeMax,
-                        _ => configuration.VoltageRangeDef),
-                    _ => RangeBehaviorSubject.Value.Match(
-                        number => number.Value,
-                        _ => configuration.CurrentRangeAuto,
-                        _ => configuration.CurrentRangeMin,
-                        _ => configuration.CurrentRangeMax,
-                        _ => configuration.CurrentRangeDef));
-            }
-
-            var rangeValue = GetRangeValue();
-            var impedanceMultiplier = GetImpedanceMultiplier();
-            return rangeValue + interference * impedanceMultiplier * rangeValue;
+            return CalculateMeasurementValue.ForRangeValueUsingMultipliers(
+                configuration.GetRangeValueByElectricalUnitOfMeasureAndRange(
+                    ElectricalUnitOfMeasureBehaviorSubject.Value,
+                    RangeBehaviorSubject.Value),
+                configuration.GetImpedanceMultiplierByImpedance(
+                    ImpedanceBehaviorSubject.Value),
+                interference);
         }
 
         string IMeasuringInstrument.GetIdentification()

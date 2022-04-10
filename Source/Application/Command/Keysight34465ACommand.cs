@@ -21,9 +21,9 @@ namespace Emulator.Command
         public static Keysight34465ACommand DisplayText(string text) => new DisplayText_(text);
 
         public static readonly Keysight34465ACommand ClearDisplay = new ClearDisplay_();
-
         public static Keysight34465ACommand SetImpedance(Impedance impedance) => new SetImpedance_(impedance);
 
+        
         public sealed class Identification_ : Keysight34465ACommand
         {
             public Identification_() : base(UnionCases.Identification)

@@ -7,8 +7,7 @@ using FunicularSwitch;
 
 namespace EmulatorTests
 {
-    public class
-        CommandExecutionAdapter<TDevice, TCommand> : ICommandExecutionAdapter<TCommand>
+    public class CommandExecutionAdapter<TDevice, TCommand> : ICommandExecutionAdapter<TCommand>
     {
         private readonly ConcurrentQueue<IStringConvertible> outputQueue = new ConcurrentQueue<IStringConvertible>();
         private readonly ICommandHandler<TDevice, TCommand> commandHandler;
