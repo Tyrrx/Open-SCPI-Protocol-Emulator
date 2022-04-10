@@ -1,27 +1,14 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Reactive.Subjects;
+﻿using System.Collections.Generic;
 using Domain.UnionTypes;
 
 namespace Domain.Interfaces
 {
-    public interface IKeysight34Series
+    public interface IKeysight34Series :
+        ITriggerSubsystem,
+        IValueGenerationSubsystem,
+        IElectricalMeasuringSubsystem,
+        IMeasuringInstrument
     {
-        public BehaviorSubject<TriggerState> TriggerStateBehaviourSubject { get; }
-        
-        public ConcurrentQueue<MeasurementValue> ReadingQueue { get; }
-        
-        public Queue<double> GeneratorQueue { get; set; }
-        
-        public BehaviorSubject<ElectricalUnitOfMeasure> ElectricalUnitOfMeasureBehaviorSubject { get; }
-        
-        public BehaviorSubject<ElectricCurrentType> ElectricCurrentTypeBehaviorSubject { get; }
-        
-        public BehaviorSubject<Impedance> ImpedanceBehaviorSubject { get; }
-        
-        public BehaviorSubject<Range> RangeBehaviorSubject { get; }
-        
-        public BehaviorSubject<Resolution> ResolutionBehaviorSubject { get; }
-        
+        public List<double> GetInterferenceFactors(ElectricalUnitOfMeasure electricalUnitOfMeasure);
     }
 }

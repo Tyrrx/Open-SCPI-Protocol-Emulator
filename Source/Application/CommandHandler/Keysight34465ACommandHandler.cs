@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using Domain;
 using Domain.Interfaces;
 using Domain.Keysight34465A;
 using Emulator.Command;
@@ -38,7 +39,7 @@ namespace Emulator.CommandHandler
 
             Task<Result<CommandExecutionResult<Keysight34465ACommand>>> AbortHandler(Keysight34465ACommand.Abort_ abort) =>
                 Task.FromResult(
-                        AbortMeasuring.OfDevice(device))
+                        AbortMeasuring.ByNotifying(device))
                     .Map(_ => executionResult);
 
             Task<Result<CommandExecutionResult<Keysight34465ACommand>>> InitiateHandler(

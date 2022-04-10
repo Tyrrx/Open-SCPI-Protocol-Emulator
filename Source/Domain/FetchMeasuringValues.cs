@@ -2,13 +2,15 @@
 using Domain.Interfaces;
 using FunicularSwitch;
 
-namespace Domain.Keysight34465A
+namespace Domain
 {
     public static class FetchMeasuringValues
     {
-        public static Result<Unit> FromDeviceIntoOutputQueue(Keysight34465A keysight34465A, ConcurrentQueue<IStringConvertible> queue)
+        public static Result<Unit> FromDeviceIntoOutputQueue(
+            IValueGenerationSubsystem valueGenerationSubsystem,
+            ConcurrentQueue<IStringConvertible> queue)
         {
-            foreach (var measurementValue in keysight34465A.ReadingQueue)
+            foreach (var measurementValue in valueGenerationSubsystem.ReadingQueue)
             {
                 queue.Enqueue(measurementValue);
             }

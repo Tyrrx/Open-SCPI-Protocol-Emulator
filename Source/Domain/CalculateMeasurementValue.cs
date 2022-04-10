@@ -1,6 +1,4 @@
-﻿using Domain.UnionTypes;
-
-namespace Domain.Keysight34465A
+﻿namespace Domain
 {
     public static class CalculateMeasurementValue
     {
