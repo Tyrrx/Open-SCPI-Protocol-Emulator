@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Reactive.Linq;
 using Domain.Interfaces;
 using Domain.UnionTypes;
+using FunicularSwitch;
 
 namespace Domain
 {
@@ -19,16 +21,21 @@ namespace Domain
                         measuringDevice.GeneratorQueue,
                         measuringDevice.ReadingQueue));
         }
-
+        
         public static void RotateGeneratorQueueAndProduceMeasurement(
             Func<double, double> valueGenerator,
             Queue<double> measuringDeviceGeneratorQueue,
             ConcurrentQueue<MeasurementValue> measuringDeviceReadingQueue)
         {
-            var interference = measuringDeviceGeneratorQueue.Dequeue();
-            measuringDeviceReadingQueue.Enqueue(
-                MeasurementValue.Double(valueGenerator(interference)));
-            measuringDeviceGeneratorQueue.Enqueue(interference);
+            if (measuringDeviceGeneratorQueue.TryDequeue(out var interference))
+            {
+                measuringDeviceReadingQueue.Enqueue(MeasurementValue.Double(valueGenerator(interference)));
+                measuringDeviceGeneratorQueue.Enqueue(interference);
+            }
+            else
+            {
+                measuringDeviceReadingQueue.Enqueue(MeasurementValue.Double(valueGenerator(1.0)));
+            }
         }
     }
 }
