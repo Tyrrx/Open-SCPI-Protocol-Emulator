@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>9.0</LangVersion>
+        <RootNamespace>PluginParsing</RootNamespace>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Antlr4BuildTasks" Version="10.3.0" />
+        <PackageReference Include="FunicularSwitch" Version="1.1.3" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="System.Reactive" Version="5.0.0" />
+        <PackageReference Include="System.Reactive.Linq" Version="5.0.0" />
+        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.9.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Application\Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Antlr4 Include="Grammars\Keysight34465ASCPI.g4">
+            <Package>PluginParsing.GeneratedKeysight34465A</Package>
+            <AntOutDir>..\PluginParsing\GeneratedKeysight34465A</AntOutDir>
+            <Listener>false</Listener>
+        </Antlr4>
+        <Antlr4 Include="Grammars\Keysight3458ASCPI.g4">
+            <Package>PluginParsing.GeneratedKeysight3458A</Package>
+            <AntOutDir>..\PluginParsing\GeneratedKeysight3458</AntOutDir>
+            <Listener>false</Listener>
+        </Antlr4>
+    </ItemGroup>
+
+</Project>

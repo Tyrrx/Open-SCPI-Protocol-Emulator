@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PluginConfiguration;
 using PluginHosting;
-using PluginInterpreter;
+using PluginParsing;
 using PluginNetwork;
 using PluginPersistence;
 using static PluginConfiguration.DeviceConfigurationLoader;

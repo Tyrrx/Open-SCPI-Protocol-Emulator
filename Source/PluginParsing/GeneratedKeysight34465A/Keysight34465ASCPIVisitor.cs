@@ -111,4 +111,4 @@ public interface IKeysight34465ASCPIVisitor<Result> : IParseTreeVisitor<Result> 
 	/// <return>The visitor result.</return>
 	Result VisitVoltageParameters([NotNull] Keysight34465ASCPIParser.VoltageParametersContext context);
 }
-} // namespace PluginInterpreter.GeneratedKeysight34465A
+} // namespace PluginParsing.GeneratedKeysight34465A

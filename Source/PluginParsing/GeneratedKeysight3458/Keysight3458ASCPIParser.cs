@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\Dev\Open-SCPI-Protocol-Emulator\Source\PluginParsing\Grammars\Keysight34465ASCPI.g4 by ANTLR 4.9.1
+// Generated from C:\Dev\Open-SCPI-Protocol-Emulator\Source\PluginParsing\Grammars\Keysight3458ASCPI.g4 by ANTLR 4.9.1
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -19,7 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace PluginParsing.GeneratedKeysight34465A {
+namespace PluginParsing.GeneratedKeysight3458A {
 using System;
 using System.IO;
 using System.Text;
@@ -33,37 +33,31 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.9.1")]
 [System.CLSCompliant(false)]
-public partial class Keysight34465ASCPIParser : Parser {
+public partial class Keysight3458ASCPIParser : Parser {
 	protected static DFA[] decisionToDFA;
 	protected static PredictionContextCache sharedContextCache = new PredictionContextCache();
 	public const int
 		T__0=1, T__1=2, T__2=3, T__3=4, ConfigureVoltage=5, ConfigureCurrent=6, 
-		MeasureCurrent=7, MeasureVoltage=8, DisplayText=9, DisplayTextClear=10, 
-		SenseVoltageImpedance=11, AC=12, DC=13, AUTO=14, MIN=15, MAX=16, DEF=17, 
-		Space=18, CommaSeparator=19, QuestionMark=20, AutoTRUE=21, AutoFALSE=22, 
-		Number=23, QuotedString=24;
+		MeasureCurrent=7, MeasureVoltage=8, AC=9, DC=10, AUTO=11, MIN=12, MAX=13, 
+		DEF=14, Space=15, CommaSeparator=16, QuestionMark=17, Number=18;
 	public const int
 		RULE_command = 0, RULE_identificationQuery = 1, RULE_readQuery = 2, RULE_abortCommand = 3, 
 		RULE_configureCurrentCommand = 4, RULE_configureVoltageCommand = 5, RULE_measureCurrentQuery = 6, 
-		RULE_measureVoltageQuery = 7, RULE_displayTextCommand = 8, RULE_displayTextClearCommand = 9, 
-		RULE_senseVoltageImpedanceCommand = 10, RULE_currentParameters = 11, RULE_voltageParameters = 12;
+		RULE_measureVoltageQuery = 7, RULE_currentParameters = 8, RULE_voltageParameters = 9;
 	public static readonly string[] ruleNames = {
 		"command", "identificationQuery", "readQuery", "abortCommand", "configureCurrentCommand", 
 		"configureVoltageCommand", "measureCurrentQuery", "measureVoltageQuery", 
-		"displayTextCommand", "displayTextClearCommand", "senseVoltageImpedanceCommand", 
 		"currentParameters", "voltageParameters"
 	};
 
 	private static readonly string[] _LiteralNames = {
 		null, "'*IDN?'", "'READ?'", "'ABOR'", "'ABORt'", null, null, null, null, 
-		null, null, null, "'AC'", "'DC'", "'AUTO'", "'MIN'", "'MAX'", "'DEF'", 
-		null, null, "'?'"
+		"'AC'", "'DC'", "'AUTO'", "'MIN'", "'MAX'", "'DEF'", null, null, "'?'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, null, null, null, null, "ConfigureVoltage", "ConfigureCurrent", 
-		"MeasureCurrent", "MeasureVoltage", "DisplayText", "DisplayTextClear", 
-		"SenseVoltageImpedance", "AC", "DC", "AUTO", "MIN", "MAX", "DEF", "Space", 
-		"CommaSeparator", "QuestionMark", "AutoTRUE", "AutoFALSE", "Number", "QuotedString"
+		"MeasureCurrent", "MeasureVoltage", "AC", "DC", "AUTO", "MIN", "MAX", 
+		"DEF", "Space", "CommaSeparator", "QuestionMark", "Number"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -76,22 +70,22 @@ public partial class Keysight34465ASCPIParser : Parser {
 		}
 	}
 
-	public override string GrammarFileName { get { return "Keysight34465ASCPI.g4"; } }
+	public override string GrammarFileName { get { return "Keysight3458ASCPI.g4"; } }
 
 	public override string[] RuleNames { get { return ruleNames; } }
 
 	public override string SerializedAtn { get { return new string(_serializedATN); } }
 
-	static Keysight34465ASCPIParser() {
+	static Keysight3458ASCPIParser() {
 		decisionToDFA = new DFA[_ATN.NumberOfDecisions];
 		for (int i = 0; i < _ATN.NumberOfDecisions; i++) {
 			decisionToDFA[i] = new DFA(_ATN.GetDecisionState(i), i);
 		}
 	}
 
-		public Keysight34465ASCPIParser(ITokenStream input) : this(input, Console.Out, Console.Error) { }
+		public Keysight3458ASCPIParser(ITokenStream input) : this(input, Console.Out, Console.Error) { }
 
-		public Keysight34465ASCPIParser(ITokenStream input, TextWriter output, TextWriter errorOutput)
+		public Keysight3458ASCPIParser(ITokenStream input, TextWriter output, TextWriter errorOutput)
 		: base(input, output, errorOutput)
 	{
 		Interpreter = new ParserATNSimulator(this, _ATN, decisionToDFA, sharedContextCache);
@@ -101,7 +95,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public IdentificationQueryContext identificationQuery() {
 			return GetRuleContext<IdentificationQueryContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Eof() { return GetToken(Keysight34465ASCPIParser.Eof, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Eof() { return GetToken(Keysight3458ASCPIParser.Eof, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ReadQueryContext readQuery() {
 			return GetRuleContext<ReadQueryContext>(0);
 		}
@@ -120,15 +114,6 @@ public partial class Keysight34465ASCPIParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public MeasureVoltageQueryContext measureVoltageQuery() {
 			return GetRuleContext<MeasureVoltageQueryContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public DisplayTextCommandContext displayTextCommand() {
-			return GetRuleContext<DisplayTextCommandContext>(0);
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public DisplayTextClearCommandContext displayTextClearCommand() {
-			return GetRuleContext<DisplayTextClearCommandContext>(0);
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public SenseVoltageImpedanceCommandContext senseVoltageImpedanceCommand() {
-			return GetRuleContext<SenseVoltageImpedanceCommandContext>(0);
-		}
 		public CommandContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -136,7 +121,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		public override int RuleIndex { get { return RULE_command; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
+			IKeysight3458ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight3458ASCPIVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitCommand(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -147,24 +132,24 @@ public partial class Keysight34465ASCPIParser : Parser {
 		CommandContext _localctx = new CommandContext(Context, State);
 		EnterRule(_localctx, 0, RULE_command);
 		try {
-			State = 56;
+			State = 41;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
 			case T__0:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 26;
+				State = 20;
 				identificationQuery();
-				State = 27;
+				State = 21;
 				Match(Eof);
 				}
 				break;
 			case T__1:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 29;
+				State = 23;
 				readQuery();
-				State = 30;
+				State = 24;
 				Match(Eof);
 				}
 				break;
@@ -172,72 +157,45 @@ public partial class Keysight34465ASCPIParser : Parser {
 			case T__3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 32;
+				State = 26;
 				abortCommand();
-				State = 33;
+				State = 27;
 				Match(Eof);
 				}
 				break;
 			case ConfigureCurrent:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 35;
+				State = 29;
 				configureCurrentCommand();
-				State = 36;
+				State = 30;
 				Match(Eof);
 				}
 				break;
 			case MeasureCurrent:
 				EnterOuterAlt(_localctx, 5);
 				{
-				State = 38;
+				State = 32;
 				measureCurrentQuery();
-				State = 39;
+				State = 33;
 				Match(Eof);
 				}
 				break;
 			case ConfigureVoltage:
 				EnterOuterAlt(_localctx, 6);
 				{
-				State = 41;
+				State = 35;
 				configureVoltageCommand();
-				State = 42;
+				State = 36;
 				Match(Eof);
 				}
 				break;
 			case MeasureVoltage:
 				EnterOuterAlt(_localctx, 7);
 				{
-				State = 44;
+				State = 38;
 				measureVoltageQuery();
-				State = 45;
-				Match(Eof);
-				}
-				break;
-			case DisplayText:
-				EnterOuterAlt(_localctx, 8);
-				{
-				State = 47;
-				displayTextCommand();
-				State = 48;
-				Match(Eof);
-				}
-				break;
-			case DisplayTextClear:
-				EnterOuterAlt(_localctx, 9);
-				{
-				State = 50;
-				displayTextClearCommand();
-				State = 51;
-				Match(Eof);
-				}
-				break;
-			case SenseVoltageImpedance:
-				EnterOuterAlt(_localctx, 10);
-				{
-				State = 53;
-				senseVoltageImpedanceCommand();
-				State = 54;
+				State = 39;
 				Match(Eof);
 				}
 				break;
@@ -264,7 +222,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		public override int RuleIndex { get { return RULE_identificationQuery; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
+			IKeysight3458ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight3458ASCPIVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitIdentificationQuery(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -277,7 +235,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 58;
+			State = 43;
 			Match(T__0);
 			}
 		}
@@ -300,7 +258,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		public override int RuleIndex { get { return RULE_readQuery; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
+			IKeysight3458ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight3458ASCPIVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitReadQuery(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -313,7 +271,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 60;
+			State = 45;
 			Match(T__1);
 			}
 		}
@@ -336,7 +294,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		public override int RuleIndex { get { return RULE_abortCommand; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
+			IKeysight3458ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight3458ASCPIVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitAbortCommand(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -350,7 +308,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 62;
+			State = 47;
 			_la = TokenStream.LA(1);
 			if ( !(_la==T__2 || _la==T__3) ) {
 			ErrorHandler.RecoverInline(this);
@@ -374,10 +332,10 @@ public partial class Keysight34465ASCPIParser : Parser {
 
 	public partial class ConfigureCurrentCommandContext : ParserRuleContext {
 		public IToken electricityType;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode ConfigureCurrent() { return GetToken(Keysight34465ASCPIParser.ConfigureCurrent, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AC() { return GetToken(Keysight34465ASCPIParser.AC, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DC() { return GetToken(Keysight34465ASCPIParser.DC, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Space() { return GetToken(Keysight34465ASCPIParser.Space, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode ConfigureCurrent() { return GetToken(Keysight3458ASCPIParser.ConfigureCurrent, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AC() { return GetToken(Keysight3458ASCPIParser.AC, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DC() { return GetToken(Keysight3458ASCPIParser.DC, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Space() { return GetToken(Keysight3458ASCPIParser.Space, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public CurrentParametersContext currentParameters() {
 			return GetRuleContext<CurrentParametersContext>(0);
 		}
@@ -388,7 +346,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		public override int RuleIndex { get { return RULE_configureCurrentCommand; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
+			IKeysight3458ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight3458ASCPIVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitConfigureCurrentCommand(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -400,15 +358,15 @@ public partial class Keysight34465ASCPIParser : Parser {
 		EnterRule(_localctx, 8, RULE_configureCurrentCommand);
 		int _la;
 		try {
-			State = 70;
+			State = 55;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,1,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 64;
+				State = 49;
 				Match(ConfigureCurrent);
-				State = 65;
+				State = 50;
 				_localctx.electricityType = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !(_la==AC || _la==DC) ) {
@@ -423,9 +381,9 @@ public partial class Keysight34465ASCPIParser : Parser {
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 66;
+				State = 51;
 				Match(ConfigureCurrent);
-				State = 67;
+				State = 52;
 				_localctx.electricityType = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !(_la==AC || _la==DC) ) {
@@ -435,9 +393,9 @@ public partial class Keysight34465ASCPIParser : Parser {
 					ErrorHandler.ReportMatch(this);
 				    Consume();
 				}
-				State = 68;
+				State = 53;
 				Match(Space);
-				State = 69;
+				State = 54;
 				currentParameters();
 				}
 				break;
@@ -456,10 +414,10 @@ public partial class Keysight34465ASCPIParser : Parser {
 
 	public partial class ConfigureVoltageCommandContext : ParserRuleContext {
 		public IToken electricityType;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode ConfigureVoltage() { return GetToken(Keysight34465ASCPIParser.ConfigureVoltage, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AC() { return GetToken(Keysight34465ASCPIParser.AC, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DC() { return GetToken(Keysight34465ASCPIParser.DC, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Space() { return GetToken(Keysight34465ASCPIParser.Space, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode ConfigureVoltage() { return GetToken(Keysight3458ASCPIParser.ConfigureVoltage, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AC() { return GetToken(Keysight3458ASCPIParser.AC, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DC() { return GetToken(Keysight3458ASCPIParser.DC, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Space() { return GetToken(Keysight3458ASCPIParser.Space, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public VoltageParametersContext voltageParameters() {
 			return GetRuleContext<VoltageParametersContext>(0);
 		}
@@ -470,7 +428,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		public override int RuleIndex { get { return RULE_configureVoltageCommand; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
+			IKeysight3458ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight3458ASCPIVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitConfigureVoltageCommand(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -482,15 +440,15 @@ public partial class Keysight34465ASCPIParser : Parser {
 		EnterRule(_localctx, 10, RULE_configureVoltageCommand);
 		int _la;
 		try {
-			State = 78;
+			State = 63;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,2,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 72;
+				State = 57;
 				Match(ConfigureVoltage);
-				State = 73;
+				State = 58;
 				_localctx.electricityType = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !(_la==AC || _la==DC) ) {
@@ -505,9 +463,9 @@ public partial class Keysight34465ASCPIParser : Parser {
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 74;
+				State = 59;
 				Match(ConfigureVoltage);
-				State = 75;
+				State = 60;
 				_localctx.electricityType = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !(_la==AC || _la==DC) ) {
@@ -517,9 +475,9 @@ public partial class Keysight34465ASCPIParser : Parser {
 					ErrorHandler.ReportMatch(this);
 				    Consume();
 				}
-				State = 76;
+				State = 61;
 				Match(Space);
-				State = 77;
+				State = 62;
 				voltageParameters();
 				}
 				break;
@@ -538,11 +496,11 @@ public partial class Keysight34465ASCPIParser : Parser {
 
 	public partial class MeasureCurrentQueryContext : ParserRuleContext {
 		public IToken electricityType;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MeasureCurrent() { return GetToken(Keysight34465ASCPIParser.MeasureCurrent, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode QuestionMark() { return GetToken(Keysight34465ASCPIParser.QuestionMark, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AC() { return GetToken(Keysight34465ASCPIParser.AC, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DC() { return GetToken(Keysight34465ASCPIParser.DC, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Space() { return GetToken(Keysight34465ASCPIParser.Space, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MeasureCurrent() { return GetToken(Keysight3458ASCPIParser.MeasureCurrent, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode QuestionMark() { return GetToken(Keysight3458ASCPIParser.QuestionMark, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AC() { return GetToken(Keysight3458ASCPIParser.AC, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DC() { return GetToken(Keysight3458ASCPIParser.DC, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Space() { return GetToken(Keysight3458ASCPIParser.Space, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public CurrentParametersContext currentParameters() {
 			return GetRuleContext<CurrentParametersContext>(0);
 		}
@@ -553,7 +511,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		public override int RuleIndex { get { return RULE_measureCurrentQuery; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
+			IKeysight3458ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight3458ASCPIVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitMeasureCurrentQuery(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -565,15 +523,15 @@ public partial class Keysight34465ASCPIParser : Parser {
 		EnterRule(_localctx, 12, RULE_measureCurrentQuery);
 		int _la;
 		try {
-			State = 88;
+			State = 73;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,3,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 80;
+				State = 65;
 				Match(MeasureCurrent);
-				State = 81;
+				State = 66;
 				_localctx.electricityType = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !(_la==AC || _la==DC) ) {
@@ -583,16 +541,16 @@ public partial class Keysight34465ASCPIParser : Parser {
 					ErrorHandler.ReportMatch(this);
 				    Consume();
 				}
-				State = 82;
+				State = 67;
 				Match(QuestionMark);
 				}
 				break;
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 83;
+				State = 68;
 				Match(MeasureCurrent);
-				State = 84;
+				State = 69;
 				_localctx.electricityType = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !(_la==AC || _la==DC) ) {
@@ -602,11 +560,11 @@ public partial class Keysight34465ASCPIParser : Parser {
 					ErrorHandler.ReportMatch(this);
 				    Consume();
 				}
-				State = 85;
+				State = 70;
 				Match(QuestionMark);
-				State = 86;
+				State = 71;
 				Match(Space);
-				State = 87;
+				State = 72;
 				currentParameters();
 				}
 				break;
@@ -625,11 +583,11 @@ public partial class Keysight34465ASCPIParser : Parser {
 
 	public partial class MeasureVoltageQueryContext : ParserRuleContext {
 		public IToken electricityType;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MeasureVoltage() { return GetToken(Keysight34465ASCPIParser.MeasureVoltage, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode QuestionMark() { return GetToken(Keysight34465ASCPIParser.QuestionMark, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AC() { return GetToken(Keysight34465ASCPIParser.AC, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DC() { return GetToken(Keysight34465ASCPIParser.DC, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Space() { return GetToken(Keysight34465ASCPIParser.Space, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MeasureVoltage() { return GetToken(Keysight3458ASCPIParser.MeasureVoltage, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode QuestionMark() { return GetToken(Keysight3458ASCPIParser.QuestionMark, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AC() { return GetToken(Keysight3458ASCPIParser.AC, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DC() { return GetToken(Keysight3458ASCPIParser.DC, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Space() { return GetToken(Keysight3458ASCPIParser.Space, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public VoltageParametersContext voltageParameters() {
 			return GetRuleContext<VoltageParametersContext>(0);
 		}
@@ -640,7 +598,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		public override int RuleIndex { get { return RULE_measureVoltageQuery; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
+			IKeysight3458ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight3458ASCPIVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitMeasureVoltageQuery(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -652,15 +610,15 @@ public partial class Keysight34465ASCPIParser : Parser {
 		EnterRule(_localctx, 14, RULE_measureVoltageQuery);
 		int _la;
 		try {
-			State = 98;
+			State = 83;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,4,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 90;
+				State = 75;
 				Match(MeasureVoltage);
-				State = 91;
+				State = 76;
 				_localctx.electricityType = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !(_la==AC || _la==DC) ) {
@@ -670,16 +628,16 @@ public partial class Keysight34465ASCPIParser : Parser {
 					ErrorHandler.ReportMatch(this);
 				    Consume();
 				}
-				State = 92;
+				State = 77;
 				Match(QuestionMark);
 				}
 				break;
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 93;
+				State = 78;
 				Match(MeasureVoltage);
-				State = 94;
+				State = 79;
 				_localctx.electricityType = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !(_la==AC || _la==DC) ) {
@@ -689,11 +647,11 @@ public partial class Keysight34465ASCPIParser : Parser {
 					ErrorHandler.ReportMatch(this);
 				    Consume();
 				}
-				State = 95;
+				State = 80;
 				Match(QuestionMark);
-				State = 96;
+				State = 81;
 				Match(Space);
-				State = 97;
+				State = 82;
 				voltageParameters();
 				}
 				break;
@@ -710,158 +668,27 @@ public partial class Keysight34465ASCPIParser : Parser {
 		return _localctx;
 	}
 
-	public partial class DisplayTextCommandContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DisplayText() { return GetToken(Keysight34465ASCPIParser.DisplayText, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Space() { return GetToken(Keysight34465ASCPIParser.Space, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode QuotedString() { return GetToken(Keysight34465ASCPIParser.QuotedString, 0); }
-		public DisplayTextCommandContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_displayTextCommand; } }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitDisplayTextCommand(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public DisplayTextCommandContext displayTextCommand() {
-		DisplayTextCommandContext _localctx = new DisplayTextCommandContext(Context, State);
-		EnterRule(_localctx, 16, RULE_displayTextCommand);
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 100;
-			Match(DisplayText);
-			State = 101;
-			Match(Space);
-			State = 102;
-			Match(QuotedString);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class DisplayTextClearCommandContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DisplayTextClear() { return GetToken(Keysight34465ASCPIParser.DisplayTextClear, 0); }
-		public DisplayTextClearCommandContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_displayTextClearCommand; } }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitDisplayTextClearCommand(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public DisplayTextClearCommandContext displayTextClearCommand() {
-		DisplayTextClearCommandContext _localctx = new DisplayTextClearCommandContext(Context, State);
-		EnterRule(_localctx, 18, RULE_displayTextClearCommand);
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 104;
-			Match(DisplayTextClear);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class SenseVoltageImpedanceCommandContext : ParserRuleContext {
-		public IToken @bool;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode SenseVoltageImpedance() { return GetToken(Keysight34465ASCPIParser.SenseVoltageImpedance, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AutoTRUE() { return GetToken(Keysight34465ASCPIParser.AutoTRUE, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AutoFALSE() { return GetToken(Keysight34465ASCPIParser.AutoFALSE, 0); }
-		public SenseVoltageImpedanceCommandContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_senseVoltageImpedanceCommand; } }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitSenseVoltageImpedanceCommand(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public SenseVoltageImpedanceCommandContext senseVoltageImpedanceCommand() {
-		SenseVoltageImpedanceCommandContext _localctx = new SenseVoltageImpedanceCommandContext(Context, State);
-		EnterRule(_localctx, 20, RULE_senseVoltageImpedanceCommand);
-		int _la;
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 106;
-			Match(SenseVoltageImpedance);
-			State = 107;
-			_localctx.@bool = TokenStream.LT(1);
-			_la = TokenStream.LA(1);
-			if ( !(_la==AutoTRUE || _la==AutoFALSE) ) {
-				_localctx.@bool = ErrorHandler.RecoverInline(this);
-			}
-			else {
-				ErrorHandler.ReportMatch(this);
-			    Consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			ErrorHandler.ReportError(this, re);
-			ErrorHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
 	public partial class CurrentParametersContext : ParserRuleContext {
 		public IToken range;
 		public IToken resolution;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] Number() { return GetTokens(Keysight34465ASCPIParser.Number); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] Number() { return GetTokens(Keysight3458ASCPIParser.Number); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Number(int i) {
-			return GetToken(Keysight34465ASCPIParser.Number, i);
+			return GetToken(Keysight3458ASCPIParser.Number, i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AUTO() { return GetToken(Keysight34465ASCPIParser.AUTO, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] MIN() { return GetTokens(Keysight34465ASCPIParser.MIN); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AUTO() { return GetToken(Keysight3458ASCPIParser.AUTO, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] MIN() { return GetTokens(Keysight3458ASCPIParser.MIN); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MIN(int i) {
-			return GetToken(Keysight34465ASCPIParser.MIN, i);
+			return GetToken(Keysight3458ASCPIParser.MIN, i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] MAX() { return GetTokens(Keysight34465ASCPIParser.MAX); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] MAX() { return GetTokens(Keysight3458ASCPIParser.MAX); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MAX(int i) {
-			return GetToken(Keysight34465ASCPIParser.MAX, i);
+			return GetToken(Keysight3458ASCPIParser.MAX, i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] DEF() { return GetTokens(Keysight34465ASCPIParser.DEF); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] DEF() { return GetTokens(Keysight3458ASCPIParser.DEF); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DEF(int i) {
-			return GetToken(Keysight34465ASCPIParser.DEF, i);
+			return GetToken(Keysight3458ASCPIParser.DEF, i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode CommaSeparator() { return GetToken(Keysight34465ASCPIParser.CommaSeparator, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode CommaSeparator() { return GetToken(Keysight3458ASCPIParser.CommaSeparator, 0); }
 		public CurrentParametersContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -869,7 +696,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		public override int RuleIndex { get { return RULE_currentParameters; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
+			IKeysight3458ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight3458ASCPIVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitCurrentParameters(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -878,16 +705,16 @@ public partial class Keysight34465ASCPIParser : Parser {
 	[RuleVersion(0)]
 	public CurrentParametersContext currentParameters() {
 		CurrentParametersContext _localctx = new CurrentParametersContext(Context, State);
-		EnterRule(_localctx, 22, RULE_currentParameters);
+		EnterRule(_localctx, 16, RULE_currentParameters);
 		int _la;
 		try {
-			State = 113;
+			State = 89;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,5,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 109;
+				State = 85;
 				_localctx.range = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AUTO) | (1L << MIN) | (1L << MAX) | (1L << DEF) | (1L << Number))) != 0)) ) {
@@ -902,7 +729,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 110;
+				State = 86;
 				_localctx.range = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AUTO) | (1L << MIN) | (1L << MAX) | (1L << DEF) | (1L << Number))) != 0)) ) {
@@ -912,9 +739,9 @@ public partial class Keysight34465ASCPIParser : Parser {
 					ErrorHandler.ReportMatch(this);
 				    Consume();
 				}
-				State = 111;
+				State = 87;
 				Match(CommaSeparator);
-				State = 112;
+				State = 88;
 				_localctx.resolution = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MIN) | (1L << MAX) | (1L << DEF) | (1L << Number))) != 0)) ) {
@@ -942,24 +769,24 @@ public partial class Keysight34465ASCPIParser : Parser {
 	public partial class VoltageParametersContext : ParserRuleContext {
 		public IToken range;
 		public IToken resolution;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] Number() { return GetTokens(Keysight34465ASCPIParser.Number); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] Number() { return GetTokens(Keysight3458ASCPIParser.Number); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode Number(int i) {
-			return GetToken(Keysight34465ASCPIParser.Number, i);
+			return GetToken(Keysight3458ASCPIParser.Number, i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AUTO() { return GetToken(Keysight34465ASCPIParser.AUTO, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] MIN() { return GetTokens(Keysight34465ASCPIParser.MIN); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode AUTO() { return GetToken(Keysight3458ASCPIParser.AUTO, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] MIN() { return GetTokens(Keysight3458ASCPIParser.MIN); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MIN(int i) {
-			return GetToken(Keysight34465ASCPIParser.MIN, i);
+			return GetToken(Keysight3458ASCPIParser.MIN, i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] MAX() { return GetTokens(Keysight34465ASCPIParser.MAX); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] MAX() { return GetTokens(Keysight3458ASCPIParser.MAX); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MAX(int i) {
-			return GetToken(Keysight34465ASCPIParser.MAX, i);
+			return GetToken(Keysight3458ASCPIParser.MAX, i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] DEF() { return GetTokens(Keysight34465ASCPIParser.DEF); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] DEF() { return GetTokens(Keysight3458ASCPIParser.DEF); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode DEF(int i) {
-			return GetToken(Keysight34465ASCPIParser.DEF, i);
+			return GetToken(Keysight3458ASCPIParser.DEF, i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode CommaSeparator() { return GetToken(Keysight34465ASCPIParser.CommaSeparator, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode CommaSeparator() { return GetToken(Keysight3458ASCPIParser.CommaSeparator, 0); }
 		public VoltageParametersContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -967,7 +794,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 		public override int RuleIndex { get { return RULE_voltageParameters; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IKeysight34465ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight34465ASCPIVisitor<TResult>;
+			IKeysight3458ASCPIVisitor<TResult> typedVisitor = visitor as IKeysight3458ASCPIVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitVoltageParameters(this);
 			else return visitor.VisitChildren(this);
 		}
@@ -976,16 +803,16 @@ public partial class Keysight34465ASCPIParser : Parser {
 	[RuleVersion(0)]
 	public VoltageParametersContext voltageParameters() {
 		VoltageParametersContext _localctx = new VoltageParametersContext(Context, State);
-		EnterRule(_localctx, 24, RULE_voltageParameters);
+		EnterRule(_localctx, 18, RULE_voltageParameters);
 		int _la;
 		try {
-			State = 119;
+			State = 95;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,6,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 115;
+				State = 91;
 				_localctx.range = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AUTO) | (1L << MIN) | (1L << MAX) | (1L << DEF) | (1L << Number))) != 0)) ) {
@@ -1000,7 +827,7 @@ public partial class Keysight34465ASCPIParser : Parser {
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 116;
+				State = 92;
 				_localctx.range = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AUTO) | (1L << MIN) | (1L << MAX) | (1L << DEF) | (1L << Number))) != 0)) ) {
@@ -1010,9 +837,9 @@ public partial class Keysight34465ASCPIParser : Parser {
 					ErrorHandler.ReportMatch(this);
 				    Consume();
 				}
-				State = 117;
+				State = 93;
 				Match(CommaSeparator);
-				State = 118;
+				State = 94;
 				_localctx.resolution = TokenStream.LT(1);
 				_la = TokenStream.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MIN) | (1L << MAX) | (1L << DEF) | (1L << Number))) != 0)) ) {
@@ -1039,102 +866,84 @@ public partial class Keysight34465ASCPIParser : Parser {
 
 	private static char[] _serializedATN = {
 		'\x3', '\x608B', '\xA72A', '\x8133', '\xB9ED', '\x417C', '\x3BE7', '\x7786', 
-		'\x5964', '\x3', '\x1A', '|', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
+		'\x5964', '\x3', '\x14', '\x64', '\x4', '\x2', '\t', '\x2', '\x4', '\x3', 
 		'\t', '\x3', '\x4', '\x4', '\t', '\x4', '\x4', '\x5', '\t', '\x5', '\x4', 
 		'\x6', '\t', '\x6', '\x4', '\a', '\t', '\a', '\x4', '\b', '\t', '\b', 
 		'\x4', '\t', '\t', '\t', '\x4', '\n', '\t', '\n', '\x4', '\v', '\t', '\v', 
-		'\x4', '\f', '\t', '\f', '\x4', '\r', '\t', '\r', '\x4', '\xE', '\t', 
-		'\xE', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', 
-		'\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', 
-		'\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', 
-		'\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', 
-		'\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', 
-		'\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', 
-		'\x2', '\x5', '\x2', ';', '\n', '\x2', '\x3', '\x3', '\x3', '\x3', '\x3', 
-		'\x4', '\x3', '\x4', '\x3', '\x5', '\x3', '\x5', '\x3', '\x6', '\x3', 
-		'\x6', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6', '\x5', 
-		'\x6', 'I', '\n', '\x6', '\x3', '\a', '\x3', '\a', '\x3', '\a', '\x3', 
-		'\a', '\x3', '\a', '\x3', '\a', '\x5', '\a', 'Q', '\n', '\a', '\x3', '\b', 
+		'\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', 
+		'\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', 
+		'\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', 
+		'\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', '\x3', '\x2', 
+		'\x3', '\x2', '\x5', '\x2', ',', '\n', '\x2', '\x3', '\x3', '\x3', '\x3', 
+		'\x3', '\x4', '\x3', '\x4', '\x3', '\x5', '\x3', '\x5', '\x3', '\x6', 
+		'\x3', '\x6', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6', '\x3', '\x6', 
+		'\x5', '\x6', ':', '\n', '\x6', '\x3', '\a', '\x3', '\a', '\x3', '\a', 
+		'\x3', '\a', '\x3', '\a', '\x3', '\a', '\x5', '\a', '\x42', '\n', '\a', 
 		'\x3', '\b', '\x3', '\b', '\x3', '\b', '\x3', '\b', '\x3', '\b', '\x3', 
-		'\b', '\x3', '\b', '\x5', '\b', '[', '\n', '\b', '\x3', '\t', '\x3', '\t', 
+		'\b', '\x3', '\b', '\x3', '\b', '\x5', '\b', 'L', '\n', '\b', '\x3', '\t', 
 		'\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', '\t', '\x3', 
-		'\t', '\x5', '\t', '\x65', '\n', '\t', '\x3', '\n', '\x3', '\n', '\x3', 
-		'\n', '\x3', '\n', '\x3', '\v', '\x3', '\v', '\x3', '\f', '\x3', '\f', 
-		'\x3', '\f', '\x3', '\r', '\x3', '\r', '\x3', '\r', '\x3', '\r', '\x5', 
-		'\r', 't', '\n', '\r', '\x3', '\xE', '\x3', '\xE', '\x3', '\xE', '\x3', 
-		'\xE', '\x5', '\xE', 'z', '\n', '\xE', '\x3', '\xE', '\x2', '\x2', '\xF', 
-		'\x2', '\x4', '\x6', '\b', '\n', '\f', '\xE', '\x10', '\x12', '\x14', 
-		'\x16', '\x18', '\x1A', '\x2', '\a', '\x3', '\x2', '\x5', '\x6', '\x3', 
-		'\x2', '\xE', '\xF', '\x3', '\x2', '\x17', '\x18', '\x4', '\x2', '\x10', 
-		'\x13', '\x19', '\x19', '\x4', '\x2', '\x11', '\x13', '\x19', '\x19', 
-		'\x2', '}', '\x2', ':', '\x3', '\x2', '\x2', '\x2', '\x4', '<', '\x3', 
-		'\x2', '\x2', '\x2', '\x6', '>', '\x3', '\x2', '\x2', '\x2', '\b', '@', 
-		'\x3', '\x2', '\x2', '\x2', '\n', 'H', '\x3', '\x2', '\x2', '\x2', '\f', 
-		'P', '\x3', '\x2', '\x2', '\x2', '\xE', 'Z', '\x3', '\x2', '\x2', '\x2', 
-		'\x10', '\x64', '\x3', '\x2', '\x2', '\x2', '\x12', '\x66', '\x3', '\x2', 
-		'\x2', '\x2', '\x14', 'j', '\x3', '\x2', '\x2', '\x2', '\x16', 'l', '\x3', 
-		'\x2', '\x2', '\x2', '\x18', 's', '\x3', '\x2', '\x2', '\x2', '\x1A', 
-		'y', '\x3', '\x2', '\x2', '\x2', '\x1C', '\x1D', '\x5', '\x4', '\x3', 
-		'\x2', '\x1D', '\x1E', '\a', '\x2', '\x2', '\x3', '\x1E', ';', '\x3', 
-		'\x2', '\x2', '\x2', '\x1F', ' ', '\x5', '\x6', '\x4', '\x2', ' ', '!', 
-		'\a', '\x2', '\x2', '\x3', '!', ';', '\x3', '\x2', '\x2', '\x2', '\"', 
-		'#', '\x5', '\b', '\x5', '\x2', '#', '$', '\a', '\x2', '\x2', '\x3', '$', 
-		';', '\x3', '\x2', '\x2', '\x2', '%', '&', '\x5', '\n', '\x6', '\x2', 
-		'&', '\'', '\a', '\x2', '\x2', '\x3', '\'', ';', '\x3', '\x2', '\x2', 
-		'\x2', '(', ')', '\x5', '\xE', '\b', '\x2', ')', '*', '\a', '\x2', '\x2', 
-		'\x3', '*', ';', '\x3', '\x2', '\x2', '\x2', '+', ',', '\x5', '\f', '\a', 
-		'\x2', ',', '-', '\a', '\x2', '\x2', '\x3', '-', ';', '\x3', '\x2', '\x2', 
-		'\x2', '.', '/', '\x5', '\x10', '\t', '\x2', '/', '\x30', '\a', '\x2', 
-		'\x2', '\x3', '\x30', ';', '\x3', '\x2', '\x2', '\x2', '\x31', '\x32', 
-		'\x5', '\x12', '\n', '\x2', '\x32', '\x33', '\a', '\x2', '\x2', '\x3', 
-		'\x33', ';', '\x3', '\x2', '\x2', '\x2', '\x34', '\x35', '\x5', '\x14', 
-		'\v', '\x2', '\x35', '\x36', '\a', '\x2', '\x2', '\x3', '\x36', ';', '\x3', 
-		'\x2', '\x2', '\x2', '\x37', '\x38', '\x5', '\x16', '\f', '\x2', '\x38', 
-		'\x39', '\a', '\x2', '\x2', '\x3', '\x39', ';', '\x3', '\x2', '\x2', '\x2', 
-		':', '\x1C', '\x3', '\x2', '\x2', '\x2', ':', '\x1F', '\x3', '\x2', '\x2', 
-		'\x2', ':', '\"', '\x3', '\x2', '\x2', '\x2', ':', '%', '\x3', '\x2', 
-		'\x2', '\x2', ':', '(', '\x3', '\x2', '\x2', '\x2', ':', '+', '\x3', '\x2', 
-		'\x2', '\x2', ':', '.', '\x3', '\x2', '\x2', '\x2', ':', '\x31', '\x3', 
-		'\x2', '\x2', '\x2', ':', '\x34', '\x3', '\x2', '\x2', '\x2', ':', '\x37', 
-		'\x3', '\x2', '\x2', '\x2', ';', '\x3', '\x3', '\x2', '\x2', '\x2', '<', 
-		'=', '\a', '\x3', '\x2', '\x2', '=', '\x5', '\x3', '\x2', '\x2', '\x2', 
-		'>', '?', '\a', '\x4', '\x2', '\x2', '?', '\a', '\x3', '\x2', '\x2', '\x2', 
-		'@', '\x41', '\t', '\x2', '\x2', '\x2', '\x41', '\t', '\x3', '\x2', '\x2', 
-		'\x2', '\x42', '\x43', '\a', '\b', '\x2', '\x2', '\x43', 'I', '\t', '\x3', 
-		'\x2', '\x2', '\x44', '\x45', '\a', '\b', '\x2', '\x2', '\x45', '\x46', 
-		'\t', '\x3', '\x2', '\x2', '\x46', 'G', '\a', '\x14', '\x2', '\x2', 'G', 
-		'I', '\x5', '\x18', '\r', '\x2', 'H', '\x42', '\x3', '\x2', '\x2', '\x2', 
-		'H', '\x44', '\x3', '\x2', '\x2', '\x2', 'I', '\v', '\x3', '\x2', '\x2', 
-		'\x2', 'J', 'K', '\a', '\a', '\x2', '\x2', 'K', 'Q', '\t', '\x3', '\x2', 
-		'\x2', 'L', 'M', '\a', '\a', '\x2', '\x2', 'M', 'N', '\t', '\x3', '\x2', 
-		'\x2', 'N', 'O', '\a', '\x14', '\x2', '\x2', 'O', 'Q', '\x5', '\x1A', 
-		'\xE', '\x2', 'P', 'J', '\x3', '\x2', '\x2', '\x2', 'P', 'L', '\x3', '\x2', 
-		'\x2', '\x2', 'Q', '\r', '\x3', '\x2', '\x2', '\x2', 'R', 'S', '\a', '\t', 
-		'\x2', '\x2', 'S', 'T', '\t', '\x3', '\x2', '\x2', 'T', '[', '\a', '\x16', 
-		'\x2', '\x2', 'U', 'V', '\a', '\t', '\x2', '\x2', 'V', 'W', '\t', '\x3', 
-		'\x2', '\x2', 'W', 'X', '\a', '\x16', '\x2', '\x2', 'X', 'Y', '\a', '\x14', 
-		'\x2', '\x2', 'Y', '[', '\x5', '\x18', '\r', '\x2', 'Z', 'R', '\x3', '\x2', 
-		'\x2', '\x2', 'Z', 'U', '\x3', '\x2', '\x2', '\x2', '[', '\xF', '\x3', 
-		'\x2', '\x2', '\x2', '\\', ']', '\a', '\n', '\x2', '\x2', ']', '^', '\t', 
-		'\x3', '\x2', '\x2', '^', '\x65', '\a', '\x16', '\x2', '\x2', '_', '`', 
-		'\a', '\n', '\x2', '\x2', '`', '\x61', '\t', '\x3', '\x2', '\x2', '\x61', 
-		'\x62', '\a', '\x16', '\x2', '\x2', '\x62', '\x63', '\a', '\x14', '\x2', 
-		'\x2', '\x63', '\x65', '\x5', '\x1A', '\xE', '\x2', '\x64', '\\', '\x3', 
-		'\x2', '\x2', '\x2', '\x64', '_', '\x3', '\x2', '\x2', '\x2', '\x65', 
-		'\x11', '\x3', '\x2', '\x2', '\x2', '\x66', 'g', '\a', '\v', '\x2', '\x2', 
-		'g', 'h', '\a', '\x14', '\x2', '\x2', 'h', 'i', '\a', '\x1A', '\x2', '\x2', 
-		'i', '\x13', '\x3', '\x2', '\x2', '\x2', 'j', 'k', '\a', '\f', '\x2', 
-		'\x2', 'k', '\x15', '\x3', '\x2', '\x2', '\x2', 'l', 'm', '\a', '\r', 
-		'\x2', '\x2', 'm', 'n', '\t', '\x4', '\x2', '\x2', 'n', '\x17', '\x3', 
-		'\x2', '\x2', '\x2', 'o', 't', '\t', '\x5', '\x2', '\x2', 'p', 'q', '\t', 
-		'\x5', '\x2', '\x2', 'q', 'r', '\a', '\x15', '\x2', '\x2', 'r', 't', '\t', 
-		'\x6', '\x2', '\x2', 's', 'o', '\x3', '\x2', '\x2', '\x2', 's', 'p', '\x3', 
-		'\x2', '\x2', '\x2', 't', '\x19', '\x3', '\x2', '\x2', '\x2', 'u', 'z', 
-		'\t', '\x5', '\x2', '\x2', 'v', 'w', '\t', '\x5', '\x2', '\x2', 'w', 'x', 
-		'\a', '\x15', '\x2', '\x2', 'x', 'z', '\t', '\x6', '\x2', '\x2', 'y', 
-		'u', '\x3', '\x2', '\x2', '\x2', 'y', 'v', '\x3', '\x2', '\x2', '\x2', 
-		'z', '\x1B', '\x3', '\x2', '\x2', '\x2', '\t', ':', 'H', 'P', 'Z', '\x64', 
-		's', 'y',
+		'\t', '\x3', '\t', '\x5', '\t', 'V', '\n', '\t', '\x3', '\n', '\x3', '\n', 
+		'\x3', '\n', '\x3', '\n', '\x5', '\n', '\\', '\n', '\n', '\x3', '\v', 
+		'\x3', '\v', '\x3', '\v', '\x3', '\v', '\x5', '\v', '\x62', '\n', '\v', 
+		'\x3', '\v', '\x2', '\x2', '\f', '\x2', '\x4', '\x6', '\b', '\n', '\f', 
+		'\xE', '\x10', '\x12', '\x14', '\x2', '\x6', '\x3', '\x2', '\x5', '\x6', 
+		'\x3', '\x2', '\v', '\f', '\x4', '\x2', '\r', '\x10', '\x14', '\x14', 
+		'\x4', '\x2', '\xE', '\x10', '\x14', '\x14', '\x2', '\x65', '\x2', '+', 
+		'\x3', '\x2', '\x2', '\x2', '\x4', '-', '\x3', '\x2', '\x2', '\x2', '\x6', 
+		'/', '\x3', '\x2', '\x2', '\x2', '\b', '\x31', '\x3', '\x2', '\x2', '\x2', 
+		'\n', '\x39', '\x3', '\x2', '\x2', '\x2', '\f', '\x41', '\x3', '\x2', 
+		'\x2', '\x2', '\xE', 'K', '\x3', '\x2', '\x2', '\x2', '\x10', 'U', '\x3', 
+		'\x2', '\x2', '\x2', '\x12', '[', '\x3', '\x2', '\x2', '\x2', '\x14', 
+		'\x61', '\x3', '\x2', '\x2', '\x2', '\x16', '\x17', '\x5', '\x4', '\x3', 
+		'\x2', '\x17', '\x18', '\a', '\x2', '\x2', '\x3', '\x18', ',', '\x3', 
+		'\x2', '\x2', '\x2', '\x19', '\x1A', '\x5', '\x6', '\x4', '\x2', '\x1A', 
+		'\x1B', '\a', '\x2', '\x2', '\x3', '\x1B', ',', '\x3', '\x2', '\x2', '\x2', 
+		'\x1C', '\x1D', '\x5', '\b', '\x5', '\x2', '\x1D', '\x1E', '\a', '\x2', 
+		'\x2', '\x3', '\x1E', ',', '\x3', '\x2', '\x2', '\x2', '\x1F', ' ', '\x5', 
+		'\n', '\x6', '\x2', ' ', '!', '\a', '\x2', '\x2', '\x3', '!', ',', '\x3', 
+		'\x2', '\x2', '\x2', '\"', '#', '\x5', '\xE', '\b', '\x2', '#', '$', '\a', 
+		'\x2', '\x2', '\x3', '$', ',', '\x3', '\x2', '\x2', '\x2', '%', '&', '\x5', 
+		'\f', '\a', '\x2', '&', '\'', '\a', '\x2', '\x2', '\x3', '\'', ',', '\x3', 
+		'\x2', '\x2', '\x2', '(', ')', '\x5', '\x10', '\t', '\x2', ')', '*', '\a', 
+		'\x2', '\x2', '\x3', '*', ',', '\x3', '\x2', '\x2', '\x2', '+', '\x16', 
+		'\x3', '\x2', '\x2', '\x2', '+', '\x19', '\x3', '\x2', '\x2', '\x2', '+', 
+		'\x1C', '\x3', '\x2', '\x2', '\x2', '+', '\x1F', '\x3', '\x2', '\x2', 
+		'\x2', '+', '\"', '\x3', '\x2', '\x2', '\x2', '+', '%', '\x3', '\x2', 
+		'\x2', '\x2', '+', '(', '\x3', '\x2', '\x2', '\x2', ',', '\x3', '\x3', 
+		'\x2', '\x2', '\x2', '-', '.', '\a', '\x3', '\x2', '\x2', '.', '\x5', 
+		'\x3', '\x2', '\x2', '\x2', '/', '\x30', '\a', '\x4', '\x2', '\x2', '\x30', 
+		'\a', '\x3', '\x2', '\x2', '\x2', '\x31', '\x32', '\t', '\x2', '\x2', 
+		'\x2', '\x32', '\t', '\x3', '\x2', '\x2', '\x2', '\x33', '\x34', '\a', 
+		'\b', '\x2', '\x2', '\x34', ':', '\t', '\x3', '\x2', '\x2', '\x35', '\x36', 
+		'\a', '\b', '\x2', '\x2', '\x36', '\x37', '\t', '\x3', '\x2', '\x2', '\x37', 
+		'\x38', '\a', '\x11', '\x2', '\x2', '\x38', ':', '\x5', '\x12', '\n', 
+		'\x2', '\x39', '\x33', '\x3', '\x2', '\x2', '\x2', '\x39', '\x35', '\x3', 
+		'\x2', '\x2', '\x2', ':', '\v', '\x3', '\x2', '\x2', '\x2', ';', '<', 
+		'\a', '\a', '\x2', '\x2', '<', '\x42', '\t', '\x3', '\x2', '\x2', '=', 
+		'>', '\a', '\a', '\x2', '\x2', '>', '?', '\t', '\x3', '\x2', '\x2', '?', 
+		'@', '\a', '\x11', '\x2', '\x2', '@', '\x42', '\x5', '\x14', '\v', '\x2', 
+		'\x41', ';', '\x3', '\x2', '\x2', '\x2', '\x41', '=', '\x3', '\x2', '\x2', 
+		'\x2', '\x42', '\r', '\x3', '\x2', '\x2', '\x2', '\x43', '\x44', '\a', 
+		'\t', '\x2', '\x2', '\x44', '\x45', '\t', '\x3', '\x2', '\x2', '\x45', 
+		'L', '\a', '\x13', '\x2', '\x2', '\x46', 'G', '\a', '\t', '\x2', '\x2', 
+		'G', 'H', '\t', '\x3', '\x2', '\x2', 'H', 'I', '\a', '\x13', '\x2', '\x2', 
+		'I', 'J', '\a', '\x11', '\x2', '\x2', 'J', 'L', '\x5', '\x12', '\n', '\x2', 
+		'K', '\x43', '\x3', '\x2', '\x2', '\x2', 'K', '\x46', '\x3', '\x2', '\x2', 
+		'\x2', 'L', '\xF', '\x3', '\x2', '\x2', '\x2', 'M', 'N', '\a', '\n', '\x2', 
+		'\x2', 'N', 'O', '\t', '\x3', '\x2', '\x2', 'O', 'V', '\a', '\x13', '\x2', 
+		'\x2', 'P', 'Q', '\a', '\n', '\x2', '\x2', 'Q', 'R', '\t', '\x3', '\x2', 
+		'\x2', 'R', 'S', '\a', '\x13', '\x2', '\x2', 'S', 'T', '\a', '\x11', '\x2', 
+		'\x2', 'T', 'V', '\x5', '\x14', '\v', '\x2', 'U', 'M', '\x3', '\x2', '\x2', 
+		'\x2', 'U', 'P', '\x3', '\x2', '\x2', '\x2', 'V', '\x11', '\x3', '\x2', 
+		'\x2', '\x2', 'W', '\\', '\t', '\x4', '\x2', '\x2', 'X', 'Y', '\t', '\x4', 
+		'\x2', '\x2', 'Y', 'Z', '\a', '\x12', '\x2', '\x2', 'Z', '\\', '\t', '\x5', 
+		'\x2', '\x2', '[', 'W', '\x3', '\x2', '\x2', '\x2', '[', 'X', '\x3', '\x2', 
+		'\x2', '\x2', '\\', '\x13', '\x3', '\x2', '\x2', '\x2', ']', '\x62', '\t', 
+		'\x4', '\x2', '\x2', '^', '_', '\t', '\x4', '\x2', '\x2', '_', '`', '\a', 
+		'\x12', '\x2', '\x2', '`', '\x62', '\t', '\x5', '\x2', '\x2', '\x61', 
+		']', '\x3', '\x2', '\x2', '\x2', '\x61', '^', '\x3', '\x2', '\x2', '\x2', 
+		'\x62', '\x15', '\x3', '\x2', '\x2', '\x2', '\t', '+', '\x39', '\x41', 
+		'K', 'U', '[', '\x61',
 	};
 
 	public static readonly ATN _ATN =
@@ -1142,4 +951,4 @@ public partial class Keysight34465ASCPIParser : Parser {
 
 
 }
-} // namespace PluginInterpreter.GeneratedKeysight34465A
+} // namespace PluginParsing.GeneratedKeysight3458A
