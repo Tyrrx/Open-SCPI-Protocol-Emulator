@@ -46,6 +46,8 @@ namespace Domain
                     _ => configuration.CurrentRangeDef));
         }
 
+        
+
         public static double GetImpedanceMultiplierByImpedance(
             this Keysight34465AConfiguration configuration,
             Impedance impedance)
