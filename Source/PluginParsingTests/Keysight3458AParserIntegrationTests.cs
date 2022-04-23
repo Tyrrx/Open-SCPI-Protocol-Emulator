@@ -12,7 +12,7 @@ using Range = Domain.UnionTypes.Range;
 namespace ProtocolTests
 {
     [TestClass]
-    public class Keysight3458AProtocolInterpreterTests
+    public class Keysight3458AParserIntegrationTests
     {
         [TestMethod]
         public void Test_SCPI_IDN()
