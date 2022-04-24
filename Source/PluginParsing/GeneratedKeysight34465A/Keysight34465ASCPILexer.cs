@@ -446,4 +446,4 @@ public partial class Keysight34465ASCPILexer : Lexer {
 
 
 }
-} // namespace PluginInterpreter.GeneratedKeysight34465A
+} // namespace PluginParsing.GeneratedKeysight34465A

@@ -1142,4 +1142,4 @@ public partial class Keysight34465ASCPIParser : Parser {
 
 
 }
-} // namespace PluginInterpreter.GeneratedKeysight34465A
+} // namespace PluginParsing.GeneratedKeysight34465A

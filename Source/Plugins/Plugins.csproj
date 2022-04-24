@@ -23,7 +23,7 @@
     <ProjectReference Include="..\Adapters\Adapters.csproj" />
     <ProjectReference Include="..\PluginConfiguration\PluginConfiguration.csproj" />
     <ProjectReference Include="..\PluginHosting\PluginHosting.csproj" />
-    <ProjectReference Include="..\PluginInterpreter\PluginInterpreter.csproj" />
+    <ProjectReference Include="..\PluginParsing\PluginParsing.csproj" />
     <ProjectReference Include="..\PluginNetwork\PluginNetwork.csproj" />
     <ProjectReference Include="..\PluginPersistence\PluginPersistence.csproj" />
   </ItemGroup>

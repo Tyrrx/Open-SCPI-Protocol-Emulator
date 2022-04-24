@@ -136,4 +136,4 @@ public partial class Keysight3458ASCPIBaseVisitor<Result> : AbstractParseTreeVis
 	/// <return>The visitor result.</return>
 	public virtual Result VisitVoltageParameters([NotNull] Keysight3458ASCPIParser.VoltageParametersContext context) { return VisitChildren(context); }
 }
-} // namespace PluginInterpreter.GeneratedKeysight3458A
+} // namespace PluginParsing.GeneratedKeysight3458A

@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PluginConfiguration;
 using PluginHosting;
-using PluginInterpreter;
+using PluginParsing;
 using PluginNetwork;
 using PluginPersistence;
 using static PluginConfiguration.DeviceConfigurationLoader;
@@ -66,14 +66,6 @@ namespace EmulatorHost
                     services.AddSingleton<IMeasuringInstrumentRepository<Keysight3458A>, MeasuringInstrumentRepository<Keysight3458A>>();
                     services.AddSingleton<MeasuringInstrumentInstanceManager<Keysight3458A,Keysight3458ACommand,Keysight3458AConfiguration>>();
                     services.AddHostedService<HostedMeasuringInstrumentInstanceManager<Keysight3458A,Keysight3458ACommand,Keysight3458AConfiguration>>();
-                    
-                    
-                    // services.AddSingleton(deviceConfigurations.Keysight3458AConfiguration);
-                    // services.AddTransient<IProtocolInterpreter<Keysight3458ACommand>, Keysight3458AProtocolInterpreter>();
-                    // services.AddTransient<Keysight3458A>();
-                    // services.AddTransient<ICommandHandler<Keysight3458A, Keysight3458ACommand>, Keysight3458ACommandHandler>();
-                    // services.AddTransient<MeasurementDeviceExecutionService<Keysight3458ACommand, Keysight3458AConfiguration>>();
-                    // services.AddHostedService<HostedMeasurementDeviceInstanceManager<,,>>();
                 });
         }
     }

@@ -6,6 +6,8 @@ using Domain.Interfaces;
 
 namespace Emulator
 {
+    // Todo: this is a repository and should be called repository
+    // Todo: StartAll, StopAll and Start methods should be services and not part of this repository
     public class MeasuringInstrumentInstanceManager<TMeasurementDevice, TCommand, TConfiguration>
         where TConfiguration : IDeviceConfiguration
     {
@@ -18,8 +20,9 @@ namespace Emulator
         private readonly IMeasuringInstrumentFactory<TMeasurementDevice, TConfiguration> measuringInstrumentFactory;
         private readonly IMeasuringInstrumentRepository<TMeasurementDevice> measuringInstrumentRepository;
 
+        // Todo how to handle these disposables?
         private List<IDisposable> subscriptions = new List<IDisposable>();
-
+        
         private readonly List<IServer> servers = new List<IServer>();
 
         public MeasuringInstrumentInstanceManager(
